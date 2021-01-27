@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JongSnam.Services", "JongSnam.Services\JongSnam.Services.csproj", "{4E6275CC-1E00-40F6-AD39-F1974489E267}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JongSnamFootball.Managers", "JongSnamFootball.Managers\JongSnamFootball.Managers.csproj", "{656423FE-4B8B-4F93-AFF1-2D7187888C01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JongSnamFootball.Entities", "JongSnamFootball.Entities\JongSnamFootball.Entities.csproj", "{5CC12E55-2A43-4A6C-B01C-CF2CDE3BE01A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JongSnamFootball.Repositories", "JongSnamFootball.Repositories\JongSnamFootball.Repositories.csproj", "{B3BE986F-DA9B-42F7-BD3B-BBBEA2FC92D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JongSnamFootball.Interfaces", "JongSnamFootball.Interfaces\JongSnamFootball.Interfaces.csproj", "{B245574C-DF10-451A-8918-F82D3AF86B47}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E6275CC-1E00-40F6-AD39-F1974489E267}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E6275CC-1E00-40F6-AD39-F1974489E267}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E6275CC-1E00-40F6-AD39-F1974489E267}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E6275CC-1E00-40F6-AD39-F1974489E267}.Release|Any CPU.Build.0 = Release|Any CPU
+		{656423FE-4B8B-4F93-AFF1-2D7187888C01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{656423FE-4B8B-4F93-AFF1-2D7187888C01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{656423FE-4B8B-4F93-AFF1-2D7187888C01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{656423FE-4B8B-4F93-AFF1-2D7187888C01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CC12E55-2A43-4A6C-B01C-CF2CDE3BE01A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CC12E55-2A43-4A6C-B01C-CF2CDE3BE01A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CC12E55-2A43-4A6C-B01C-CF2CDE3BE01A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CC12E55-2A43-4A6C-B01C-CF2CDE3BE01A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3BE986F-DA9B-42F7-BD3B-BBBEA2FC92D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3BE986F-DA9B-42F7-BD3B-BBBEA2FC92D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3BE986F-DA9B-42F7-BD3B-BBBEA2FC92D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3BE986F-DA9B-42F7-BD3B-BBBEA2FC92D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B245574C-DF10-451A-8918-F82D3AF86B47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B245574C-DF10-451A-8918-F82D3AF86B47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B245574C-DF10-451A-8918-F82D3AF86B47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B245574C-DF10-451A-8918-F82D3AF86B47}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9EECA15D-2427-4870-928D-82D8B1CBBFA5}
+	EndGlobalSection
+EndGlobal
