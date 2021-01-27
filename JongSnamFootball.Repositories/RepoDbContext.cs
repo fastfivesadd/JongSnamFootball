@@ -37,7 +37,7 @@ namespace JongSnamFootball.Repositories
 
             modelBuilder.Entity<StoreModel>(entity =>
             {
-                entity.HasMany(s => s.CommentModel).WithOne().HasForeignKey(x => x.StoreId);
+                //entity.HasMany(s => s.CommentModel).WithOne().HasForeignKey(x => x.StoreId);
                 entity.ToTable(nameof(Store), Schema);
             });
 

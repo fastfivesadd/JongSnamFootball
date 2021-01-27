@@ -17,7 +17,7 @@ namespace JongSnamFootball.Entities.Models
         public string Detail { get; set; }
 
         [Column("rating_comment")]
-        public double? Rating { get; set; }
+        public decimal? Rating { get; set; }
 
         public virtual UserMemberModel UserModel { get; set; }
 

@@ -13,6 +13,6 @@ namespace JongSnamFootball.Interfaces.Repositories
 
         Task<List<FieldModel>> GetByStoreID(int? storeID);
 
-        Task<List<FieldModel>> GetByFieldID(int? fieldID);
+        Task<List<FieldModel>> GetByFieldId(int? fieldID);
     }
 }

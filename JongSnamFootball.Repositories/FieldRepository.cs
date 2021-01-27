@@ -32,11 +32,11 @@ namespace JongSnamFootball.Repositories
             return new List<FieldModel>();
         }
 
-        public async Task<List<FieldModel>> GetByFieldID(int? fieldID)
+        public async Task<List<FieldModel>> GetByFieldId(int? id)
         {
-            if (fieldID.HasValue)
+            if (id.HasValue)
             {
-                return await _dbContext.Field.Where(w => w.Id == fieldID).AsNoTracking().ToListAsync();
+                return await _dbContext.Field.Where(w => w.Id == id).AsNoTracking().ToListAsync();
             }
 
             return new List<FieldModel>();

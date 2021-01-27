@@ -13,6 +13,6 @@ namespace JongSnamFootball.Entities.Dtos
         public int TotalThree { get; set; }
         public int TotalTwo { get; set; }
         public int TotalOne { get; set; }
-        public double Rating { get; set; }
+        public decimal SummaryRating { get; set; }
     }
 }

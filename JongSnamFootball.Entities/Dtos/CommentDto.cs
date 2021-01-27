@@ -11,7 +11,7 @@ namespace JongSnamFootball.Entities.Dtos
 
         public string Detail { get; set; }
 
-        public double Rating { get; set; }
+        public decimal Rating { get; set; }
 
         public string Name { get; set; }
     }

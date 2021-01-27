@@ -8,7 +8,7 @@ namespace JongSnamFootball.Interfaces.Repositories
     {
         Task<List<StoreModel>> GetAll();
 
-        Task<List<StoreModel>> GetByOwnerId(int? ownerId);
+        Task<List<StoreModel>> GetStoreByOwnerId(int? ownerId);
 
         Task<StoreModel> GetCommentByStoreId(int? storeID);
     }

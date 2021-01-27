@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 using JongSnamFootball.Entities.Dtos;
 using JongSnamFootball.Interfaces.Managers;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace JongSnam.Services.Controllers
 {
@@ -17,15 +19,24 @@ namespace JongSnam.Services.Controllers
         }
 
         [HttpGet]
-        public async Task<BasePagingDto<StoreDto>> GetAll(int currentPage, int pageSize)
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(BasePagingDto<StoreDto>))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<StoreDto>))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> GetStores(int currentPage, int pageSize)
         {
-            return await _storeManager.GetListStore(currentPage, pageSize);
+            return Ok(await _storeManager.GetListStore(currentPage, pageSize));
         }
 
         [HttpGet("{ownerId}")]
-        public async Task<BasePagingDto<YourStore>> GetYourStore(int ownerId, int currentPage, int pageSize)
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(BasePagingDto<YourStore>))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<YourStore>))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> GetYourStores(int ownerId, int currentPage, int pageSize)
         {
-            return await _storeManager.GetYourStore(ownerId, currentPage, pageSize);
+            return Ok(await _storeManager.GetYourStores(ownerId, currentPage, pageSize));
         }
     }
 }

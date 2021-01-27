@@ -11,6 +11,6 @@ namespace JongSnamFootball.Interfaces.Managers
     {
         //Task<BasePagingDto<CommentDto>> GetFieldByStore(int storeId, int currentPage, int pageSize);
 
-        Task<BasePagingDto<CommentDto>> GetCommentByStoreId(int storeId, int currentPage, int pageSize);
+        Task<SumaryRatingDto> GetCommentByStoreId(int storeId, int currentPage, int pageSize);
     }
 }

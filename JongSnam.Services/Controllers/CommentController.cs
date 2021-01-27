@@ -6,6 +6,7 @@ using JongSnamFootball.Entities.Dtos;
 using JongSnamFootball.Interfaces.Managers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace JongSnam.Services.Controllers
 {
@@ -26,9 +27,13 @@ namespace JongSnam.Services.Controllers
         //}
 
         [HttpGet("{storeId}")]
-        public async Task<BasePagingDto<CommentDto>> GetCommentByStoreId(int storeId, int currentPage, int pageSize)
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(SumaryRatingDto))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(SumaryRatingDto))]    
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> GetCommentByStoreId(int storeId, int currentPage, int pageSize)
         {
-            return await _commentManager.GetCommentByStoreId(storeId, currentPage, pageSize);
+            return Ok(await _commentManager.GetCommentByStoreId(storeId, currentPage, pageSize));
         }
     }
 }
