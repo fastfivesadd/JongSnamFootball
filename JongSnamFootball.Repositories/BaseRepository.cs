@@ -1,29 +1,31 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 using JongSnamFootball.Interfaces.Repositories;
-using Microsoft.Extensions.Logging;
 
 namespace JongSnamFootball.Repositories
 {
-    public abstract class BaseRepository<T> : BaseLogger, IRepository<T> where T : class
+    public abstract class BaseRepository<T> : IRepository<T> where T : class
     {
-        protected readonly RepoDbContext _dbContext;
-        public BaseRepository(ILogger logger, RepoDbContext dbContext) : base(logger)
+        protected readonly RepositoryDbContext _dbContext;
+
+        public BaseRepository(RepositoryDbContext dbContext) : base()
         {
             _dbContext = dbContext;
         }
-        public T Create(T model)
+
+        public async Task<T> CreateAsync(T model)
         {
-            throw new NotImplementedException();
+            await _dbContext.Set<T>().AddAsync(model);
+            return model;
         }
 
         public void Delete(T model)
         {
-            throw new NotImplementedException();
+            _dbContext.Set<T>().Remove(model);
         }
 
         public T Updete(T model)
         {
-            throw new NotImplementedException();
+            return _dbContext.Set<T>().Update(model).Entity;
         }
     }
 }

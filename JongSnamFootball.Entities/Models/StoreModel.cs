@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JongSnamFootball.Entities.Models
 {
@@ -42,7 +41,7 @@ namespace JongSnamFootball.Entities.Models
         public string Picture { get; set; }
 
         [Column("rating")]
-        public double? Rating { get; set; }
+        public decimal? Rating { get; set; }
 
         [Column("status_store")]
         public string Status { get; set; }
@@ -50,6 +49,6 @@ namespace JongSnamFootball.Entities.Models
         [Column("office_hours_store")]
         public string OfficeHours { get; set; }
 
-        public virtual IEnumerable<CommentModel> CommentModel { get; set; }
+        //public virtual List<CommentModel> CommentModel { get; set; }
     }
 }

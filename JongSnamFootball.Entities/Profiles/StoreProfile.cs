@@ -16,7 +16,7 @@ namespace JongSnamFootball.Entities.Profiles
 
             CreateMap<FieldModel, ListFieldByIdFieldDto>();
 
-            
+
         }
     }
 }

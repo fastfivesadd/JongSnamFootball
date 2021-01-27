@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using JongSnamFootball.Entities.Models;
 using JongSnamFootball.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace JongSnamFootball.Repositories
 {
     public class FieldRepository : BaseRepository<FieldModel>, IFieldRepository
     {
-        public FieldRepository(ILogger<FieldRepository> logger, RepoDbContext context) : base(logger, context)
+        public FieldRepository(RepositoryDbContext context) : base(context)
         {
 
         }
@@ -32,11 +29,11 @@ namespace JongSnamFootball.Repositories
             return new List<FieldModel>();
         }
 
-        public async Task<List<FieldModel>> GetByFieldID(int? fieldID)
+        public async Task<List<FieldModel>> GetByFieldId(int? id)
         {
-            if (fieldID.HasValue)
+            if (id.HasValue)
             {
-                return await _dbContext.Field.Where(w => w.Id == fieldID).AsNoTracking().ToListAsync();
+                return await _dbContext.Field.Where(w => w.Id == id).AsNoTracking().ToListAsync();
             }
 
             return new List<FieldModel>();

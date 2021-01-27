@@ -1,8 +1,5 @@
-using AutoMapper;
-using JongSnamFootball.Entities.Profiles;
-using JongSnamFootball.Interfaces.Managers;
-using JongSnamFootball.Interfaces.Repositories;
-using JongSnamFootball.Managers;
+using System.Reflection;
+using JongSnam.Services.Extensions;
 using JongSnamFootball.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace JongSnam.Services
 {
@@ -30,28 +28,19 @@ namespace JongSnam.Services
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "JongSnam.Services", Version = "v1" });
+                c.CustomOperationIds(apiDesc => apiDesc.TryGetMethodInfo(out MethodInfo methodInfo) ? methodInfo.Name : null);
             });
 
-            services.AddDbContext<RepoDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("comsci_jsnfb")));
-
-            // Regis Manager
-            services.AddScoped<IStoreManager, StoreManager>();
-            services.AddScoped<IUserManager, UserManager>();
-            services.AddScoped<IFieldManager, FieldManager>();
-            services.AddScoped<ICommentManager, CommentManager>();
+            services.AddDbContext<RepositoryDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("comsci_jsnfb")));
 
             // Regis Repo
-            services.AddScoped<IStoreRepository, StoreRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IFieldRepository, FieldRepository>();
-            services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddConfigureRepositories();
 
+            // Regis Manager
+            services.AddConfigureManagers();
 
             // Regis AutoMapper
-            services.AddAutoMapper(typeof(UserProfile));
-            services.AddAutoMapper(typeof(StoreProfile));
-            services.AddAutoMapper(typeof(CommentProfile));
-
+            services.AddAutoMapperProfiles();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,7 +49,7 @@ namespace JongSnam.Services
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
+                app.UseSwagger(o => o.SerializeAsV2 = true);
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "JongSnam.Services v1"));
             }
 

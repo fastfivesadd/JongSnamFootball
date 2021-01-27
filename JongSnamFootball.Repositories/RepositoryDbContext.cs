@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JongSnamFootball.Repositories
 {
-    public class RepoDbContext : DbContext
+    public class RepositoryDbContext : DbContext
     {
         private const string Schema = "jsnfb";
 
-        public RepoDbContext(DbContextOptions<RepoDbContext> options) : base(options)
+        public RepositoryDbContext(DbContextOptions<RepositoryDbContext> options) : base(options)
         {
 
         }
@@ -37,7 +37,7 @@ namespace JongSnamFootball.Repositories
 
             modelBuilder.Entity<StoreModel>(entity =>
             {
-                entity.HasMany(s => s.CommentModel).WithOne().HasForeignKey(x => x.StoreId);
+                //entity.HasMany(s => s.CommentModel).WithOne().HasForeignKey(x => x.StoreId);
                 entity.ToTable(nameof(Store), Schema);
             });
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using JongSnamFootball.Entities.Dtos;
@@ -33,9 +30,9 @@ namespace JongSnamFootball.Managers
             return result;
         }
 
-        public async Task<List<ListFieldByIdFieldDto>> GetFieldByField(int fieldId)
+        public async Task<List<ListFieldByIdFieldDto>> GetFieldById(int id)
         {
-            var listStore = await _fieldRepository.GetByFieldID(fieldId);
+            var listStore = await _fieldRepository.GetByFieldId(id);
 
             var result = _mapper.Map<List<ListFieldByIdFieldDto>>(listStore);
 

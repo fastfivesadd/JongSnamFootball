@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using JongSnamFootball.Entities.Models;
 
@@ -13,6 +10,6 @@ namespace JongSnamFootball.Interfaces.Repositories
 
         Task<List<FieldModel>> GetByStoreID(int? storeID);
 
-        Task<List<FieldModel>> GetByFieldID(int? fieldID);
+        Task<List<FieldModel>> GetByFieldId(int? fieldID);
     }
 }

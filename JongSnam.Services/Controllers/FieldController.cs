@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using JongSnamFootball.Entities.Dtos;
 using JongSnamFootball.Interfaces.Managers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace JongSnam.Services.Controllers
 {
@@ -19,18 +17,27 @@ namespace JongSnam.Services.Controllers
             _fieldManager = fieldManager;
         }
 
-        [HttpGet("{fieldId}")]
-        public async Task<List<ListFieldByIdFieldDto>> GetFieldByField(int fieldId)
+        [HttpGet("{id}")]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(ListFieldByIdFieldDto))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(ListFieldByIdFieldDto))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> GetFieldById(int id)
         {
-            return await _fieldManager.GetFieldByField(fieldId);
+            return Ok(await _fieldManager.GetFieldById(id));
 
         }
 
-        [HttpGet("{storeId}/{currentPage}")]
-        public async Task<BasePagingDto<FieldDto>> GetFieldByStore(int storeId, int currentPage, int pageSize)
+        [HttpGet("{storeId}/Fields")]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(BasePagingDto<FieldDto>))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<FieldDto>))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> GetFieldByStore(int storeId, int currentPage, int pageSize)
         {
-            return await _fieldManager.GetFieldByStore(storeId, currentPage, pageSize);
-
+            return Ok(await _fieldManager.GetFieldByStore(storeId, currentPage, pageSize));
         }
     }
 }

@@ -4,13 +4,12 @@ using System.Threading.Tasks;
 using JongSnamFootball.Entities.Models;
 using JongSnamFootball.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace JongSnamFootball.Repositories
 {
     public class StoreRepository : BaseRepository<StoreModel>, IStoreRepository
     {
-        public StoreRepository(ILogger<StoreRepository> logger, RepoDbContext context) : base(logger, context)
+        public StoreRepository(RepositoryDbContext context) : base(context)
         {
 
         }
@@ -22,7 +21,7 @@ namespace JongSnamFootball.Repositories
             return result;
         }
 
-        public async Task<List<StoreModel>> GetByOwnerId(int? ownerId)
+        public async Task<List<StoreModel>> GetStoreByOwnerId(int? ownerId)
         {
             if (ownerId.HasValue)
             {
@@ -36,7 +35,7 @@ namespace JongSnamFootball.Repositories
         {
             if (storeID.HasValue)
             {
-                return await _dbContext.Store.Where(w => w.Id == storeID).Include(i => i.CommentModel).AsNoTracking().FirstOrDefaultAsync();
+                //return await _dbContext.Store.Where(w => w.Id == storeID).Include(i => i.CommentModel).AsNoTracking().FirstOrDefaultAsync();
             }
 
             return new StoreModel();
