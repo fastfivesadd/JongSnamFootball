@@ -7,6 +7,6 @@ namespace JongSnamFootball.Interfaces.Managers
     {
         Task<BasePagingDto<StoreDto>> GetListStore(int currentPage, int pageSize);
 
-        Task<BasePagingDto<YourStore>> GetYourStore(int ownerId, int currentPage, int pageSize);
+        Task<BasePagingDto<YourStore>> GetYourStores(int ownerId, int currentPage, int pageSize);
     }
 }

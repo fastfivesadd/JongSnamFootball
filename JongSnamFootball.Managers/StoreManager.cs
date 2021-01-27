@@ -29,10 +29,10 @@ namespace JongSnamFootball.Managers
             return result;
         }
 
-        public async Task<BasePagingDto<YourStore>> GetYourStore(int ownerId, int currentPage, int pageSize)
+        public async Task<BasePagingDto<YourStore>> GetYourStores(int ownerId, int currentPage, int pageSize)
         {
             
-            var listStore = await _storeRepository.GetByOwnerId(ownerId);
+            var listStore = await _storeRepository.GetStoreByOwnerId(ownerId);
 
             var listStoreDto = _mapper.Map<List<YourStore>>(listStore);
 
