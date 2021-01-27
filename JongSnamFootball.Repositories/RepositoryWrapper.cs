@@ -119,19 +119,19 @@ namespace JongSnamFootball.Repositories
             return await _repositoryDbContext.SaveChangesAsync();
         }
 
-        public void BeginTransaction()
+        public async Task BeginTransaction()
         {
-            _dbContextTransaction = _repositoryDbContext.Database.BeginTransaction();
+             _dbContextTransaction = await _repositoryDbContext.Database.BeginTransactionAsync();
         }
 
-        public void Commit()
+        public async Task Commit()
         {
-            _dbContextTransaction?.Commit();
+            await _dbContextTransaction?.CommitAsync();
         }
 
-        public void Rollback()
+        public async Task Rollback()
         {
-            _dbContextTransaction?.Rollback();
+            await _dbContextTransaction?.RollbackAsync();
         }
 
         public void Dispose()

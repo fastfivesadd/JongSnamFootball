@@ -20,10 +20,10 @@ namespace JongSnamFootball.Interfaces.Repositories
 
         Task<int> SaveAsync();
 
-        void BeginTransaction();
+        Task BeginTransaction();
 
-        void Commit();
+        Task Commit();
 
-        void Rollback();
+        Task Rollback();
     }
 }

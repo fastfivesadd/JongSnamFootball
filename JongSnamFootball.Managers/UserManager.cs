@@ -37,19 +37,22 @@ namespace JongSnamFootball.Managers
             {
                 var userModel = _mapper.Map<UserMemberModel>(requestDto);
 
-                _repositoryWrapper.BeginTransaction();
+                await _repositoryWrapper.BeginTransaction();
 
                 await _repositoryWrapper.User.CreateAsync(userModel);
 
                 await _repositoryWrapper.SaveAsync();
 
-                _repositoryWrapper.Commit();
+                await _repositoryWrapper.Commit();
 
                 return true;
             }
             catch (Exception ex)
             {
                 return false;
+            }
+            finally
+            {
             }
         }
     }
