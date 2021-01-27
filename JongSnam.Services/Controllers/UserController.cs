@@ -37,7 +37,7 @@ namespace JongSnam.Services.Controllers
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
         public async Task<ActionResult> CreateUser(UserRequestDto requestDto)
         {
-            var result =  await _userManager.CreateUser(requestDto);
+            var result = await _userManager.CreateUser(requestDto);
             return Ok(result);
         }
     }

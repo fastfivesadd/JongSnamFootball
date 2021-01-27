@@ -31,7 +31,7 @@ namespace JongSnamFootball.Managers
 
         public async Task<BasePagingDto<YourStore>> GetYourStores(int ownerId, int currentPage, int pageSize)
         {
-            
+
             var listStore = await _storeRepository.GetStoreByOwnerId(ownerId);
 
             var listStoreDto = _mapper.Map<List<YourStore>>(listStore);
