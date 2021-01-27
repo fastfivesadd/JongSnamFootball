@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using JongSnamFootball.Entities.Dtos;
-using JongSnamFootball.Entities.RequestModel;
+using JongSnamFootball.Entities.Request;
 
 namespace JongSnamFootball.Interfaces.Managers
 {
@@ -9,6 +9,6 @@ namespace JongSnamFootball.Interfaces.Managers
     {
         Task<List<UserDto>> GetAll();
 
-        Task<bool> CreateUser(UserRequestDto requestDto);
+        Task<bool> CreateUser(UserRequest requestDto);
     }
 }

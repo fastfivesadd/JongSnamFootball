@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using JongSnamFootball.Entities.Dtos;
 using JongSnamFootball.Entities.Models;
-using JongSnamFootball.Entities.RequestModel;
+using JongSnamFootball.Entities.Request;
 using JongSnamFootball.Interfaces.Managers;
 using JongSnamFootball.Interfaces.Repositories;
 
@@ -31,7 +31,7 @@ namespace JongSnamFootball.Managers
             return result;
         }
 
-        public async Task<bool> CreateUser(UserRequestDto requestDto)
+        public async Task<bool> CreateUser(UserRequest requestDto)
         {
             try
             {
