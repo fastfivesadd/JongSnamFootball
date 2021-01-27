@@ -41,7 +41,6 @@ namespace JongSnam.Services.Controllers
         public async Task<ActionResult> GetFieldByStore(int storeId, int currentPage, int pageSize)
         {
             return Ok(await _fieldManager.GetFieldByStore(storeId, currentPage, pageSize));
-
         }
     }
 }

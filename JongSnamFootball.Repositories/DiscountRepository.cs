@@ -12,7 +12,7 @@ namespace JongSnamFootball.Repositories
 {
     public class DiscountRepository : BaseRepository<DiscountModel>, IDiscountRepository
     {
-        public DiscountRepository(ILogger<DiscountRepository> logger, RepoDbContext context) : base(logger, context)
+        public DiscountRepository(RepositoryDbContext context) : base(context)
         {
 
         }

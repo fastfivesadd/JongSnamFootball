@@ -30,6 +30,7 @@ namespace JongSnam.Services.Extensions
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IFieldRepository, FieldRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
 
         public static void AddAutoMapperProfiles(this IServiceCollection services)

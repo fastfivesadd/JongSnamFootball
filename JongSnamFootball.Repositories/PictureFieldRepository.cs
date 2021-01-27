@@ -12,7 +12,7 @@ namespace JongSnamFootball.Repositories
 {
     class PictureFieldRepository : BaseRepository<PictureFieldModel>, IPictureFieldRepository
     {
-        public PictureFieldRepository(ILogger<PictureFieldRepository> logger, RepoDbContext context) : base(logger, context)
+        public PictureFieldRepository(RepositoryDbContext context) : base(context)
         {
 
         }

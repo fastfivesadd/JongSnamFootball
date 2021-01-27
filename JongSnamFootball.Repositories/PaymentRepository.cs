@@ -12,7 +12,7 @@ namespace JongSnamFootball.Repositories
 {
     public class PaymentRepository : BaseRepository<PaymentModel>, IPaymentRepository
     {
-        public PaymentRepository(ILogger<PaymentRepository> logger, RepoDbContext context) : base(logger, context)
+        public PaymentRepository(RepositoryDbContext context) : base(context)
         {
 
         }

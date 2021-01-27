@@ -12,7 +12,7 @@ namespace JongSnamFootball.Repositories
 {
     public class CommentRepository : BaseRepository<CommentModel>, ICommentRepository
     {
-        public CommentRepository(ILogger<CommentRepository> logger, RepoDbContext context) : base(logger, context)
+        public CommentRepository(RepositoryDbContext context) : base(context)
         {
 
         }

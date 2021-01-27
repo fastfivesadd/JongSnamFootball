@@ -12,7 +12,7 @@ namespace JongSnamFootball.Repositories
 {
     public class ReservationRepository : BaseRepository<ReservationModel>, IReservationRepository
     {
-        public ReservationRepository(ILogger<ReservationRepository> logger, RepoDbContext context) : base(logger, context)
+        public ReservationRepository(RepositoryDbContext context) : base(context)
         {
 
         }

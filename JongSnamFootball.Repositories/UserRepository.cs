@@ -9,7 +9,7 @@ namespace JongSnamFootball.Repositories
 {
     public class UserRepository : BaseRepository<UserMemberModel>, IUserRepository
     {
-        public UserRepository(ILogger<UserRepository> logger, RepoDbContext context) : base(logger, context)
+        public UserRepository(RepositoryDbContext context) : base(context)
         {
 
         }

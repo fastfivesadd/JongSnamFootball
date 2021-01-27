@@ -12,7 +12,7 @@ namespace JongSnamFootball.Repositories
 {
     public class FieldRepository : BaseRepository<FieldModel>, IFieldRepository
     {
-        public FieldRepository(ILogger<FieldRepository> logger, RepoDbContext context) : base(logger, context)
+        public FieldRepository(RepositoryDbContext context) : base(context)
         {
 
         }
