@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using JongSnamFootball.Entities.Models;
 using JongSnamFootball.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace JongSnamFootball.Repositories
 {
     public class CommentRepository : BaseRepository<CommentModel>, ICommentRepository
     {
-        public CommentRepository(ILogger<CommentRepository> logger, RepoDbContext context) : base(logger, context)
+        public CommentRepository(RepositoryDbContext context) : base(context)
         {
 
         }

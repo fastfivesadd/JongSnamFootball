@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using JongSnamFootball.Entities.Dtos;
@@ -36,7 +34,7 @@ namespace JongSnamFootball.Managers
             result.SummaryRating = listComment.Count > 0 ? listComment[0].Rating.GetValueOrDefault() : 0;
 
             result.TotalOne = commentPaging.Collection.Count(c => c.Rating == 1);
-            result.TotalTwo  = commentPaging.Collection.Count(c => c.Rating == 2);
+            result.TotalTwo = commentPaging.Collection.Count(c => c.Rating == 2);
             result.TotalThree = commentPaging.Collection.Count(c => c.Rating == 3);
             result.TotalFour = commentPaging.Collection.Count(c => c.Rating == 4);
             result.TotalFive = commentPaging.Collection.Count(c => c.Rating == 5);

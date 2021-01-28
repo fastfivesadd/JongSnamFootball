@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using JongSnamFootball.Entities.Dtos;
+using JongSnamFootball.Entities.Request;
 using JongSnamFootball.Interfaces.Managers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,11 +23,22 @@ namespace JongSnam.Services.Controllers
         [HttpGet]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(IEnumerable<UserDto>))]
-        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(ListFieldByIdFieldDto))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(IEnumerable<UserDto>))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
         public async Task<ActionResult> GetUsers()
         {
             return Ok(await _userManager.GetAll());
+        }
+
+        [HttpPost]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(IEnumerable<bool>))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(bool))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> CreateUser(UserRequest requestDto)
+        {
+            var result = await _userManager.CreateUser(requestDto);
+            return Ok(result);
         }
     }
 }

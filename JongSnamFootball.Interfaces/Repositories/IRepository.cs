@@ -1,8 +1,10 @@
-﻿namespace JongSnamFootball.Interfaces.Repositories
+﻿using System.Threading.Tasks;
+
+namespace JongSnamFootball.Interfaces.Repositories
 {
     public interface IRepository<T> where T : class
     {
-        T Create(T model);
+        Task<T> CreateAsync(T model);
 
         T Updete(T model);
 

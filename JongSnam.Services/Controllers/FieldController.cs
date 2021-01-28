@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using JongSnamFootball.Entities.Dtos;
 using JongSnamFootball.Interfaces.Managers;
 using Microsoft.AspNetCore.Http;
@@ -41,7 +38,6 @@ namespace JongSnam.Services.Controllers
         public async Task<ActionResult> GetFieldByStore(int storeId, int currentPage, int pageSize)
         {
             return Ok(await _fieldManager.GetFieldByStore(storeId, currentPage, pageSize));
-
         }
     }
 }

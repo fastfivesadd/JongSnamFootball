@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace JongSnamFootball.Entities.Dtos
+﻿namespace JongSnamFootball.Entities.Dtos
 {
-    public class SumaryRatingDto : BasePagingDto<CommentDto> 
+    public class SumaryRatingDto : BasePagingDto<CommentDto>
     {
         public int TotalFive { get; set; }
         public int TotalFour { get; set; }

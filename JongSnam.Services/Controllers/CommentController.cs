@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using JongSnamFootball.Entities.Dtos;
 using JongSnamFootball.Interfaces.Managers;
 using Microsoft.AspNetCore.Http;
@@ -29,7 +26,7 @@ namespace JongSnam.Services.Controllers
         [HttpGet("{storeId}")]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(SumaryRatingDto))]
-        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(SumaryRatingDto))]    
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(SumaryRatingDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
         public async Task<ActionResult> GetCommentByStoreId(int storeId, int currentPage, int pageSize)
         {

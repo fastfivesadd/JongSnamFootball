@@ -1,10 +1,5 @@
 using System.Reflection;
-using AutoMapper;
 using JongSnam.Services.Extensions;
-using JongSnamFootball.Entities.Profiles;
-using JongSnamFootball.Interfaces.Managers;
-using JongSnamFootball.Interfaces.Repositories;
-using JongSnamFootball.Managers;
 using JongSnamFootball.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,16 +31,16 @@ namespace JongSnam.Services
                 c.CustomOperationIds(apiDesc => apiDesc.TryGetMethodInfo(out MethodInfo methodInfo) ? methodInfo.Name : null);
             });
 
-            services.AddDbContext<RepoDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("comsci_jsnfb")));
+            services.AddDbContext<RepositoryDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("comsci_jsnfb")));
 
-            // Regis AutoMapper
-            services.AddAutoMapperProfiles();
+            // Regis Repo
+            services.AddConfigureRepositories();
 
             // Regis Manager
             services.AddConfigureManagers();
 
-            // Regis Repo
-            services.AddConfigureRepositories();
+            // Regis AutoMapper
+            services.AddAutoMapperProfiles();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
