@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using JongSnamFootball.Entities.Profiles;
 using JongSnamFootball.Interfaces.Managers;
 using JongSnamFootball.Interfaces.Repositories;
@@ -30,6 +24,7 @@ namespace JongSnam.Services.Extensions
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IFieldRepository, FieldRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
 
         public static void AddAutoMapperProfiles(this IServiceCollection services)

@@ -4,7 +4,7 @@ using JongSnamFootball.Entities.Models;
 
 namespace JongSnamFootball.Interfaces.Repositories
 {
-    public interface IUserRepository
+    public interface IUserRepository : IRepository<UserMemberModel>
     {
         Task<List<UserMemberModel>> GetAll();
     }

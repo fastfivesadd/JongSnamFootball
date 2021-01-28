@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using JongSnamFootball.Entities.Models;
 using JongSnamFootball.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace JongSnamFootball.Repositories
 {
     public class PaymentRepository : BaseRepository<PaymentModel>, IPaymentRepository
     {
-        public PaymentRepository(ILogger<PaymentRepository> logger, RepoDbContext context) : base(logger, context)
+        public PaymentRepository(RepositoryDbContext context) : base(context)
         {
 
         }

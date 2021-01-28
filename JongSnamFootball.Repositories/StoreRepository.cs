@@ -4,13 +4,12 @@ using System.Threading.Tasks;
 using JongSnamFootball.Entities.Models;
 using JongSnamFootball.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace JongSnamFootball.Repositories
 {
     public class StoreRepository : BaseRepository<StoreModel>, IStoreRepository
     {
-        public StoreRepository(ILogger<StoreRepository> logger, RepoDbContext context) : base(logger, context)
+        public StoreRepository(RepositoryDbContext context) : base(context)
         {
 
         }
