@@ -17,6 +17,8 @@ namespace JongSnamFootball.Repositories
         private IReservationRepository _reservationRepository;
         private IStoreRepository _storeRepository;
         private IUserRepository _userRepository;
+        private IPictureFieldRepository _pictureField;
+
 
         public RepositoryWrapper(RepositoryDbContext repositoryDbContext)
         {
@@ -113,23 +115,35 @@ namespace JongSnamFootball.Repositories
                 return _userRepository;
             }
         }
+        public IPictureFieldRepository PictureField
+        {
+            get
+            {
+                if (_pictureField == null)
+                {
+                    _pictureField = new PictureFieldRepository(_repositoryDbContext);
+                }
+
+                return _pictureField;
+            }
+        }
 
         public async Task<int> SaveAsync()
         {
             return await _repositoryDbContext.SaveChangesAsync();
         }
 
-        public async Task BeginTransaction()
+        public async Task BeginTransactionAsync()
         {
              _dbContextTransaction = await _repositoryDbContext.Database.BeginTransactionAsync();
         }
 
-        public async Task Commit()
+        public async Task CommitAsync()
         {
             await _dbContextTransaction?.CommitAsync();
         }
 
-        public async Task Rollback()
+        public async Task RollbackAsync()
         {
             await _dbContextTransaction?.RollbackAsync();
         }

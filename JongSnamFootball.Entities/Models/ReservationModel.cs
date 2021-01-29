@@ -8,6 +8,9 @@ namespace JongSnamFootball.Entities.Models
         [Column("id_reservation")]
         public int Id { get; set; }
 
+        [Column("id_store_in_reservation")]
+        public int IdStore { get; set; }
+
         [Column("id_member_in_reservation")]
         public int IdMember { get; set; }
 
@@ -22,6 +25,12 @@ namespace JongSnamFootball.Entities.Models
 
         [Column("status_reservation")]
         public string Status { get; set; }
+
+        public virtual UserMemberModel UserMemberModel { get; set; }
+
+        public virtual StoreModel StoreModel { get; set; }
+        public virtual FieldModel FieldModel { get; set; }
+        public virtual PaymentModel PaymentModel { get; set; }
 
     }
 }

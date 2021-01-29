@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JongSnamFootball.Entities.Models
 {
@@ -13,9 +14,6 @@ namespace JongSnamFootball.Entities.Models
         [Column("name_field")]
         public string Name { get; set; }
 
-        [Column("discount_field")]
-        public string Discount { get; set; }
-
         [Column("size_field")]
         public string Size { get; set; }
 
@@ -24,6 +22,11 @@ namespace JongSnamFootball.Entities.Models
 
         [Column("status_field")]
         public string Status { get; set; }
+
+        public virtual StoreModel StoreModel { get; set; }
+        public virtual DiscountModel DiscountModel { get; set; }
+
+        public virtual ICollection<PictureFieldModel> PictureFieldModel { get; set; }
 
     }
 }

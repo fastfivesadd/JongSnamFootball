@@ -18,12 +18,16 @@ namespace JongSnamFootball.Interfaces.Repositories
 
         ICommentRepository Comment { get; }
 
+        IPictureFieldRepository PictureField { get; }
+
         Task<int> SaveAsync();
 
-        Task BeginTransaction();
+        Task BeginTransactionAsync();
 
-        Task Commit();
+        Task CommitAsync();
 
-        Task Rollback();
+        Task RollbackAsync();
+
+        void Dispose();
     }
 }

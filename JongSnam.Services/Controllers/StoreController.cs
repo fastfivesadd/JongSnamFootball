@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using JongSnamFootball.Entities.Dtos;
+using JongSnamFootball.Entities.Request;
 using JongSnamFootball.Interfaces.Managers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -37,6 +39,16 @@ namespace JongSnam.Services.Controllers
         public async Task<ActionResult> GetYourStores(int ownerId, int currentPage, int pageSize)
         {
             return Ok(await _storeManager.GetYourStores(ownerId, currentPage, pageSize));
+        }
+        [HttpPost]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(IEnumerable<bool>))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(bool))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> AddStore(StoreRequest requestDto)
+        {
+            var result = await _storeManager.AddStore(requestDto);
+            return Ok(result);
         }
     }
 }

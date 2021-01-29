@@ -8,6 +8,8 @@
 
         public int Price { get; set; }
 
+        public string NameStore {get; set; }
 
+        public string Status { get; set; }
     }
 }

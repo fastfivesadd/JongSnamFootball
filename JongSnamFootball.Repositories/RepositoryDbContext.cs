@@ -18,7 +18,7 @@ namespace JongSnamFootball.Repositories
 
         public virtual DbSet<FieldModel> Field { get; set; }
 
-        public virtual DbSet<ReservationModel> Reservation { get; set; }
+        public virtual DbSet<ReservationModel> Reservations { get; set; }
 
         public virtual DbSet<PictureFieldModel> Picturefield { get; set; }
 
@@ -37,18 +37,24 @@ namespace JongSnamFootball.Repositories
 
             modelBuilder.Entity<StoreModel>(entity =>
             {
-                //entity.HasMany(s => s.CommentModel).WithOne().HasForeignKey(x => x.StoreId);
                 entity.ToTable(nameof(Store), Schema);
             });
 
             modelBuilder.Entity<FieldModel>(entity =>
             {
+                entity.HasOne(s => s.StoreModel).WithOne().HasForeignKey<FieldModel>(x => x.IdStore);
+                entity.HasMany(s => s.PictureFieldModel).WithOne().HasForeignKey(s => s.IdField);
+                entity.HasOne(s => s.DiscountModel).WithOne().HasForeignKey<DiscountModel>(s => s.IdField);
                 entity.ToTable(nameof(Field), Schema);
             });
 
             modelBuilder.Entity<ReservationModel>(entity =>
             {
-                entity.ToTable(nameof(Reservation), Schema);
+                entity.HasOne(s => s.UserMemberModel).WithOne().HasForeignKey<ReservationModel>(x => x.IdMember);
+                entity.HasOne(s => s.StoreModel).WithOne().HasForeignKey<ReservationModel>(x => x.IdStore);
+                entity.HasOne(s => s.FieldModel).WithOne().HasForeignKey<ReservationModel>(x => x.IdField);
+                entity.HasOne(s => s.PaymentModel).WithOne().HasForeignKey<PaymentModel>(x => x.IdReservation);
+                entity.ToTable(nameof(Reservations), Schema);
             });
 
             modelBuilder.Entity<PictureFieldModel>(entity =>

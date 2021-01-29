@@ -31,7 +31,7 @@ namespace JongSnamFootball.Managers
             result.Collection = commentPaging.Collection;
             result.CurrentPage = commentPaging.CurrentPage;
             result.TotalPage = commentPaging.TotalPage;
-            result.SummaryRating = listComment.Count > 0 ? listComment[0].Rating.GetValueOrDefault() : 0;
+            result.SummaryRating = listComment.Count > 0 ? listComment[0].StoreModel.Rating.GetValueOrDefault() : 0;
 
             result.TotalOne = commentPaging.Collection.Count(c => c.Rating == 1);
             result.TotalTwo = commentPaging.Collection.Count(c => c.Rating == 2);

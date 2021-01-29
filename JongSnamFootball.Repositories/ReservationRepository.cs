@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using JongSnamFootball.Entities.Models;
 using JongSnamFootball.Interfaces.Repositories;
@@ -14,8 +15,31 @@ namespace JongSnamFootball.Repositories
         }
         public async Task<List<ReservationModel>> GetAll()
         {
-            var result = await _dbContext.Reservation.AsNoTracking().ToListAsync();
+            var result = await _dbContext.Reservations.AsNoTracking().ToListAsync();
             return result;
+        }
+
+        public async Task<List<ReservationModel>> GetYourReservation(int? storeID)
+        {
+            if (storeID.HasValue)
+            {
+                return await _dbContext.Reservations.Where(w => w.IdStore == storeID).Include(i => i.UserMemberModel).AsNoTracking().ToListAsync();
+            }
+            return new List<ReservationModel>();
+        }
+
+        public async Task<List<ReservationModel>> GetShowDetailYourReservation(int? Id)
+        {
+            if (Id.HasValue)
+            {
+                return await _dbContext.Reservations.Where(w => w.Id == Id)
+                    .Include(i => i.UserMemberModel)
+                    .Include(i => i.StoreModel)
+                    .Include(i => i.PaymentModel)
+                    .Include(i => i.FieldModel)
+                    .AsNoTracking().ToListAsync();
+            }
+            return new List<ReservationModel>();
         }
     }
 }

@@ -15,15 +15,15 @@ namespace JongSnamFootball.Entities.Models
         public string Picture { get; set; }
 
         [Column("amount_payment")]
-        public float Amount { get; set; }
+        public double Amount { get; set; }
 
         [Column("date_payment")]
         public DateTime Date { get; set; }
 
         [Column("status_payment")]
-        public int Status { get; set; }
+        public string Status { get; set; }
 
         [Column("status_amount_payment")]
-        public int StatusAmount { get; set; }
+        public string StatusAmount { get; set; }
     }
 }

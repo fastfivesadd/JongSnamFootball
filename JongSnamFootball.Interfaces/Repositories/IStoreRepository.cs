@@ -4,12 +4,12 @@ using JongSnamFootball.Entities.Models;
 
 namespace JongSnamFootball.Interfaces.Repositories
 {
-    public interface IStoreRepository
+    public interface IStoreRepository : IRepository<StoreModel>
     {
         Task<List<StoreModel>> GetAll();
 
         Task<List<StoreModel>> GetStoreByOwnerId(int? ownerId);
 
-        Task<StoreModel> GetCommentByStoreId(int? storeID);
+    
     }
 }

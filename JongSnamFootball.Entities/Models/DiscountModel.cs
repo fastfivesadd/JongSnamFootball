@@ -18,7 +18,7 @@ namespace JongSnamFootball.Entities.Models
         public DateTime EndTime { get; set; }
 
         [Column("percentage_discount")]
-        public float Percentage { get; set; }
+        public double Percentage { get; set; }
 
         [Column("detail_discount")]
         public string Detail { get; set; }

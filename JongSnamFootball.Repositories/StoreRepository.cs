@@ -31,14 +31,6 @@ namespace JongSnamFootball.Repositories
             return new List<StoreModel>();
         }
 
-        public async Task<StoreModel> GetCommentByStoreId(int? storeID)
-        {
-            if (storeID.HasValue)
-            {
-                //return await _dbContext.Store.Where(w => w.Id == storeID).Include(i => i.CommentModel).AsNoTracking().FirstOrDefaultAsync();
-            }
 
-            return new StoreModel();
-        }
     }
 }

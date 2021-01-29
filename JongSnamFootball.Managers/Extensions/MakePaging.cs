@@ -90,5 +90,26 @@ namespace JongSnamFootball.Managers.Extensions
             return result;
         }
 
+        public static BasePagingDto<ReservationDto> ReservationDtoToPaging(List<ReservationDto> list, int currentPage, int pageSize)
+        {
+            var result = new BasePagingDto<ReservationDto>();
+
+            var total = list.Count;
+            if (total == 0)
+            {
+                return result;
+            }
+
+            var skip = (currentPage - 1) * pageSize;
+
+            result.Collection = list.Skip(skip).Take(pageSize).ToList();
+
+            result.TotalPage = ((total - 1) / pageSize) + 1;
+
+            result.CurrentPage = currentPage;
+
+            return result;
+        }
+
     }
 }

@@ -23,20 +23,18 @@ namespace JongSnamFootball.Repositories
         {
             if (storeID.HasValue)
             {
-                return await _dbContext.Field.Where(w => w.IdStore == storeID).AsNoTracking().ToListAsync();
+                return await _dbContext.Field.Where(w => w.IdStore == storeID).Include(i => i.StoreModel).AsNoTracking().ToListAsync();
             }
 
             return new List<FieldModel>();
         }
 
-        public async Task<List<FieldModel>> GetByFieldId(int? id)
+        public async Task<FieldModel> GetFieldById(int id)
         {
-            if (id.HasValue)
-            {
-                return await _dbContext.Field.Where(w => w.Id == id).AsNoTracking().ToListAsync();
-            }
-
-            return new List<FieldModel>();
+                return await _dbContext.Field.Where(w => w.Id == id)
+                    .Include(i => i.PictureFieldModel)
+                    .Include(i => i.DiscountModel)
+                    .AsNoTracking().FirstOrDefaultAsync();
         }
     }
 }

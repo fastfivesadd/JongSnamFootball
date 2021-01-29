@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using JongSnamFootball.Entities.Dtos;
 using JongSnamFootball.Entities.Models;
+using JongSnamFootball.Entities.Request;
 
 namespace JongSnamFootball.Entities.Profiles
 {
@@ -12,11 +13,7 @@ namespace JongSnamFootball.Entities.Profiles
 
             CreateMap<StoreModel, YourStore>();
 
-            CreateMap<FieldModel, FieldDto>();
-
-            CreateMap<FieldModel, ListFieldByIdFieldDto>();
-
-
+            CreateMap<StoreRequest, StoreModel>();
         }
     }
 }

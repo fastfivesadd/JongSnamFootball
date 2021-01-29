@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using JongSnamFootball.Entities.Dtos;
+using JongSnamFootball.Entities.Models;
+using JongSnamFootball.Entities.Request;
 using JongSnamFootball.Interfaces.Managers;
 using JongSnamFootball.Interfaces.Repositories;
 using JongSnamFootball.Managers.Extensions;
@@ -12,10 +15,12 @@ namespace JongSnamFootball.Managers
     {
         private readonly IMapper _mapper;
         private readonly IStoreRepository _storeRepository;
-        public StoreManager(IStoreRepository storeRepository, IMapper mapper)
+        private readonly IRepositoryWrapper _repositoryWrapper;
+        public StoreManager(IStoreRepository storeRepository, IMapper mapper, IRepositoryWrapper repositoryWrapper)
         {
             _storeRepository = storeRepository;
             _mapper = mapper;
+            _repositoryWrapper = repositoryWrapper;
         }
 
         public async Task<BasePagingDto<StoreDto>> GetListStore(int currentPage, int pageSize)
@@ -40,5 +45,31 @@ namespace JongSnamFootball.Managers
 
             return result;
         }
+        public async Task<bool> AddStore(StoreRequest requestDto)
+        {
+            try
+            {
+                var storeModel = _mapper.Map<StoreModel>(requestDto);
+
+                await _repositoryWrapper.BeginTransactionAsync();
+
+                await _repositoryWrapper.Store.CreateAsync(storeModel);
+
+                await _repositoryWrapper.SaveAsync();
+
+                await _repositoryWrapper.CommitAsync();
+
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+
+            }
+        }
+        
     }
 }

@@ -1,13 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using JongSnamFootball.Entities.Dtos;
+using JongSnamFootball.Entities.Request;
 
 namespace JongSnamFootball.Interfaces.Managers
 {
     public interface IFieldManager
     {
-        Task<BasePagingDto<FieldDto>> GetFieldByStore(int storeId, int currentPage, int pageSize);
+        Task<BasePagingDto<FieldDto>> GetFieldByStoreId(int storeId, int currentPage, int pageSize);
 
-        Task<List<ListFieldByIdFieldDto>> GetFieldById(int id);
+        Task<FieldByIdFieldDto> GetFieldById(int id);
+
+        Task<bool> AddField(AddFieldRequest requestDto);
+
+        Task<bool> UpdeteField(int id, UpdateFieldRequest updateFieldRequest);
     }
 }
