@@ -50,5 +50,16 @@ namespace JongSnam.Services.Controllers
             var result = await _storeManager.AddStore(requestDto);
             return Ok(result);
         }
+
+        [HttpPut]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(bool))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(bool))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> UpdateStore(int id, UpdateStoreRequest request)
+        {
+            var result = await _storeManager.UpdateStore(id, request);
+            return Ok(result);
+        }
     }
 }

@@ -6,6 +6,8 @@ namespace JongSnamFootball.Interfaces.Repositories
 {
     public interface IUserRepository : IRepository<UserMemberModel>
     {
-        Task<List<UserMemberModel>> GetAll();
+        Task<List<UserMemberModel>> GetAllUser();
+
+        Task<UserMemberModel> GetUserById(int id);
     }
 }

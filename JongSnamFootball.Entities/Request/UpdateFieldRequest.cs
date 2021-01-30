@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace JongSnamFootball.Entities.Request
 {
-    public class UpdateFieldRequest : AddFieldRequest
+    public class UpdateFieldRequest : FieldRequest
     {
+        public UpdateDiscountRequest UpdateDiscountRequest { get; set; }
 
+        public ICollection<UpdatePictureFieldRequest> UpdatePictureFieldRequest { get; set; }
     }
 }

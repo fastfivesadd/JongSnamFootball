@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using JongSnamFootball.Entities.Dtos;
@@ -107,7 +108,37 @@ namespace JongSnamFootball.Managers
                 }
                 await _repositoryWrapper.BeginTransactionAsync();
 
-                field = _mapper.Map<FieldModel>(updateFieldRequest);
+                //field = _mapper.Map<FieldModel>(updateFieldRequest.FieldRequest);
+
+                field.Name = updateFieldRequest.Name;
+                field.Size = updateFieldRequest.Size;
+                field.Price = updateFieldRequest.Price;
+                field.Status = updateFieldRequest.Status;
+
+                field.DiscountModel.Percentage = updateFieldRequest.UpdateDiscountRequest.Percentage.GetValueOrDefault();
+                field.DiscountModel.StartTime = updateFieldRequest.UpdateDiscountRequest.StartTime.GetValueOrDefault();
+                field.DiscountModel.EndTime = updateFieldRequest.UpdateDiscountRequest.EndTime.GetValueOrDefault();
+                field.DiscountModel.Detail = updateFieldRequest.UpdateDiscountRequest.Detail;
+
+                foreach (var item in updateFieldRequest.UpdatePictureFieldRequest)
+                {
+                    var picToUpdate = field.PictureFieldModel.Where(w => w.Id == item.Id).FirstOrDefault();
+                    if (picToUpdate == null)
+                    {
+                        field.PictureFieldModel.Add(
+                            new PictureFieldModel
+                            {
+                                IdField = field.Id,
+                                Picture = item.Picture,
+                                Date = item.Date
+                            });
+                    }
+                    else
+                    {
+                        picToUpdate.Picture = item.Picture;
+                        picToUpdate.Date = item.Date;
+                    }
+                }
 
                 _repositoryWrapper.Field.Updete(field);
 
@@ -117,10 +148,9 @@ namespace JongSnamFootball.Managers
 
                 return true;
             }
-            catch
+            catch(Exception ex)
             {
-
-                return false;
+                throw ex;
             }
             finally
             {

@@ -11,5 +11,7 @@ namespace JongSnamFootball.Interfaces.Managers
         Task<BasePagingDto<YourStore>> GetYourStores(int ownerId, int currentPage, int pageSize);
 
         Task<bool> AddStore(StoreRequest requestDto);
+
+        Task<bool> UpdateStore(int id, UpdateStoreRequest request);
     }
 }

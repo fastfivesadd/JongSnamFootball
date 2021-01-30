@@ -40,5 +40,16 @@ namespace JongSnam.Services.Controllers
             var result = await _userManager.CreateUser(requestDto);
             return Ok(result);
         }
+
+        [HttpPut("ChangePassword")]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(bool))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(bool))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> ChangePassword(int id, ChangePasswordRequest request)
+        {
+            var result = await _userManager.ChangePassword(id, request);
+            return Ok(result);
+        }
     }
 }

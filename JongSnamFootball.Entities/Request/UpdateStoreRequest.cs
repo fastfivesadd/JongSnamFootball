@@ -7,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace JongSnamFootball.Entities.Request
 {
-    public class StoreRequest
+    public class UpdateStoreRequest 
     {
-
-        [Required(ErrorMessage = "Owner is required")]
-        public int Owner { get; set; }
-
         public string Picture { get; set; }
 
         [Required(ErrorMessage = "Name is required")]
@@ -46,7 +42,7 @@ namespace JongSnamFootball.Entities.Request
         [Phone]
         public string TelePhone { get; set; }
 
- 
+
         public decimal? Latitude { get; set; }
 
         public decimal? Longtitude { get; set; }
@@ -60,8 +56,5 @@ namespace JongSnamFootball.Entities.Request
 
         [MaxLength(50)]
         public string? Rules { get; set; }
-
-
-
     }
 }

@@ -71,5 +71,45 @@ namespace JongSnamFootball.Managers
             }
         }
         
+        public async Task<bool> UpdateStore(int id, UpdateStoreRequest request)
+        {
+            try
+            {
+                var store = await _storeRepository.GetStoreById(id);
+
+                await _repositoryWrapper.BeginTransactionAsync();
+
+                store.Name = request.Name;
+                store.OtherAddress = request.OtherAddress;
+                store.DistrictAddress = request.DistrictAddress;
+                store.AmphurAddress = request.AmphurAddress;
+                store.ProvinceAddress = request.ProvinceAddress;
+                store.TelePhone = request.TelePhone;
+                store.Latitude = request.Latitude;
+                store.Longtitude = request.Longtitude;
+                store.Rules = request.Rules;
+                store.Picture = request.Picture;
+                store.Status = request.Status;
+                store.OfficeHours = request.OfficeHours;
+
+                _repositoryWrapper.Store.Updete(store);
+
+                await _repositoryWrapper.SaveAsync();
+
+                await _repositoryWrapper.CommitAsync();
+
+                return true;
+
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _repositoryWrapper.Dispose();
+            }
+        }
+        
     }
 }

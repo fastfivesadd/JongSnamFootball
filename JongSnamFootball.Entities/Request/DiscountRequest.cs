@@ -18,7 +18,7 @@ namespace JongSnamFootball.Entities.Request
 
         [Range(0,100)]
         [Required(ErrorMessage = "Percentage is required")]
-        public decimal? Percentage { get; set; }
+        public double? Percentage { get; set; }
 
         [MaxLength(50)]
         public string? Detail { get; set; }

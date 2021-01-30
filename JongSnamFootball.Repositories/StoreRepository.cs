@@ -20,6 +20,10 @@ namespace JongSnamFootball.Repositories
 
             return result;
         }
+        public async Task<StoreModel> GetStoreById(int? Id)
+        {
+            return await _dbContext.Store.Where(w => w.Id == Id).AsNoTracking().FirstOrDefaultAsync();
+        }
 
         public async Task<List<StoreModel>> GetStoreByOwnerId(int? ownerId)
         {

@@ -23,7 +23,7 @@ namespace JongSnamFootball.Entities.Request
         [Required(ErrorMessage = "Price is required")]
         public int Price { get; set; }
 
-        [MaxLength(5)]
+        [MaxLength(10)]
         [Required(ErrorMessage = "Status is required")]
         public string Status { get; set; }
 

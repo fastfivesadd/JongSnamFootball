@@ -26,7 +26,7 @@ namespace JongSnamFootball.Managers
 
         public async Task<List<UserDto>> GetAll()
         {
-            var userMembers = await _userRepository.GetAll();
+            var userMembers = await _userRepository.GetAllUser();
             var result = _mapper.Map<List<UserDto>>(userMembers);
             return result;
         }
@@ -55,5 +55,39 @@ namespace JongSnamFootball.Managers
             {
             }
         }
+
+        public async Task<bool> ChangePassword(int id, ChangePasswordRequest request)
+        {
+            try
+            {
+                var user = await _userRepository.GetUserById(id);
+
+                await _repositoryWrapper.BeginTransactionAsync();
+
+                if (user.Password == request.OldPassword)
+                {
+                    user.Password = request.NewPassword;
+                }
+                else
+                {
+                    return false;
+                }
+                _repositoryWrapper.User.Updete(user);
+
+                await _repositoryWrapper.SaveAsync();
+
+                await _repositoryWrapper.CommitAsync();
+
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _repositoryWrapper.Dispose();
+            }
+        } 
     }
 }

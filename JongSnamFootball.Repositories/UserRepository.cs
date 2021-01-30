@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using JongSnamFootball.Entities.Models;
 using JongSnamFootball.Interfaces.Repositories;
@@ -13,10 +14,14 @@ namespace JongSnamFootball.Repositories
 
         }
 
-        public async Task<List<UserMemberModel>> GetAll()
+        public async Task<List<UserMemberModel>> GetAllUser()
         {
             var result = await _dbContext.Usermember.AsNoTracking().ToListAsync();
             return result;
+        }
+        public async Task<UserMemberModel> GetUserById(int id)
+        {
+            return await _dbContext.Usermember.Where(w => w.Id == id).AsNoTracking().FirstOrDefaultAsync();
         }
     }
 }
