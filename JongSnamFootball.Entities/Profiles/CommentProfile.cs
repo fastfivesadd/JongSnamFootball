@@ -8,7 +8,7 @@ namespace JongSnamFootball.Entities.Profiles
     {
         public CommentProfile()
         {
-            CreateMap<CommentModel, CommentDto>()
+            CreateMap<ReviewModel, ReviewDto>()
                   .ForMember(cd => cd.Name, map => map.MapFrom(cm => $"{cm.UserModel.FirstName} {cm.UserModel.LastName}"));
 
         }

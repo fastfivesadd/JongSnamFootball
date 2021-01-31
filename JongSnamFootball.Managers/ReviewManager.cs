@@ -9,21 +9,21 @@ using JongSnamFootball.Managers.Extensions;
 
 namespace JongSnamFootball.Managers
 {
-    public class CommentManager : ICommentManager
+    public class ReviewManager : IReviewManager
     {
         private readonly IMapper _mapper;
-        private readonly ICommentRepository _commentRepository;
-        public CommentManager(IMapper mapper, ICommentRepository commentRepository)
+        private readonly IReviewRepository _reviewRepository;
+        public ReviewManager(IMapper mapper, IReviewRepository reviewRepository)
         {
             _mapper = mapper;
-            _commentRepository = commentRepository;
+            _reviewRepository = reviewRepository;
         }
 
-        public async Task<SumaryRatingDto> GetCommentByStoreId(int storeId, int currentPage, int pageSize)
+        public async Task<SumaryRatingDto> GetReviewByStoreId(int storeId, int currentPage, int pageSize)
         {
-            var listComment = await _commentRepository.GetCommentByStoreId(storeId);
+            var listComment = await _reviewRepository.GetReviewByStoreId(storeId);
 
-            var listCommentDto = _mapper.Map<List<CommentDto>>(listComment);
+            var listCommentDto = _mapper.Map<List<ReviewDto>>(listComment);
 
             var commentPaging = MakePaging.CommentDtoToPaging(listCommentDto, currentPage, pageSize);
 
@@ -31,7 +31,7 @@ namespace JongSnamFootball.Managers
             result.Collection = commentPaging.Collection;
             result.CurrentPage = commentPaging.CurrentPage;
             result.TotalPage = commentPaging.TotalPage;
-            result.SummaryRating = listComment.Count > 0 ? listComment[0].StoreModel.Rating.GetValueOrDefault() : 0;
+            //result.SummaryRating = listComment.Count > 0 ? listComment[0].StoreModel.Rating.GetValueOrDefault() : 0;
 
             result.TotalOne = commentPaging.Collection.Count(c => c.Rating == 1);
             result.TotalTwo = commentPaging.Collection.Count(c => c.Rating == 2);

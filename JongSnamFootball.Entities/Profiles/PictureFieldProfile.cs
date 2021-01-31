@@ -14,9 +14,9 @@ namespace JongSnamFootball.Entities.Profiles
     {
         public PictureFieldProfile()
         {
-            CreateMap<PictureFieldRequest, PictureFieldModel>();
+            CreateMap<ImageFieldRequest, ImageFieldModel>();
 
-            CreateMap<PictureFieldModel, PictureFieldDto>();
+            CreateMap<ImageFieldModel, ImageFieldDto>();
         }
     }
 }

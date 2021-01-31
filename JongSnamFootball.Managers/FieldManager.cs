@@ -26,7 +26,7 @@ namespace JongSnamFootball.Managers
 
         public async Task<BasePagingDto<FieldDto>> GetFieldByStoreId(int storeId, int currentPage, int pageSize)
         {
-            var listStore = await _fieldRepository.GetByStoreID(storeId);
+            var listStore = await _fieldRepository.GetByStoreId(storeId);
 
             var listFieldDto = _mapper.Map<List<FieldDto>>(listStore);
 
@@ -36,11 +36,16 @@ namespace JongSnamFootball.Managers
         }
 
 
-        public async Task<FieldByIdFieldDto> GetFieldById(int id)
+        public async Task<FieldDetailDto> GetFieldById(int id)
         {
             var field = await _fieldRepository.GetFieldById(id);
 
-            var result = _mapper.Map<FieldByIdFieldDto>(field);
+            if (field == null)
+            {
+                //return false;
+            }
+
+            var result = _mapper.Map<FieldDetailDto>(field);
 
             return result;
         }
@@ -50,10 +55,14 @@ namespace JongSnamFootball.Managers
             try
             {
                 var fieldModel = _mapper.Map<FieldModel>(request.FieldRequest);
+                fieldModel.CreatedDate = DateTime.Now;
+                fieldModel.UpdatedDate = DateTime.Now;
 
                 var disCountModel = _mapper.Map<DiscountModel>(request.DiscountRequest);
+                disCountModel.CreatedDate = DateTime.Now;
+                disCountModel.UpdatedDate = DateTime.Now;
 
-                var pictureFields = _mapper.Map<IEnumerable<PictureFieldModel>>(request.PictureFieldRequest);
+                var pictureFields = _mapper.Map<IEnumerable<ImageFieldModel>>(request.PictureFieldRequest);
 
                 // open begn transaction when we must insert foreign key to other tables
                 await _repositoryWrapper.BeginTransactionAsync();
@@ -65,13 +74,15 @@ namespace JongSnamFootball.Managers
                 await _repositoryWrapper.SaveAsync();
 
                 // assing id field before save
-                disCountModel.IdField = fieldAfterSaved.Id;
+                disCountModel.FieldId = fieldAfterSaved.Id;
                 await _repositoryWrapper.Discount.CreateAsync(disCountModel);
 
                 // assing id field before save
                 foreach (var item in pictureFields)
                 {
-                    item.IdField = fieldAfterSaved.Id;
+                    item.FieldId = fieldAfterSaved.Id;
+                    item.CreatedDate = DateTime.Now;
+                    item.UpdatedDate = DateTime.Now;
                 }
 
                 await _repositoryWrapper.PictureField.CreateRangeAsync(pictureFields);
@@ -100,9 +111,9 @@ namespace JongSnamFootball.Managers
         {
             try
             {
-                var field = await _fieldRepository.GetFieldById(id);
+                var fieldModel = await _fieldRepository.GetFieldById(id);
 
-                if (field == null)
+                if (fieldModel == null)
                 {
                     return false;
                 }
@@ -110,35 +121,65 @@ namespace JongSnamFootball.Managers
 
                 //field = _mapper.Map<FieldModel>(updateFieldRequest.FieldRequest);
 
-                field.Name = updateFieldRequest.Name;
-                field.Size = updateFieldRequest.Size;
-                field.Price = updateFieldRequest.Price;
-                field.Status = updateFieldRequest.Status;
+                fieldModel.Name = updateFieldRequest.Name;
+                fieldModel.Size = updateFieldRequest.Size;
+                fieldModel.Price = updateFieldRequest.Price;
+                fieldModel.IsOpen = updateFieldRequest.IsOpen;
 
-                field.DiscountModel.Percentage = updateFieldRequest.UpdateDiscountRequest.Percentage.GetValueOrDefault();
-                field.DiscountModel.StartTime = updateFieldRequest.UpdateDiscountRequest.StartTime.GetValueOrDefault();
-                field.DiscountModel.EndTime = updateFieldRequest.UpdateDiscountRequest.EndTime.GetValueOrDefault();
-                field.DiscountModel.Detail = updateFieldRequest.UpdateDiscountRequest.Detail;
-
+                fieldModel.DiscountModel.Percentage = updateFieldRequest.UpdateDiscountRequest.Percentage.Value;
+                fieldModel.DiscountModel.StartDate = updateFieldRequest.UpdateDiscountRequest.StartDate.Value;
+                fieldModel.DiscountModel.EndDate = updateFieldRequest.UpdateDiscountRequest.EndDate.Value;
+                fieldModel.DiscountModel.Detail = updateFieldRequest.UpdateDiscountRequest.Detail;
+                fieldModel.UpdatedDate = DateTime.Now;
                 foreach (var item in updateFieldRequest.UpdatePictureFieldRequest)
                 {
-                    var picToUpdate = field.PictureFieldModel.Where(w => w.Id == item.Id).FirstOrDefault();
+                    var picToUpdate = fieldModel.ImageField.Where(w => w.Id == item.Id).FirstOrDefault();
                     if (picToUpdate == null)
                     {
-                        field.PictureFieldModel.Add(
-                            new PictureFieldModel
+                        fieldModel.ImageField.Add(
+                            new ImageFieldModel
                             {
-                                IdField = field.Id,
-                                Picture = item.Picture,
-                                Date = item.Date
+                                FieldId = fieldModel.Id,
+                                Image = item.Image,
+                                UpdatedDate = DateTime.Now,
+                                CreatedDate = DateTime.Now
                             });
                     }
                     else
                     {
-                        picToUpdate.Picture = item.Picture;
-                        picToUpdate.Date = item.Date;
+                        picToUpdate.Image = item.Image;
+                        picToUpdate.UpdatedDate = DateTime.Now;
                     }
                 }
+                _repositoryWrapper.Field.Updete(fieldModel);
+
+                await _repositoryWrapper.SaveAsync();
+
+                await _repositoryWrapper.CommitAsync();
+
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _repositoryWrapper.Dispose();
+            }
+        }
+        public async Task<bool> DeleteField(int id)
+        {
+            try
+            {
+                var field = await _fieldRepository.GetFieldById(id);
+                if (field == null)
+                {
+                    return false;
+                }
+                await _repositoryWrapper.BeginTransactionAsync();
+
+                field.Active = false;
 
                 _repositoryWrapper.Field.Updete(field);
 
@@ -157,9 +198,5 @@ namespace JongSnamFootball.Managers
                 _repositoryWrapper.Dispose();
             }
         }
-
-
-
-
     }
 }

@@ -7,22 +7,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JongSnamFootball.Repositories
 {
-    public class CommentRepository : BaseRepository<CommentModel>, ICommentRepository
+    public class ReviewRepository : BaseRepository<ReviewModel>, IReviewRepository
     {
-        public CommentRepository(RepositoryDbContext context) : base(context)
+        public ReviewRepository(RepositoryDbContext context) : base(context)
         {
 
         }
 
-        public async Task<List<CommentModel>> GetAll()
+        public async Task<List<ReviewModel>> GetAll()
         {
-            var result = await _dbContext.Comment.AsNoTracking().ToListAsync();
+            var result = await _dbContext.Comments.AsNoTracking().ToListAsync();
             return result;
         }
 
-        public async Task<List<CommentModel>> GetCommentByStoreId(int storeID)
+        public async Task<List<ReviewModel>> GetReviewByStoreId(int storeID)
         {
-            return await _dbContext.Comment.Where(w => w.StoreId == storeID)
+            return await _dbContext.Comments.Where(w => w.StoreId == storeID)
                 .Include(i => i.UserModel)
                 .Include(i => i.StoreModel)
                 .AsNoTracking().ToListAsync();

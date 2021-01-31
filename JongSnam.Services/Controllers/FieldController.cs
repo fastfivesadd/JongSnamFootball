@@ -21,8 +21,8 @@ namespace JongSnam.Services.Controllers
 
         [HttpGet("{id}")]
         [Consumes("application/json")]
-        [Produces("application/json", Type = typeof(FieldByIdFieldDto))]
-        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(FieldByIdFieldDto))]
+        [Produces("application/json", Type = typeof(FieldDetailDto))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(FieldDetailDto))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
         public async Task<ActionResult> GetFieldById(int id)
@@ -58,9 +58,20 @@ namespace JongSnam.Services.Controllers
         [Produces("application/json", Type = typeof(bool))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(bool))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
-        public async Task<ActionResult> UpdateField(int id, [FromBody]UpdateFieldRequest updateFieldRequest)
+        public async Task<ActionResult> UpdateField(int id, [FromBody] UpdateFieldRequest updateFieldRequest)
         {
             var result = await _fieldManager.UpdeteField(id, updateFieldRequest);
+            return Ok(result);
+        }
+
+        [HttpPut("{id}/DeleteField")]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(bool))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(bool))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> DeleteField(int id)
+        {
+            var result = await _fieldManager.DeleteField(id);
             return Ok(result);
         }
 

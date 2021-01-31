@@ -4,10 +4,10 @@ using JongSnamFootball.Entities.Models;
 
 namespace JongSnamFootball.Interfaces.Repositories
 {
-    public interface IUserRepository : IRepository<UserMemberModel>
+    public interface IUserRepository : IRepository<UserModel>
     {
-        Task<List<UserMemberModel>> GetAllUser();
+        Task<List<UserModel>> GetAllUser();
 
-        Task<UserMemberModel> GetUserById(int id);
+        Task<UserModel> GetUserById(int id);
     }
 }

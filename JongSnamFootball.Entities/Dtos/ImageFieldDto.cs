@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace JongSnamFootball.Entities.Dtos
 {
-    public class PictureFieldDto
+    public class ImageFieldDto
     {
-        public string Picture { get; set; }
+        public string Image { get; set; }
     }
 }

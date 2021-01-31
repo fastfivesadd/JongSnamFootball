@@ -16,7 +16,7 @@ namespace JongSnamFootball.Interfaces.Repositories
 
         IDiscountRepository Discount { get; }
 
-        ICommentRepository Comment { get; }
+        IReviewRepository Comment { get; }
 
         IPictureFieldRepository PictureField { get; }
 

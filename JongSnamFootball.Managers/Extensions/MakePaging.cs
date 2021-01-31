@@ -69,9 +69,9 @@ namespace JongSnamFootball.Managers.Extensions
             return result;
         }
 
-        public static BasePagingDto<CommentDto> CommentDtoToPaging(List<CommentDto> list, int currentPage, int pageSize)
+        public static BasePagingDto<ReviewDto> CommentDtoToPaging(List<ReviewDto> list, int currentPage, int pageSize)
         {
-            var result = new BasePagingDto<CommentDto>();
+            var result = new BasePagingDto<ReviewDto>();
 
             var total = list.Count;
             if (total == 0)

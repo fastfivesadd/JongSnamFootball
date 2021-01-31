@@ -36,7 +36,6 @@ namespace JongSnamFootball.Managers
 
         public async Task<BasePagingDto<YourStore>> GetYourStores(int ownerId, int currentPage, int pageSize)
         {
-
             var listStore = await _storeRepository.GetStoreByOwnerId(ownerId);
 
             var listStoreDto = _mapper.Map<List<YourStore>>(listStore);
@@ -51,23 +50,18 @@ namespace JongSnamFootball.Managers
             {
                 var storeModel = _mapper.Map<StoreModel>(requestDto);
 
-                await _repositoryWrapper.BeginTransactionAsync();
+                storeModel.CreatedDate = DateTime.Now;
+                storeModel.UpdatedDate = DateTime.Now;
 
                 await _repositoryWrapper.Store.CreateAsync(storeModel);
 
                 await _repositoryWrapper.SaveAsync();
-
-                await _repositoryWrapper.CommitAsync();
 
                 return true;
             }
             catch(Exception ex)
             {
                 throw ex;
-            }
-            finally
-            {
-
             }
         }
         
@@ -75,39 +69,31 @@ namespace JongSnamFootball.Managers
         {
             try
             {
-                var store = await _storeRepository.GetStoreById(id);
+                var storeModel = await _storeRepository.GetStoreById(id);
 
-                await _repositoryWrapper.BeginTransactionAsync();
+                storeModel.Name = request.Name;
+                storeModel.Address = request.Address;
+                storeModel.District = request.District;
+                storeModel.Amphur = request.Amphur;
+                storeModel.Province = request.Province;
+                storeModel.ContactMobile = request.ContactMobile;
+                storeModel.Latitude = request.Latitude;
+                storeModel.Longtitude = request.Longtitude;
+                storeModel.Rules = request.Rules;
+                storeModel.Image = request.Image;
+                storeModel.IsOpen = request.IsOpen;
+                storeModel.OfficeHours = request.OfficeHours;
+                storeModel.UpdatedDate = DateTime.Now;
 
-                store.Name = request.Name;
-                store.OtherAddress = request.OtherAddress;
-                store.DistrictAddress = request.DistrictAddress;
-                store.AmphurAddress = request.AmphurAddress;
-                store.ProvinceAddress = request.ProvinceAddress;
-                store.TelePhone = request.TelePhone;
-                store.Latitude = request.Latitude;
-                store.Longtitude = request.Longtitude;
-                store.Rules = request.Rules;
-                store.Picture = request.Picture;
-                store.Status = request.Status;
-                store.OfficeHours = request.OfficeHours;
-
-                _repositoryWrapper.Store.Updete(store);
-
+                _repositoryWrapper.Store.Updete(storeModel);
+                
                 await _repositoryWrapper.SaveAsync();
 
-                await _repositoryWrapper.CommitAsync();
-
                 return true;
-
             }
             catch(Exception ex)
             {
                 throw ex;
-            }
-            finally
-            {
-                _repositoryWrapper.Dispose();
             }
         }
         

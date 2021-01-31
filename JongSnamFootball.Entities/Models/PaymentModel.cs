@@ -3,27 +3,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JongSnamFootball.Entities.Models
 {
-    public class PaymentModel
+    public class PaymentModel : BaseModel
     {
-        [Column("id_payment")]
-        public int Id { get; set; }
+        public int ReservationId { get; set; }
 
-        [Column("id_reservation_in_payment")]
-        public int IdReservation { get; set; }
+        public string Image { get; set; }
 
-        [Column("picture_payment")]
-        public string Picture { get; set; }
+        public decimal Amount { get; set; }
 
-        [Column("amount_payment")]
-        public double Amount { get; set; }
-
-        [Column("date_payment")]
         public DateTime Date { get; set; }
 
-        [Column("status_payment")]
-        public string Status { get; set; }
+        public bool ApprovalStatus { get; set; }
 
-        [Column("status_amount_payment")]
-        public string StatusAmount { get; set; }
+        public bool IsFullAmount { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace JongSnamFootball.Repositories
         {
             if (storeID.HasValue)
             {
-                return await _dbContext.Reservations.Where(w => w.IdStore == storeID).Include(i => i.UserMemberModel).AsNoTracking().ToListAsync();
+                return await _dbContext.Reservations.Where(w => w.StoreId == storeID).Include(i => i.UserModel).AsNoTracking().ToListAsync();
             }
             return new List<ReservationModel>();
         }
@@ -33,7 +33,7 @@ namespace JongSnamFootball.Repositories
             if (Id.HasValue)
             {
                 return await _dbContext.Reservations.Where(w => w.Id == Id)
-                    .Include(i => i.UserMemberModel)
+                    .Include(i => i.UserModel)
                     .Include(i => i.StoreModel)
                     .Include(i => i.PaymentModel)
                     .Include(i => i.FieldModel)

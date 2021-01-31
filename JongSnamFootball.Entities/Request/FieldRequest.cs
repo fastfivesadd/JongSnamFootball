@@ -9,8 +9,8 @@ namespace JongSnamFootball.Entities.Request
 {
     public class FieldRequest
     {
-        [Required(ErrorMessage = "IdStore is required")]
-        public int IdStore { get; set; }
+        [Required(ErrorMessage = "StoreId is required")]
+        public int StoreId { get; set; }
 
         [MaxLength(50)]
         [Required(ErrorMessage = "Name is required")]
@@ -23,9 +23,6 @@ namespace JongSnamFootball.Entities.Request
         [Required(ErrorMessage = "Price is required")]
         public int Price { get; set; }
 
-        [MaxLength(10)]
-        [Required(ErrorMessage = "Status is required")]
-        public string Status { get; set; }
-
+        public bool IsOpen { get; set; }
     }
 }

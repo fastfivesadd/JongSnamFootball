@@ -4,8 +4,8 @@ using JongSnamFootball.Entities.Models;
 
 namespace JongSnamFootball.Interfaces.Repositories
 {
-    public interface IPictureFieldRepository : IRepository<PictureFieldModel>
+    public interface IPictureFieldRepository : IRepository<ImageFieldModel>
     {
-        Task<List<PictureFieldModel>> GetAll();
+        Task<List<ImageFieldModel>> GetAll();
     }
 }

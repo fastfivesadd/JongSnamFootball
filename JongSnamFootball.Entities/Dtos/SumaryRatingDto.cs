@@ -1,6 +1,6 @@
 ﻿namespace JongSnamFootball.Entities.Dtos
 {
-    public class SumaryRatingDto : BasePagingDto<CommentDto>
+    public class SumaryRatingDto : BasePagingDto<ReviewDto>
     {
         public int TotalFive { get; set; }
         public int TotalFour { get; set; }

@@ -11,6 +11,6 @@ namespace JongSnamFootball.Entities.Request
         public FieldRequest FieldRequest { get; set; }
         public DiscountRequest DiscountRequest { get; set; }
 
-        public ICollection<PictureFieldRequest> PictureFieldRequest { get; set; }
+        public ICollection<ImageFieldRequest> PictureFieldRequest { get; set; }
     }
 }

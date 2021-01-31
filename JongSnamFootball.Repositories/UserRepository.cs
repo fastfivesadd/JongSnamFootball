@@ -7,21 +7,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JongSnamFootball.Repositories
 {
-    public class UserRepository : BaseRepository<UserMemberModel>, IUserRepository
+    public class UserRepository : BaseRepository<UserModel>, IUserRepository
     {
         public UserRepository(RepositoryDbContext context) : base(context)
         {
 
         }
 
-        public async Task<List<UserMemberModel>> GetAllUser()
+        public async Task<List<UserModel>> GetAllUser()
         {
-            var result = await _dbContext.Usermember.AsNoTracking().ToListAsync();
+            var result = await _dbContext.Users.AsNoTracking().ToListAsync();
             return result;
         }
-        public async Task<UserMemberModel> GetUserById(int id)
+        public async Task<UserModel> GetUserById(int id)
         {
-            return await _dbContext.Usermember.Where(w => w.Id == id).AsNoTracking().FirstOrDefaultAsync();
+            return await _dbContext.Users.Where(w => w.Id == id).AsNoTracking().FirstOrDefaultAsync();
         }
     }
 }

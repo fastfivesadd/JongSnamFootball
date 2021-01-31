@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace JongSnamFootball.Entities.Dtos
 {
-    public class ReservationDto
+    public class ReservationDetailDto
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
+
         public bool ApprovalStatus { get; set; }
 
         public string UserName { get; set; }
@@ -18,6 +19,15 @@ namespace JongSnamFootball.Entities.Dtos
         public DateTime StartTime { get; set; }
 
         public DateTime StopTime { get; set; }
-       
+
+        public string FieldName { get; set; }
+
+        public decimal PricePerHour { get; set; }
+        
+        public bool IsFullAmount { get; set; }
+
+        public string Image { get; set; }
+
+        public decimal AmountForPay { get; set; }
     }
 }

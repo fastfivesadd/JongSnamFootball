@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JongSnamFootball.Entities.Request
+namespace JongSnamFootball.Entities.Models
 {
-    public class UpdatePictureFieldRequest : ImageFieldRequest
+    public class UserTypeModel
     {
         public int Id { get; set; }
+        public int TypeName { get; set; }
     }
 }

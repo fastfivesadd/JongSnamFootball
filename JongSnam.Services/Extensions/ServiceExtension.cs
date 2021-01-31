@@ -15,7 +15,7 @@ namespace JongSnam.Services.Extensions
             services.AddScoped<IStoreManager, StoreManager>();
             services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<IFieldManager, FieldManager>();
-            services.AddScoped<ICommentManager, CommentManager>();
+            services.AddScoped<IReviewManager, ReviewManager>();
             services.AddScoped<IReservationManager, ReservationManager>();
 
         }
@@ -25,7 +25,7 @@ namespace JongSnam.Services.Extensions
             services.AddScoped<IStoreRepository, StoreRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IFieldRepository, FieldRepository>();
-            services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<IReviewRepository, ReviewRepository>();
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             services.AddScoped<IReservationRepository, ReservationRepository>();
         }

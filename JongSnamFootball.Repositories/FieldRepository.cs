@@ -11,28 +11,22 @@ namespace JongSnamFootball.Repositories
     {
         public FieldRepository(RepositoryDbContext context) : base(context)
         {
-
         }
         public async Task<List<FieldModel>> GetAll()
         {
-            var result = await _dbContext.Field.AsNoTracking().ToListAsync();
+            var result = await _dbContext.Fields.AsNoTracking().ToListAsync();
             return result;
         }
 
-        public async Task<List<FieldModel>> GetByStoreID(int? storeID)
+        public async Task<List<FieldModel>> GetByStoreId(int? storeId)
         {
-            if (storeID.HasValue)
-            {
-                return await _dbContext.Field.Where(w => w.IdStore == storeID).Include(i => i.StoreModel).AsNoTracking().ToListAsync();
-            }
-
-            return new List<FieldModel>();
+            return await _dbContext.Fields.Where(w => w.StoreId == storeId).Include(i => i.StoreModel).AsNoTracking().ToListAsync();
         }
 
         public async Task<FieldModel> GetFieldById(int id)
         {
-                return await _dbContext.Field.Where(w => w.Id == id)
-                    .Include(i => i.PictureFieldModel)
+                return await _dbContext.Fields.Where(w => w.Id == id)
+                    .Include(i => i.ImageField)
                     .Include(i => i.DiscountModel)
                     .AsNoTracking().FirstOrDefaultAsync();
         }

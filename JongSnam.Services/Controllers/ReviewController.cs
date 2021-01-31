@@ -9,28 +9,22 @@ namespace JongSnam.Services.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CommentController : ControllerBase
+    public class ReviewController : ControllerBase
     {
-        private readonly ICommentManager _commentManager;
-        public CommentController(ICommentManager commentManager)
+        private readonly IReviewManager _reviewManager;
+        public ReviewController(IReviewManager reviewManager)
         {
-            _commentManager = commentManager;
+            _reviewManager = reviewManager;
         }
-
-        //[HttpGet("{storeId}")]
-        //public async Task<BasePagingDto<CommentDto>> GetFieldByStore(int storeId, int currentPage, int pageSize)
-        //{
-        //    return await _commentManager.GetFieldByStore(storeId, currentPage, pageSize);
-        //}
 
         [HttpGet("{storeId}")]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(SumaryRatingDto))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(SumaryRatingDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
-        public async Task<ActionResult> GetCommentByStoreId(int storeId, int currentPage, int pageSize)
+        public async Task<ActionResult> GetReviewByStoreId(int storeId, int currentPage, int pageSize)
         {
-            return Ok(await _commentManager.GetCommentByStoreId(storeId, currentPage, pageSize));
+            return Ok(await _reviewManager.GetReviewByStoreId(storeId, currentPage, pageSize));
         }
     }
 }

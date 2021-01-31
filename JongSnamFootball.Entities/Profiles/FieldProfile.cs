@@ -15,10 +15,10 @@ namespace JongSnamFootball.Entities.Profiles
         public FieldProfile()
         {
             CreateMap<FieldModel, FieldDto>()
-                .ForMember(fd => fd.NameStore, map => map.MapFrom(fm => fm.StoreModel.Name))
-               .ForMember(fd => fd.Status, map => map.MapFrom(fm => fm.StoreModel.Status));
+                .ForMember(fd => fd.StoreName, map => map.MapFrom(fm => fm.StoreModel.Name))
+               .ForMember(fd => fd.IsOpen, map => map.MapFrom(fm => fm.StoreModel.IsOpen));
 
-            CreateMap<FieldModel, FieldByIdFieldDto>()
+            CreateMap<FieldModel, FieldDetailDto>()
                 .ForMember(fd => fd.Percentage, map => map.MapFrom(fm => fm.DiscountModel.Percentage));
 
             CreateMap<FieldModel, FieldRequest>();

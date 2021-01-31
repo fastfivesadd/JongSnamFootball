@@ -14,18 +14,17 @@ namespace JongSnamFootball.Entities.Profiles
         public ReservationProfile()
         {
             CreateMap<ReservationModel, ReservationDto>()
-                .ForMember(rm => rm.NameUser, map => map.MapFrom(rd => $"{rd.UserMemberModel.FirstName} {rd.UserMemberModel.LastName}"))
-               .ForMember(rm => rm.TelePhone, map => map.MapFrom(rd => rd.UserMemberModel.TelePhone));
+                .ForMember(rm => rm.UserName, map => map.MapFrom(rd => $"{rd.UserModel.FirstName} {rd.UserModel.LastName}"))
+               .ForMember(rm => rm.ContactMobile, map => map.MapFrom(rd => rd.UserModel.ContactMobile));
 
-            CreateMap<ReservationModel, DetailReservationDto>()
-               .ForMember(rm => rm.NameUser, map => map.MapFrom(drd => $"{drd.UserMemberModel.FirstName} {drd.UserMemberModel.LastName}"))
-               .ForMember(rm => rm.TelePhone, map => map.MapFrom(drd => drd.UserMemberModel.TelePhone))
-               .ForMember(rm => rm.NameField, map => map.MapFrom(drd => drd.FieldModel.Name))
-               .ForMember(rm => rm.PriceField, map => map.MapFrom(drd => drd.FieldModel.Price))
-               .ForMember(rm => rm.StatusAmount, map => map.MapFrom(drd => drd.PaymentModel.StatusAmount))
-               .ForMember(rm => rm.StatusPayment, map => map.MapFrom(drd => drd.PaymentModel.Status))
-               .ForMember(rm => rm.AmountPayment, map => map.MapFrom(drd => drd.PaymentModel.Amount));
-
+            CreateMap<ReservationModel, ReservationDetailDto>()
+               .ForMember(rm => rm.UserName, map => map.MapFrom(drd => $"{drd.UserModel.FirstName} {drd.UserModel.LastName}"))
+               .ForMember(rm => rm.ContactMobile, map => map.MapFrom(drd => drd.UserModel.ContactMobile))
+               .ForMember(rm => rm.FieldName, map => map.MapFrom(drd => drd.FieldModel.Name))
+               .ForMember(rm => rm.PricePerHour, map => map.MapFrom(drd => drd.FieldModel.Price))
+               .ForMember(rm => rm.ApprovalStatus, map => map.MapFrom(drd => drd.PaymentModel.ApprovalStatus))
+               .ForMember(rm => rm.AmountForPay, map => map.MapFrom(drd => drd.PaymentModel.Amount));
+                
 
         }
     }

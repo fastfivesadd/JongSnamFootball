@@ -1,10 +1,11 @@
 ﻿namespace JongSnamFootball.Entities.Dtos
 {
-    public class StoreDto
+    public class ReviewDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
+
+        public string Message { get; set; }
+
         public decimal Rating { get; set; }
-        public string OfficeHours { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace JongSnamFootball.Repositories
 
         public async Task<List<PaymentModel>> GetAll()
         {
-            var result = await _dbContext.Payment.AsNoTracking().ToListAsync();
+            var result = await _dbContext.Payments.AsNoTracking().ToListAsync();
             return result;
         }
     }

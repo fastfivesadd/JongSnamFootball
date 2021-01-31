@@ -9,10 +9,12 @@ namespace JongSnamFootball.Interfaces.Managers
     {
         Task<BasePagingDto<FieldDto>> GetFieldByStoreId(int storeId, int currentPage, int pageSize);
 
-        Task<FieldByIdFieldDto> GetFieldById(int id);
+        Task<FieldDetailDto> GetFieldById(int id);
 
         Task<bool> AddField(AddFieldRequest requestDto);
 
         Task<bool> UpdeteField(int id, UpdateFieldRequest updateFieldRequest);
+
+        Task<bool> DeleteField(int id);
     }
 }

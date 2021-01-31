@@ -10,7 +10,7 @@ namespace JongSnamFootball.Repositories
         private readonly RepositoryDbContext _repositoryDbContext;
         private IDbContextTransaction _dbContextTransaction;
 
-        private ICommentRepository _commentRepository;
+        private IReviewRepository _commentRepository;
         private IDiscountRepository _discountRepository;
         private IFieldRepository _fieldRepository;
         private IPaymentRepository _paymentRepository;
@@ -25,13 +25,13 @@ namespace JongSnamFootball.Repositories
             _repositoryDbContext = repositoryDbContext;
         }
 
-        public ICommentRepository Comment
+        public IReviewRepository Comment
         {
             get
             {
                 if (_commentRepository == null)
                 {
-                    _commentRepository = new CommentRepository(_repositoryDbContext);
+                    _commentRepository = new ReviewRepository(_repositoryDbContext);
                 }
 
                 return _commentRepository;
