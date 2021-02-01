@@ -26,7 +26,7 @@ namespace JongSnamFootball.Repositories
 
         public virtual DbSet<DiscountModel> Discounts { get; set; }
 
-        public virtual DbSet<ReviewModel> Comments { get; set; }
+        public virtual DbSet<ReviewModel> Reviews { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -74,11 +74,11 @@ namespace JongSnamFootball.Repositories
 
             modelBuilder.Entity<ReviewModel>(entity =>
             {
-                entity.HasOne(s => s.UserModel).WithOne().HasForeignKey<ReviewModel>(s => s.MemberId);
+                entity.HasOne(s => s.UserModel).WithOne().HasForeignKey<ReviewModel>(s => s.UserId);
 
                 entity.HasOne(s => s.StoreModel).WithOne().HasForeignKey<ReviewModel>(s => s.StoreId);
 
-                entity.ToTable(nameof(Comments), Schema);
+                entity.ToTable(nameof(Reviews), Schema);
             });
         }
 

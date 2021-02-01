@@ -19,6 +19,18 @@ namespace JongSnam.Services.Controllers
             _fieldManager = fieldManager;
         }
 
+        [HttpGet]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(BasePagingDto<FieldDto>))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<FieldDto>))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> GetAll([FromQuery]SearchFieldRequest request, int currentPage, int pageSize)
+        {
+            return Ok(await _fieldManager.GetAll(request, currentPage, pageSize));
+
+        }
+
         [HttpGet("{id}")]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(FieldDetailDto))]

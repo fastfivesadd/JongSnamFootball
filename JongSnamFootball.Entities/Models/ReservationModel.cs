@@ -17,6 +17,8 @@ namespace JongSnamFootball.Entities.Models
 
         public bool ApprovalStatus { get; set; }
 
+        public bool Active { get; set; }
+
         public virtual UserModel UserModel { get; set; }
 
         public virtual StoreModel StoreModel { get; set; }

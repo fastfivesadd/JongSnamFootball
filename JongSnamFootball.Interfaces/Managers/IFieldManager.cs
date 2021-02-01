@@ -7,6 +7,8 @@ namespace JongSnamFootball.Interfaces.Managers
 {
     public interface IFieldManager
     {
+        Task<BasePagingDto<FieldDto>> GetAll(SearchFieldRequest request, int currentPage, int pageSize);
+
         Task<BasePagingDto<FieldDto>> GetFieldByStoreId(int storeId, int currentPage, int pageSize);
 
         Task<FieldDetailDto> GetFieldById(int id);

@@ -17,11 +17,23 @@ namespace JongSnamFootball.Managers
         private readonly IMapper _mapper;
         private readonly IFieldRepository _fieldRepository;
         private readonly IRepositoryWrapper _repositoryWrapper;
+
         public FieldManager(IMapper mapper, IFieldRepository fieldRepository, IRepositoryWrapper repositoryWrapper)
         {
             _mapper = mapper;
             _fieldRepository = fieldRepository;
             _repositoryWrapper = repositoryWrapper;
+        }
+
+        public async Task<BasePagingDto<FieldDto>> GetAll(SearchFieldRequest request, int currentPage, int pageSize)
+        {
+            var listField = await _fieldRepository.GetAll(request);
+
+            var listFieldDto = _mapper.Map<List<FieldDto>>(listField);
+
+            var result = MakePaging.FieldDtotoToPaging(listFieldDto, currentPage, pageSize);
+
+            return result;
         }
 
         public async Task<BasePagingDto<FieldDto>> GetFieldByStoreId(int storeId, int currentPage, int pageSize)
@@ -34,7 +46,6 @@ namespace JongSnamFootball.Managers
 
             return result;
         }
-
 
         public async Task<FieldDetailDto> GetFieldById(int id)
         {
@@ -168,6 +179,7 @@ namespace JongSnamFootball.Managers
                 _repositoryWrapper.Dispose();
             }
         }
+
         public async Task<bool> DeleteField(int id)
         {
             try

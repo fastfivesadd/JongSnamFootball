@@ -4,7 +4,7 @@ using JongSnamFootball.Entities.Models;
 
 namespace JongSnamFootball.Interfaces.Repositories
 {
-    public interface IReviewRepository
+    public interface IReviewRepository : IRepository<ReviewModel>
     {
         Task<List<ReviewModel>> GetAll();
 

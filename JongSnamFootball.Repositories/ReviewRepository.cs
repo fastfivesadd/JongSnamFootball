@@ -16,13 +16,13 @@ namespace JongSnamFootball.Repositories
 
         public async Task<List<ReviewModel>> GetAll()
         {
-            var result = await _dbContext.Comments.AsNoTracking().ToListAsync();
+            var result = await _dbContext.Reviews.AsNoTracking().ToListAsync();
             return result;
         }
 
         public async Task<List<ReviewModel>> GetReviewByStoreId(int storeID)
         {
-            return await _dbContext.Comments.Where(w => w.StoreId == storeID)
+            return await _dbContext.Reviews.Where(w => w.StoreId == storeID)
                 .Include(i => i.UserModel)
                 .Include(i => i.StoreModel)
                 .AsNoTracking().ToListAsync();

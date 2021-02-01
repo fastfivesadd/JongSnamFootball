@@ -4,7 +4,7 @@ using JongSnamFootball.Entities.Models;
 
 namespace JongSnamFootball.Interfaces.Repositories
 {
-    public interface IPaymentRepository
+    public interface IPaymentRepository : IRepository<PaymentModel>
     {
         Task<List<PaymentModel>> GetAll();
     }

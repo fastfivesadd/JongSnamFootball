@@ -20,6 +20,8 @@ namespace JongSnamFootball.Interfaces.Repositories
 
         IPictureFieldRepository PictureField { get; }
 
+        IReviewRepository Review { get; }
+
         Task<int> SaveAsync();
 
         Task BeginTransactionAsync();

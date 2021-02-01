@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using JongSnamFootball.Entities.Dtos;
+using JongSnamFootball.Entities.Models;
+using JongSnamFootball.Entities.Request;
 using JongSnamFootball.Interfaces.Managers;
 using JongSnamFootball.Interfaces.Repositories;
 using JongSnamFootball.Managers.Extensions;
@@ -13,10 +16,12 @@ namespace JongSnamFootball.Managers
     {
         private readonly IMapper _mapper;
         private readonly IReviewRepository _reviewRepository;
-        public ReviewManager(IMapper mapper, IReviewRepository reviewRepository)
+        private readonly IRepositoryWrapper _repositoryWrapper;
+        public ReviewManager(IMapper mapper, IReviewRepository reviewRepository, IRepositoryWrapper repositoryWrapper)
         {
             _mapper = mapper;
             _reviewRepository = reviewRepository;
+            _repositoryWrapper = repositoryWrapper;
         }
 
         public async Task<SumaryRatingDto> GetReviewByStoreId(int storeId, int currentPage, int pageSize)
@@ -40,6 +45,26 @@ namespace JongSnamFootball.Managers
             result.TotalFive = commentPaging.Collection.Count(c => c.Rating == 5);
 
             return result;
+        }
+
+        public async Task<bool> AddReview(ReviewRequest request)
+        {
+            try
+            {
+                var reviewModel = _mapper.Map<ReviewModel>(request);
+
+                reviewModel.CreatedDate = DateTime.Now;
+
+                await _repositoryWrapper.Review.CreateAsync(reviewModel);
+
+                await _repositoryWrapper.SaveAsync();
+
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

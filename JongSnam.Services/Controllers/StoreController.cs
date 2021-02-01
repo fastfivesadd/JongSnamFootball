@@ -45,7 +45,7 @@ namespace JongSnam.Services.Controllers
         [Produces("application/json", Type = typeof(IEnumerable<bool>))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(bool))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
-        public async Task<ActionResult> AddStore(StoreRequest requestDto)
+        public async Task<ActionResult> AddStore([FromBody] StoreRequest requestDto)
         {
             var result = await _storeManager.AddStore(requestDto);
             return Ok(result);
@@ -56,7 +56,7 @@ namespace JongSnam.Services.Controllers
         [Produces("application/json", Type = typeof(bool))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(bool))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
-        public async Task<ActionResult> UpdateStore(int id, UpdateStoreRequest request)
+        public async Task<ActionResult> UpdateStore(int id, [FromBody] UpdateStoreRequest request)
         {
             var result = await _storeManager.UpdateStore(id, request);
             return Ok(result);

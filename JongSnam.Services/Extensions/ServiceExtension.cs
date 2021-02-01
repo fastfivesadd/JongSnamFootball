@@ -17,6 +17,7 @@ namespace JongSnam.Services.Extensions
             services.AddScoped<IFieldManager, FieldManager>();
             services.AddScoped<IReviewManager, ReviewManager>();
             services.AddScoped<IReservationManager, ReservationManager>();
+            services.AddScoped<IPaymentManager, PaymentManager>();
 
         }
 
@@ -28,19 +29,19 @@ namespace JongSnam.Services.Extensions
             services.AddScoped<IReviewRepository, ReviewRepository>();
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             services.AddScoped<IReservationRepository, ReservationRepository>();
+            services.AddScoped<IPaymentRepository, PaymentRepository>();
         }
 
         public static void AddAutoMapperProfiles(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(UserProfile));
             services.AddAutoMapper(typeof(StoreProfile));
-            services.AddAutoMapper(typeof(CommentProfile));
+            services.AddAutoMapper(typeof(ReviewProfile));
             services.AddAutoMapper(typeof(FieldProfile));
             services.AddAutoMapper(typeof(DiscountProfile));
             services.AddAutoMapper(typeof(PictureFieldProfile));
             services.AddAutoMapper(typeof(ReservationProfile));
-
-
+            services.AddAutoMapper(typeof(PaymentProfile));
         }
     }
 }

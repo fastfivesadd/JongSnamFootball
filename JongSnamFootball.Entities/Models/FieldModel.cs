@@ -11,7 +11,7 @@ namespace JongSnamFootball.Entities.Models
 
         public string Size { get; set; }
 
-        public int Price { get; set; }
+        public decimal Price { get; set; }
 
         public bool IsOpen { get; set; }
 

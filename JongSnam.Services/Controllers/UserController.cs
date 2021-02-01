@@ -35,7 +35,7 @@ namespace JongSnam.Services.Controllers
         [Produces("application/json", Type = typeof(IEnumerable<bool>))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(bool))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
-        public async Task<ActionResult> CreateUser(UserRequest requestDto)
+        public async Task<ActionResult> CreateUser([FromBody] UserRequest requestDto)
         {
             var result = await _userManager.CreateUser(requestDto);
             return Ok(result);
@@ -46,7 +46,7 @@ namespace JongSnam.Services.Controllers
         [Produces("application/json", Type = typeof(bool))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(bool))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
-        public async Task<ActionResult> ChangePassword(int id, ChangePasswordRequest request)
+        public async Task<ActionResult> ChangePassword(int id, [FromBody]ChangePasswordRequest request)
         {
             var result = await _userManager.ChangePassword(id, request);
             return Ok(result);

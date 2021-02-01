@@ -1,9 +1,12 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace JongSnamFootball.Entities.Models
+namespace JongSnamFootball.Entities.Request
 {
-    public class PaymentModel : BaseModel
+    public class PaymentRequest
     {
         public int ReservationId { get; set; }
 

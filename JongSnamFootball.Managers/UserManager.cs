@@ -50,9 +50,6 @@ namespace JongSnamFootball.Managers
             {
                 return false;
             }
-            finally
-            {
-            }
         }
 
         public async Task<bool> ChangePassword(int id, ChangePasswordRequest request)

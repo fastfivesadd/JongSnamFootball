@@ -1,16 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JongSnamFootball.Entities.Models
 {
-    public class ReviewModel : BaseModel
+    public class ReviewModel 
     {
+        public int Id { get; set; }
+
         public int StoreId { get; set; }
 
-        public int MemberId { get; set; }
+        public int UserId { get; set; }
 
         public string Message { get; set; }
 
         public decimal Rating { get; set; }
+
+        public DateTime? CreatedDate { get; set; }
 
         public virtual UserModel UserModel { get; set; }
 

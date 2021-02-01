@@ -18,6 +18,7 @@ namespace JongSnamFootball.Repositories
         private IStoreRepository _storeRepository;
         private IUserRepository _userRepository;
         private IPictureFieldRepository _pictureField;
+        private IReviewRepository _reviewRepository;
 
 
         public RepositoryWrapper(RepositoryDbContext repositoryDbContext)
@@ -125,6 +126,18 @@ namespace JongSnamFootball.Repositories
                 }
 
                 return _pictureField;
+            }
+        }
+        public IReviewRepository Review
+        {
+            get
+            {
+                if (_reviewRepository == null)
+                {
+                    _reviewRepository = new ReviewRepository(_repositoryDbContext);
+                }
+
+                return _reviewRepository;
             }
         }
 

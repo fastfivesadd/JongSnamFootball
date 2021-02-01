@@ -21,25 +21,22 @@ namespace JongSnamFootball.Repositories
 
         public async Task<List<ReservationModel>> GetYourReservation(int? storeID)
         {
-            if (storeID.HasValue)
-            {
-                return await _dbContext.Reservations.Where(w => w.StoreId == storeID).Include(i => i.UserModel).AsNoTracking().ToListAsync();
-            }
-            return new List<ReservationModel>();
+            return await _dbContext.Reservations.Where(w => w.StoreId == storeID).Include(i => i.UserModel).AsNoTracking().ToListAsync();
         }
 
         public async Task<List<ReservationModel>> GetShowDetailYourReservation(int? Id)
         {
-            if (Id.HasValue)
-            {
-                return await _dbContext.Reservations.Where(w => w.Id == Id)
-                    .Include(i => i.UserModel)
-                    .Include(i => i.StoreModel)
-                    .Include(i => i.PaymentModel)
-                    .Include(i => i.FieldModel)
-                    .AsNoTracking().ToListAsync();
-            }
-            return new List<ReservationModel>();
+            return await _dbContext.Reservations.Where(w => w.Id == Id)
+                .Include(i => i.UserModel)
+                .Include(i => i.StoreModel)
+                .Include(i => i.PaymentModel)
+                .Include(i => i.FieldModel)
+                .AsNoTracking().ToListAsync();
+        }
+
+        public async Task<ReservationModel> GetReservatioById(int id)
+        {
+            return await _dbContext.Reservations.Where(w => w.Id == id).AsNoTracking().FirstOrDefaultAsync();
         }
     }
 }
