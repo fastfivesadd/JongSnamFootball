@@ -7,5 +7,7 @@ namespace JongSnamFootball.Interfaces.Repositories
     public interface IPaymentRepository : IRepository<PaymentModel>
     {
         Task<List<PaymentModel>> GetAll();
+
+        Task<PaymentModel> GetById(int id);
     }
 }

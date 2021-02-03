@@ -23,7 +23,7 @@ namespace JongSnamFootball.Entities.Profiles
                .ForMember(rm => rm.ContactMobile, map => map.MapFrom(drd => drd.UserModel.ContactMobile))
                .ForMember(rm => rm.FieldName, map => map.MapFrom(drd => drd.FieldModel.Name))
                .ForMember(rm => rm.PricePerHour, map => map.MapFrom(drd => drd.FieldModel.Price))
-               .ForMember(rm => rm.AmountForPay, map => map.MapFrom(drd => drd.PaymentModel.Amount));
+               .ForMember(rm => rm.AmountForPay, map => map.MapFrom(drd => drd.PaymentModel.Sum(s => s.Amount)));
 
             CreateMap<ReservationRequest, ReservationModel>();
         }

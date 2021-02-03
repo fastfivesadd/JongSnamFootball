@@ -73,9 +73,9 @@ namespace JongSnamFootball.Managers
 
                 storeModel.Name = request.Name;
                 storeModel.Address = request.Address;
-                storeModel.District = request.District;
-                storeModel.Amphur = request.Amphur;
-                storeModel.Province = request.Province;
+                storeModel.SubDistrictId = request.SubDistrict;
+                storeModel.DistrictId = request.District;
+                storeModel.ProvinceId = request.Province;
                 storeModel.ContactMobile = request.ContactMobile;
                 storeModel.Latitude = request.Latitude;
                 storeModel.Longtitude = request.Longtitude;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JongSnamFootball.Entities.Models
@@ -14,5 +15,7 @@ namespace JongSnamFootball.Entities.Models
         public DateTime Date { get; set; }
 
         public bool IsFullAmount { get; set; }
+
+        //public virtual ICollection<ReservationModel> ReservationModel { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JongSnamFootball.Entities.Models
@@ -25,7 +26,7 @@ namespace JongSnamFootball.Entities.Models
 
         public virtual FieldModel FieldModel { get; set; }
 
-        public virtual PaymentModel PaymentModel { get; set; }
+        public virtual ICollection<PaymentModel> PaymentModel { get; set; }
 
     }
 }

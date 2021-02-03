@@ -28,14 +28,14 @@ namespace JongSnamFootball.Repositories
                 result = result.Where(w => w.Price <= request.ToPrice);
             }
 
-            if (!string.IsNullOrWhiteSpace(request.Amphur))
+            if (request.DistrictId.HasValue)
             {
-                result = result.Where(w => w.StoreModel.Amphur.Contains(request.Amphur));
+                result = result.Where(w => w.StoreModel.DistrictId == request.DistrictId.Value);
             }
 
-            if (!string.IsNullOrWhiteSpace(request.Province))
+            if (request.ProvinceId.HasValue)
             {
-                result = result.Where(w => w.StoreModel.Province.Contains(request.Province));
+                result = result.Where(w => w.StoreModel.ProvinceId == request.ProvinceId.Value);
             }
 
             return await result.ToListAsync();
@@ -49,7 +49,7 @@ namespace JongSnamFootball.Repositories
         public async Task<FieldModel> GetFieldById(int id)
         {
                 return await _dbContext.Fields.Where(w => w.Id == id)
-                    .Include(i => i.ImageField)
+                    .Include(i => i.ImageFieldModel)
                     .Include(i => i.DiscountModel)
                     .AsNoTracking().FirstOrDefaultAsync();
         }

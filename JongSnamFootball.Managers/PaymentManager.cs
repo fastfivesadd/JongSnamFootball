@@ -16,11 +16,13 @@ namespace JongSnamFootball.Managers
         private readonly IMapper _mapper;
         private readonly IPaymentRepository _paymentRepository;
         private readonly IRepositoryWrapper _repositoryWrapper;
-        public PaymentManager(IMapper mapper, IPaymentRepository paymentRepository, IRepositoryWrapper repositoryWrapper)
+        private readonly IReservationRepository _reservationRepository;
+        public PaymentManager(IMapper mapper, IPaymentRepository paymentRepository, IRepositoryWrapper repositoryWrapper, IReservationRepository reservationRepository)
         {
             _mapper = mapper;
             _paymentRepository = paymentRepository;
             _repositoryWrapper = repositoryWrapper;
+            _reservationRepository = reservationRepository;
         }
         public async Task<bool> AddPayment(PaymentRequest request)
         {
@@ -32,6 +34,36 @@ namespace JongSnamFootball.Managers
                 paymentModel.UpdatedDate = DateTime.Now;
 
                 await _repositoryWrapper.Payment.CreateAsync(paymentModel);
+
+                await _repositoryWrapper.SaveAsync();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<bool> UpdatePayment(int id , UpdatePaymentRequest request)
+        {
+            try
+            {
+                var paymentModel = await _paymentRepository.GetById(id);
+
+                var reservationModel = await _reservationRepository.GetReservatioById(paymentModel.ReservationId);
+
+                if (reservationModel.ApprovalStatus)
+                {
+                    return false;
+                }
+
+                paymentModel.Image = request.Image;
+                paymentModel.Amount = request.Amount;
+                paymentModel.Date = request.Date;
+                paymentModel.IsFullAmount = request.IsFullAmount;
+
+                _repositoryWrapper.Payment.Updete(paymentModel);
 
                 await _repositoryWrapper.SaveAsync();
 

@@ -10,5 +10,7 @@ namespace JongSnamFootball.Interfaces.Managers
     public interface IPaymentManager
     {
         Task<bool> AddPayment(PaymentRequest request);
+
+        Task<bool> UpdatePayment(int id, UpdatePaymentRequest request);
     }
 }

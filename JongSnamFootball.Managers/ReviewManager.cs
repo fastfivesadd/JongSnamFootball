@@ -38,11 +38,19 @@ namespace JongSnamFootball.Managers
             result.TotalPage = commentPaging.TotalPage;
             //result.SummaryRating = listComment.Count > 0 ? listComment[0].StoreModel.Rating.GetValueOrDefault() : 0;
 
+
+
             result.TotalOne = commentPaging.Collection.Count(c => c.Rating == 1);
             result.TotalTwo = commentPaging.Collection.Count(c => c.Rating == 2);
             result.TotalThree = commentPaging.Collection.Count(c => c.Rating == 3);
             result.TotalFour = commentPaging.Collection.Count(c => c.Rating == 4);
             result.TotalFive = commentPaging.Collection.Count(c => c.Rating == 5);
+
+
+            var totalVote = result.TotalFive + result.TotalFour + result.TotalThree + result.TotalTwo + result.TotalOne;
+
+            result.SummaryRating = (5 * (decimal)result.TotalFive + 4 * (decimal)result.TotalFour + 3 * (decimal)result.TotalThree + 2 * (decimal)result.TotalTwo + 1 * (decimal)result.TotalOne)
+                / totalVote;
 
             return result;
         }

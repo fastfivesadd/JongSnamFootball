@@ -43,7 +43,7 @@ namespace JongSnamFootball.Repositories
             modelBuilder.Entity<FieldModel>(entity =>
             {
                 entity.HasOne(s => s.StoreModel).WithOne().HasForeignKey<FieldModel>(x => x.StoreId);
-                entity.HasMany(s => s.ImageField).WithOne().HasForeignKey(s => s.FieldId);
+                entity.HasMany(s => s.ImageFieldModel).WithOne().HasForeignKey(s => s.FieldId);
                 entity.HasOne(s => s.DiscountModel).WithOne().HasForeignKey<DiscountModel>(s => s.FieldId);
                 entity.ToTable(nameof(Fields), Schema);
             });
@@ -53,7 +53,7 @@ namespace JongSnamFootball.Repositories
                 entity.HasOne(s => s.UserModel).WithOne().HasForeignKey<ReservationModel>(x => x.UserId);
                 entity.HasOne(s => s.StoreModel).WithOne().HasForeignKey<ReservationModel>(x => x.StoreId);
                 entity.HasOne(s => s.FieldModel).WithOne().HasForeignKey<ReservationModel>(x => x.FieldId);
-                entity.HasOne(s => s.PaymentModel).WithOne().HasForeignKey<PaymentModel>(x => x.ReservationId);
+                entity.HasMany(s => s.PaymentModel).WithOne().HasForeignKey(s => s.ReservationId);
                 entity.ToTable(nameof(Reservations), Schema);
             });
 

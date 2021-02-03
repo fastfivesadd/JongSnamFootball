@@ -21,7 +21,7 @@ namespace JongSnamFootball.Entities.Models
         
         public virtual DiscountModel DiscountModel { get; set; }
 
-        public virtual ICollection<ImageFieldModel> ImageField { get; set; }
+        public virtual ICollection<ImageFieldModel> ImageFieldModel { get; set; }
 
     }
 }

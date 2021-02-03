@@ -19,7 +19,7 @@ namespace JongSnam.Services.Controllers
             _fieldManager = fieldManager;
         }
 
-        [HttpGet]
+        [HttpGet("Search")]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(BasePagingDto<FieldDto>))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<FieldDto>))]

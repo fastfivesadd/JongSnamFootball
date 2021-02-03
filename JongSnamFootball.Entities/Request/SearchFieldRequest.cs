@@ -6,8 +6,8 @@
 
         public decimal? ToPrice { get; set; }
 
-        public string Amphur { get; set; }
+        public int? DistrictId { get; set; }
 
-        public string Province { get; set; }
+        public int? ProvinceId { get; set; }
     }
 }

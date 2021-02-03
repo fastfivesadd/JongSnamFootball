@@ -23,5 +23,9 @@ namespace JongSnamFootball.Repositories
         {
             return await _dbContext.Users.Where(w => w.Id == id).AsNoTracking().FirstOrDefaultAsync();
         }
+        public async Task<UserModel> GetPasswordByEmail(string email)
+        {
+            return await _dbContext.Users.Where(w => w.Email == email).AsNoTracking().FirstOrDefaultAsync();
+        }
     }
 }

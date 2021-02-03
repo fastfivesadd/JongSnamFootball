@@ -7,6 +7,7 @@ using JongSnamFootball.Entities.Models;
 using JongSnamFootball.Entities.Request;
 using JongSnamFootball.Interfaces.Managers;
 using JongSnamFootball.Interfaces.Repositories;
+using JongSnamFootball.Managers.Extensions;
 
 namespace JongSnamFootball.Managers
 {
@@ -15,8 +16,7 @@ namespace JongSnamFootball.Managers
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
         private readonly IRepositoryWrapper _repositoryWrapper;
-
-
+        private const string _key = "b14ca5898a4e4133bbce2ea2315a1916";
         public UserManager(IUserRepository userRepository, IMapper mapper, IRepositoryWrapper repositoryWrapper)
         {
             _userRepository = userRepository;
@@ -36,12 +36,11 @@ namespace JongSnamFootball.Managers
             try
             {
                 var userModel = _mapper.Map<UserModel>(requestDto);
-
                 userModel.CreatedDate = DateTime.Now;
                 userModel.UpdatedDate = DateTime.Now;
-
+                var encryptedString = Encryptions.EncryptString(_key, userModel.Password);
+                userModel.Password = encryptedString;
                 await _repositoryWrapper.User.CreateAsync(userModel);
-
                 await _repositoryWrapper.SaveAsync();
 
                 return true;
@@ -85,5 +84,18 @@ namespace JongSnamFootball.Managers
                 _repositoryWrapper.Dispose();
             }
         } 
+
+        public async Task<bool> Login(string emailrequest, string passwordrequest)
+        {
+            var user = await _userRepository.GetPasswordByEmail(emailrequest);
+
+            var password = Encryptions.DecryptString(_key ,user.Password);
+
+            if (passwordrequest != password)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

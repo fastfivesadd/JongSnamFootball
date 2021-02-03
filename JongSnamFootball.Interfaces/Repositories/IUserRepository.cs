@@ -9,5 +9,7 @@ namespace JongSnamFootball.Interfaces.Repositories
         Task<List<UserModel>> GetAllUser();
 
         Task<UserModel> GetUserById(int id);
+
+        Task<UserModel> GetPasswordByEmail(string email);
     }
 }

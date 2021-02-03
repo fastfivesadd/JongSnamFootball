@@ -31,5 +31,17 @@ namespace JongSnam.Services.Controllers
             var result = await _paymentManager.AddPayment(request);
             return Ok(result);
         }
+
+
+        [HttpPut]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(bool))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(bool))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> UpdatePayment(int id, [FromBody] UpdatePaymentRequest request)
+        {
+            var result = await _paymentManager.UpdatePayment(id, request);
+            return Ok(result);
+        }
     }
 }

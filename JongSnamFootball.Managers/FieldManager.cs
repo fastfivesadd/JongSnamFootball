@@ -144,10 +144,10 @@ namespace JongSnamFootball.Managers
                 fieldModel.UpdatedDate = DateTime.Now;
                 foreach (var item in updateFieldRequest.UpdatePictureFieldRequest)
                 {
-                    var picToUpdate = fieldModel.ImageField.Where(w => w.Id == item.Id).FirstOrDefault();
+                    var picToUpdate = fieldModel.ImageFieldModel.Where(w => w.Id == item.Id).FirstOrDefault();
                     if (picToUpdate == null)
                     {
-                        fieldModel.ImageField.Add(
+                        fieldModel.ImageFieldModel.Add(
                             new ImageFieldModel
                             {
                                 FieldId = fieldModel.Id,
