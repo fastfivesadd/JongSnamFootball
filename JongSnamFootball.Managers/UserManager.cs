@@ -30,6 +30,12 @@ namespace JongSnamFootball.Managers
             var result = _mapper.Map<List<UserDto>>(userMembers);
             return result;
         }
+        public async Task<UserDto> GetById(int id)
+        {
+            var userMembers = await _userRepository.GetUserById(id);
+            var result = _mapper.Map<UserDto>(userMembers);
+            return result;
+        }
 
         public async Task<bool> CreateUser(UserRequest requestDto)
         {

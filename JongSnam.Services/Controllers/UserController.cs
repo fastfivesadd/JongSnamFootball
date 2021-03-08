@@ -30,6 +30,16 @@ namespace JongSnam.Services.Controllers
             return Ok(await _userManager.GetAll());
         }
 
+        [HttpGet("{id}")]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(IEnumerable<UserDto>))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(IEnumerable<UserDto>))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> GetById(int id)
+        {
+            return Ok(await _userManager.GetById(id));
+        }
+
         [HttpPost]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(IEnumerable<bool>))]
