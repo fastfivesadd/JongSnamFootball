@@ -25,9 +25,9 @@ namespace JongSnamFootball.Managers
             _repositoryWrapper = repositoryWrapper;
         }
 
-        public async Task<BasePagingDto<FieldDto>> GetAll(SearchFieldRequest request, int currentPage, int pageSize)
+        public async Task<BasePagingDto<FieldDto>> GetFieldBySearch(SearchFieldRequest request, int currentPage, int pageSize)
         {
-            var listField = await _fieldRepository.GetAll(request);
+            var listField = await _fieldRepository.GetFieldBySearch(request);
 
             var listFieldDto = _mapper.Map<List<FieldDto>>(listField);
 

@@ -7,7 +7,7 @@ namespace JongSnamFootball.Interfaces.Repositories
 {
     public interface IFieldRepository : IRepository<FieldModel>
     {
-        Task<List<FieldModel>> GetAll(SearchFieldRequest request);
+        Task<List<FieldModel>> GetFieldBySearch(SearchFieldRequest request);
 
         Task<List<FieldModel>> GetByStoreId(int? storeID);
 

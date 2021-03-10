@@ -15,7 +15,7 @@ namespace JongSnamFootball.Repositories
         {
 
         }
-        public async Task<List<ReservationModel>> GetSearchYourReservation(int storeId, int ownerId, SearchReservationRequest request)
+        public async Task<List<ReservationModel>> GetReservationBySearch(int storeId, int ownerId, SearchReservationRequest request)
         {
             var result = _dbContext.Reservations.Where(w => w.StoreId == storeId)
                 .Include(i => i.UserModel).Include(i => i.StoreModel).Where(w => w.StoreModel.OwnerId == ownerId)

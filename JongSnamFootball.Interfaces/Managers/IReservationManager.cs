@@ -12,7 +12,7 @@ namespace JongSnamFootball.Interfaces.Managers
     {
         Task<BasePagingDto<ReservationDto>> GetYourReservation(int storeId,int ownerId, int currentPage, int pageSize);
 
-        Task<BasePagingDto<ReservationDto>> GetSearchReservation(int storeId, int ownerId, SearchReservationRequest request, int currentPage, int pageSize);
+        Task<BasePagingDto<ReservationDto>> GetReservationBySearch(int storeId, int ownerId, SearchReservationRequest request, int currentPage, int pageSize);
 
         Task<List<ReservationDetailDto>> GetShowDetailYourReservation(int Id);
 

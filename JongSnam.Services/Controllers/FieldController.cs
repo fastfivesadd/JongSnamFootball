@@ -25,9 +25,9 @@ namespace JongSnam.Services.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<FieldDto>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
-        public async Task<ActionResult> GetAll([FromQuery]SearchFieldRequest request, int currentPage, int pageSize)
+        public async Task<ActionResult> GetFieldBySearch([FromQuery]SearchFieldRequest request, int currentPage, int pageSize)
         {
-            return Ok(await _fieldManager.GetAll(request, currentPage, pageSize));
+            return Ok(await _fieldManager.GetFieldBySearch(request, currentPage, pageSize));
 
         }
 

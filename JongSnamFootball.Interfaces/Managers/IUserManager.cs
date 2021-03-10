@@ -8,6 +8,7 @@ namespace JongSnamFootball.Interfaces.Managers
     public interface IUserManager
     {
         Task<List<UserDto>> GetAll();
+
         Task<UserDto> GetById(int id);
 
         Task<bool> CreateUser(UserRequest requestDto);

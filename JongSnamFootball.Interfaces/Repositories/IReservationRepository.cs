@@ -7,7 +7,7 @@ namespace JongSnamFootball.Interfaces.Repositories
 {
     public interface IReservationRepository : IRepository<ReservationModel>
     {
-        Task<List<ReservationModel>> GetSearchYourReservation(int storeId, int ownerId, SearchReservationRequest request);
+        Task<List<ReservationModel>> GetReservationBySearch(int storeId, int ownerId, SearchReservationRequest request);
 
         Task<List<ReservationModel>> GetYourReservation(int storeId, int ownerId);
 
