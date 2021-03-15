@@ -32,8 +32,8 @@ namespace JongSnam.Services.Controllers
 
         [HttpGet("{id}")]
         [Consumes("application/json")]
-        [Produces("application/json", Type = typeof(IEnumerable<UserDto>))]
-        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(IEnumerable<UserDto>))]
+        [Produces("application/json", Type = typeof(UserDto))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(UserDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
         public async Task<ActionResult> GetById(int id)
         {
