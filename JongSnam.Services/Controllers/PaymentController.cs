@@ -21,6 +21,17 @@ namespace JongSnam.Services.Controllers
             _paymentManager = paymentManager;
         }
 
+        [HttpGet("{reservationId}")]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(List<PaymentDto>))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(List<PaymentDto>))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> GetPaymentByReservationId(int reservationId)
+        {
+            return Ok(await _paymentManager.GetPaymentByReservationId(reservationId));
+        }
+
         [HttpPost]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(bool))]

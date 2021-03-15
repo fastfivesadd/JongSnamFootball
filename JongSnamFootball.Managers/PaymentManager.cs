@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using JongSnamFootball.Entities.Dtos;
 using JongSnamFootball.Entities.Models;
 using JongSnamFootball.Entities.Request;
 using JongSnamFootball.Interfaces.Managers;
@@ -24,6 +25,18 @@ namespace JongSnamFootball.Managers
             _repositoryWrapper = repositoryWrapper;
             _reservationRepository = reservationRepository;
         }
+
+        public async Task<List<PaymentDto>> GetPaymentByReservationId(int reservationId)
+        {
+
+            var paymentModel = await _paymentRepository.GetByReservationId(reservationId);
+
+            var PaymentDto = _mapper.Map<List<PaymentDto>>(paymentModel);
+
+            return PaymentDto;
+  
+        }
+
         public async Task<bool> AddPayment(PaymentRequest request)
         {
             try
