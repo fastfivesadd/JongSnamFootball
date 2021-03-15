@@ -31,8 +31,6 @@ namespace JongSnam.Services.Controllers
             var result = await _paymentManager.AddPayment(request);
             return Ok(result);
         }
-
-
         [HttpPut]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(bool))]

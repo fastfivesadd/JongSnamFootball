@@ -24,7 +24,7 @@ namespace JongSnam.Services.Controllers
         [HttpGet("{storeId}")]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(BasePagingDto<ReservationDto>))]
-        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<FieldDto>))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<ReservationDto>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
         public async Task<ActionResult> GetYourReservation(int storeId, int ownerId, int currentPage, int pageSize)
@@ -34,8 +34,8 @@ namespace JongSnam.Services.Controllers
 
         [HttpGet("Search")]
         [Consumes("application/json")]
-        [Produces("application/json", Type = typeof(BasePagingDto<FieldDto>))]
-        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<FieldDto>))]
+        [Produces("application/json", Type = typeof(BasePagingDto<ReservationDto>))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<ReservationDto>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
         public async Task<ActionResult> GetReservationBySearch(int storeId, int ownerId, [FromQuery] SearchReservationRequest request, int currentPage, int pageSize)
@@ -46,7 +46,7 @@ namespace JongSnam.Services.Controllers
         [HttpGet("{Id}/Detail")]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(BasePagingDto<ReservationDto>))]
-        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<FieldDto>))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<ReservationDto>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
         public async Task<ActionResult> GetShowDetailYourReservation(int Id)
