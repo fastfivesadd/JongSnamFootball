@@ -30,6 +30,16 @@ namespace JongSnam.Services.Controllers
             return Ok(await _storeManager.GetListStore(currentPage, pageSize));
         }
 
+        [HttpGet("{id}")]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(StoreDto))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(StoreDto))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> GetStoreById(int id)
+        {
+            return Ok(await _storeManager.GetStoreById(id));
+        }
+
         [HttpGet("{ownerId}")]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(BasePagingDto<YourStore>))]
@@ -42,7 +52,7 @@ namespace JongSnam.Services.Controllers
         }
         [HttpPost]
         [Consumes("application/json")]
-        [Produces("application/json", Type = typeof(IEnumerable<bool>))]
+        [Produces("application/json", Type = typeof(bool))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(bool))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
         public async Task<ActionResult> AddStore([FromBody] StoreRequest requestDto)

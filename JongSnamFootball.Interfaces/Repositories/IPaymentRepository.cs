@@ -8,7 +8,7 @@ namespace JongSnamFootball.Interfaces.Repositories
     {
         Task<List<PaymentModel>> GetAll();
 
-        Task<PaymentModel> GetById(int id);
+        Task<PaymentModel> GetPaymentById(int id);
 
         Task<List<PaymentModel>> GetByReservationId(int id);
     }

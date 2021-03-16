@@ -9,7 +9,7 @@ namespace JongSnamFootball.Interfaces.Managers
     {
         Task<List<UserDto>> GetAll();
 
-        Task<UserDto> GetById(int id);
+        Task<UserDto> GetUserById(int id);
 
         Task<bool> CreateUser(UserRequest requestDto);
 

@@ -36,6 +36,12 @@ namespace JongSnamFootball.Managers
             return PaymentDto;
   
         }
+        public async Task<PaymentDto> GetPaymentById(int id)
+        {
+            var payment = await _paymentRepository.GetPaymentById(id);
+            var result = _mapper.Map<PaymentDto>(payment);
+            return result;
+        }
 
         public async Task<bool> AddPayment(PaymentRequest request)
         {
@@ -62,7 +68,7 @@ namespace JongSnamFootball.Managers
         {
             try
             {
-                var paymentModel = await _paymentRepository.GetById(id);
+                var paymentModel = await _paymentRepository.GetPaymentById(id);
 
                 var reservationModel = await _reservationRepository.GetReservatioById(paymentModel.ReservationId);
 

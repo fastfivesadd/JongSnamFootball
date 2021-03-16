@@ -8,6 +8,8 @@ namespace JongSnamFootball.Interfaces.Managers
     {
         Task<BasePagingDto<StoreDto>> GetListStore(int currentPage, int pageSize);
 
+        Task<StoreDto> GetStoreById(int id);
+
         Task<BasePagingDto<YourStore>> GetYourStores(int ownerId, int currentPage, int pageSize);
 
         Task<bool> AddStore(StoreRequest requestDto);

@@ -13,6 +13,8 @@ namespace JongSnamFootball.Interfaces.Managers
 
         Task<List<PaymentDto>> GetPaymentByReservationId(int reservationId);
 
+        Task<PaymentDto> GetPaymentById(int id);
+
         Task<bool> AddPayment(PaymentRequest request);
 
         Task<bool> UpdatePayment(int id, UpdatePaymentRequest request);

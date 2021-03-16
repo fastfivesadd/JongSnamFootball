@@ -32,6 +32,17 @@ namespace JongSnam.Services.Controllers
             return Ok(await _paymentManager.GetPaymentByReservationId(reservationId));
         }
 
+        [HttpGet("{id}")]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(PaymentDto))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(PaymentDto))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> GetStoreById(int id)
+        {
+            return Ok(await _paymentManager.GetPaymentById(id));
+        }
+
+
         [HttpPost]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(bool))]

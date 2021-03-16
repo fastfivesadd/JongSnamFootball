@@ -35,9 +35,9 @@ namespace JongSnam.Services.Controllers
         [Produces("application/json", Type = typeof(UserDto))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(UserDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
-        public async Task<ActionResult> GetById(int id)
+        public async Task<ActionResult> GetUserById(int id)
         {
-            return Ok(await _userManager.GetById(id));
+            return Ok(await _userManager.GetUserById(id));
         }
 
         [HttpPost]
