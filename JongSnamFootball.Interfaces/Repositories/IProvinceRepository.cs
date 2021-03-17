@@ -10,5 +10,7 @@ namespace JongSnamFootball.Interfaces.Repositories
     public interface IProvinceRepository
     {
         Task<List<ProvinceModel>> GetProvinces();
+
+        Task<ProvinceModel> GetProvinceById(int id);
     }
 }

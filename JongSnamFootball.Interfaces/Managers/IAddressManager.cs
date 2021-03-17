@@ -11,6 +11,8 @@ namespace JongSnamFootball.Interfaces.Managers
     {
         Task<List<ProvinceModel>> GetProvinces();
 
+        Task<ProvinceModel> GetProvinceById(int Id);
+
         Task<List<DistrictModel>> GetDistrictByProvinceId(int ProvinceId);
 
         Task<List<SubDistrictModel>> GetSubDistrictByDistrictId(int DistrictId);

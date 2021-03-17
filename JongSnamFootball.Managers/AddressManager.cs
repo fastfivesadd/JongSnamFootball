@@ -26,6 +26,12 @@ namespace JongSnamFootball.Managers
             var provincesModel = await _provinceRepository.GetProvinces();
             return provincesModel;
         }
+        public async Task<ProvinceModel> GetProvinceById(int Id)
+        {
+            var provincesModel = await _provinceRepository.GetProvinceById(Id);
+            return provincesModel;
+        }
+
 
         public async Task<List<DistrictModel>> GetDistrictByProvinceId(int ProvinceId)
         {

@@ -31,7 +31,17 @@ namespace JongSnam.Services.Controllers
             return Ok(await _addressManager.GetProvinces());
         }
 
-        [HttpGet("{ProvinceId}")]
+        [HttpGet("{id}/Provinces")]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(ProvinceModel))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(ProvinceModel))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> GetProvinceById(int id)
+        {
+            return Ok(await _addressManager.GetProvinceById(id));
+        }
+
+        [HttpGet("{ProvinceId}/District")]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(List<DistrictModel>))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(List<DistrictModel>))]

@@ -22,5 +22,10 @@ namespace JongSnamFootball.Repositories
             return result;
         }
 
+        public async Task<ProvinceModel> GetProvinceById(int id)
+        {
+            return await _dbContext.Provinces.Where(w => w.Id == id).AsNoTracking().FirstOrDefaultAsync();
+        }
+
     }
 }
