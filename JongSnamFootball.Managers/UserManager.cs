@@ -103,5 +103,31 @@ namespace JongSnamFootball.Managers
             }
             return true;
         }
+
+        public async Task<bool> UpdateUser(int id, UpdateUserRequest request)
+        {
+            try
+            {
+                var userModel = await _userRepository.GetUserById(id);
+                userModel.Email = request.Email;
+                userModel.FirstName = request.FirstName;
+                userModel.LastName = request.LastName;
+                userModel.ContactMobile = request.ContactMobile;
+                userModel.Address = request.Address;
+                userModel.ImageProfile = request.ImageProfile;
+                userModel.UpdatedDate = DateTime.Now;
+
+                _repositoryWrapper.User.Updete(userModel);
+
+                await _repositoryWrapper.SaveAsync();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

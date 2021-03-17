@@ -37,7 +37,7 @@ namespace JongSnam.Services.Controllers
         [Produces("application/json", Type = typeof(PaymentDto))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(PaymentDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
-        public async Task<ActionResult> GetStoreById(int id)
+        public async Task<ActionResult> GetPaymentById(int id)
         {
             return Ok(await _paymentManager.GetPaymentById(id));
         }

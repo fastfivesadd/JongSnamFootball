@@ -50,6 +50,7 @@ namespace JongSnam.Services.Controllers
         {
             return Ok(await _storeManager.GetYourStores(ownerId, currentPage, pageSize));
         }
+
         [HttpPost]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(bool))]

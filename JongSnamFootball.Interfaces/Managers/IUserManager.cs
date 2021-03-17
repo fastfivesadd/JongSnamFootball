@@ -14,5 +14,7 @@ namespace JongSnamFootball.Interfaces.Managers
         Task<bool> CreateUser(UserRequest requestDto);
 
         Task<bool> ChangePassword(int id, ChangePasswordRequest request);
+
+        Task<bool> UpdateUser(int id, UpdateUserRequest request);
     }
 }
