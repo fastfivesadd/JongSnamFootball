@@ -10,5 +10,7 @@ namespace JongSnamFootball.Interfaces.Repositories
     public interface ISubDistrictRepository
     {
         Task<List<SubDistrictModel>> GetSubDistrictByDistrictId(int DistrictId);
+
+        Task<SubDistrictModel> GetSubDistrictById(int id);
     }
 }

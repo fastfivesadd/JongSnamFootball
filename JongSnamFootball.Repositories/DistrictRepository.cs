@@ -22,5 +22,11 @@ namespace JongSnamFootball.Repositories
                 .AsNoTracking().ToListAsync();
         }
 
+
+        public async Task<DistrictModel> GetDistrictById(int id)
+        {
+            return await _dbContext.Districts.Where(w => w.Id == id).AsNoTracking().FirstOrDefaultAsync();
+        }
+
     }
 }

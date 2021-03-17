@@ -41,7 +41,7 @@ namespace JongSnam.Services.Controllers
             return Ok(await _addressManager.GetProvinceById(id));
         }
 
-        [HttpGet("{ProvinceId}/District")]
+        [HttpGet("{ProvinceId}/GetDistrictByProvinceId")]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(List<DistrictModel>))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(List<DistrictModel>))]
@@ -51,8 +51,18 @@ namespace JongSnam.Services.Controllers
         {
             return Ok(await _addressManager.GetDistrictByProvinceId(ProvinceId));
         }
+        [HttpGet("{id}/GetDistrictById")]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(DistrictModel))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(DistrictModel))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> GetDistrictById(int id)
+        {
+            return Ok(await _addressManager.GetDistrictById(id));
+        }
 
-        [HttpGet("{DistrictId}/SubDistrict")]
+        [HttpGet("{DistrictId}/GetSubDistrictByDistrictId")]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(List<SubDistrictModel>))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(List<SubDistrictModel>))]
@@ -61,6 +71,17 @@ namespace JongSnam.Services.Controllers
         public async Task<ActionResult> GetSubDistrictByDistrictId(int DistrictId)
         {
             return Ok(await _addressManager.GetSubDistrictByDistrictId(DistrictId));
+        }
+
+        [HttpGet("{id}/GetSubDistrictById")]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(SubDistrictModel))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(SubDistrictModel))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> GetSubDistrictById(int id)
+        {
+            return Ok(await _addressManager.GetSubDistrictById(id));
         }
     }
 }
