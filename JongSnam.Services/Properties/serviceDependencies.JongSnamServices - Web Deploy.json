@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "apis1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/JongSnamServicesapi/apis/JongSnamServices",
+      "type": "apis.azure"
+    },
+    "mssql1": {
+      "type": "mssql.onprem",
+      "connectionId": "comsci_jsnfb",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}

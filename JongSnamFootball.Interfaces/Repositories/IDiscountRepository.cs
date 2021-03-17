@@ -4,7 +4,7 @@ using JongSnamFootball.Entities.Models;
 
 namespace JongSnamFootball.Interfaces.Repositories
 {
-    public interface IDiscountRepository
+    public interface IDiscountRepository : IRepository<DiscountModel>
     {
         Task<List<DiscountModel>> GetAll();
     }

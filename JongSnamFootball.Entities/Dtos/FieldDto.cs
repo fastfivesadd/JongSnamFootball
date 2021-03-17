@@ -8,6 +8,8 @@
 
         public int Price { get; set; }
 
+        public string StoreName {get; set; }
 
+        public bool IsOpen { get; set; }
     }
 }

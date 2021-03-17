@@ -69,9 +69,30 @@ namespace JongSnamFootball.Managers.Extensions
             return result;
         }
 
-        public static BasePagingDto<CommentDto> CommentDtoToPaging(List<CommentDto> list, int currentPage, int pageSize)
+        public static BasePagingDto<ReviewDto> CommentDtoToPaging(List<ReviewDto> list, int currentPage, int pageSize)
         {
-            var result = new BasePagingDto<CommentDto>();
+            var result = new BasePagingDto<ReviewDto>();
+
+            var total = list.Count;
+            if (total == 0)
+            {
+                return result;
+            }
+
+            var skip = (currentPage - 1) * pageSize;
+
+            result.Collection = list.Skip(skip).Take(pageSize).ToList();
+
+            result.TotalPage = ((total - 1) / pageSize) + 1;
+
+            result.CurrentPage = currentPage;
+
+            return result;
+        }
+
+        public static BasePagingDto<ReservationDto> ReservationDtoToPaging(List<ReservationDto> list, int currentPage, int pageSize)
+        {
+            var result = new BasePagingDto<ReservationDto>();
 
             var total = list.Count;
             if (total == 0)

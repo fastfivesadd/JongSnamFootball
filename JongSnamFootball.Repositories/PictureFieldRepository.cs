@@ -6,15 +6,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JongSnamFootball.Repositories
 {
-    class PictureFieldRepository : BaseRepository<PictureFieldModel>, IPictureFieldRepository
+    class PictureFieldRepository : BaseRepository<ImageFieldModel>, IPictureFieldRepository
     {
         public PictureFieldRepository(RepositoryDbContext context) : base(context)
         {
 
         }
-        public async Task<List<PictureFieldModel>> GetAll()
+        public async Task<List<ImageFieldModel>> GetAll()
         {
-            var result = await _dbContext.Picturefield.AsNoTracking().ToListAsync();
+            var result = await _dbContext.ImagesField.AsNoTracking().ToListAsync();
             return result;
         }
 
