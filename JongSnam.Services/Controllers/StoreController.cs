@@ -62,7 +62,7 @@ namespace JongSnam.Services.Controllers
             return Ok(result);
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(bool))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(bool))]
