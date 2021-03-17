@@ -18,6 +18,7 @@ namespace JongSnam.Services.Extensions
             services.AddScoped<IReviewManager, ReviewManager>();
             services.AddScoped<IReservationManager, ReservationManager>();
             services.AddScoped<IPaymentManager, PaymentManager>();
+            services.AddScoped<IAddressManager, AddressManager>();
 
         }
 
@@ -30,6 +31,10 @@ namespace JongSnam.Services.Extensions
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             services.AddScoped<IReservationRepository, ReservationRepository>();
             services.AddScoped<IPaymentRepository, PaymentRepository>();
+            services.AddScoped<IProvinceRepository, ProvinceRepository>();
+            services.AddScoped<IDistrictRepository, DistrictRepository>();
+            services.AddScoped<ISubDistrictRepository, SubDistrictRepository>();
+
         }
 
         public static void AddAutoMapperProfiles(this IServiceCollection services)

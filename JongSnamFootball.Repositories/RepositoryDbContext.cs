@@ -28,6 +28,15 @@ namespace JongSnamFootball.Repositories
 
         public virtual DbSet<ReviewModel> Reviews { get; set; }
 
+        public virtual DbSet<SubDistrictModel> SubDistricts { get; set; }
+
+
+        public virtual DbSet<DistrictModel> Districts { get; set; }
+
+
+        public virtual DbSet<ProvinceModel> Provinces { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserModel>(entity =>
@@ -80,6 +89,26 @@ namespace JongSnamFootball.Repositories
 
                 entity.ToTable(nameof(Reviews), Schema);
             });
+
+            modelBuilder.Entity<SubDistrictModel>(entity =>
+            {
+                entity.HasOne(s => s.DistrictModel).WithOne().HasForeignKey<SubDistrictModel>(s => s.DistrictId);
+
+                entity.ToTable(nameof(SubDistricts), Schema);
+            });
+
+            modelBuilder.Entity<DistrictModel>(entity =>
+            {
+                entity.HasOne(s => s.ProvinceModel).WithOne().HasForeignKey<DistrictModel>(s => s.ProvinceId);
+
+                entity.ToTable(nameof(Districts), Schema);
+            });
+
+            modelBuilder.Entity<ProvinceModel>(entity =>
+            {
+                entity.ToTable(nameof(Provinces), Schema);
+            });
+
         }
 
     }

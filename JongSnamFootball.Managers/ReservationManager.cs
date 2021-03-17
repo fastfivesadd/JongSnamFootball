@@ -36,7 +36,7 @@ namespace JongSnamFootball.Managers
 
             return result;
         }
-        //
+
         public async Task<BasePagingDto<ReservationDto>> GetReservationBySearch(int storeId,int ownerId, SearchReservationRequest request, int currentPage, int pageSize)
         {
             var listReservation = await _reservationRepository.GetReservationBySearch(storeId, ownerId, request);
