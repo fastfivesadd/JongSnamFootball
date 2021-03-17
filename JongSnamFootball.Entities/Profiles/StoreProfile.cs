@@ -11,6 +11,8 @@ namespace JongSnamFootball.Entities.Profiles
         {
             CreateMap<StoreModel, StoreDto>();
 
+            CreateMap<StoreModel, StoreDetailDto>();
+
             CreateMap<StoreModel, YourStore>();
 
             CreateMap<StoreRequest, StoreModel>();

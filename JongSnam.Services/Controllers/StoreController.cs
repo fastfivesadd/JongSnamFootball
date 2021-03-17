@@ -32,15 +32,15 @@ namespace JongSnam.Services.Controllers
 
         [HttpGet("{id}")]
         [Consumes("application/json")]
-        [Produces("application/json", Type = typeof(StoreDto))]
-        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(StoreDto))]
+        [Produces("application/json", Type = typeof(StoreDetailDto))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(StoreDetailDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
         public async Task<ActionResult> GetStoreById(int id)
         {
             return Ok(await _storeManager.GetStoreById(id));
         }
 
-        [HttpGet("{ownerId}")]
+        [HttpGet("{ownerId}/Detail")]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(BasePagingDto<YourStore>))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<YourStore>))]

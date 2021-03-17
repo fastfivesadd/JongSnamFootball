@@ -33,10 +33,10 @@ namespace JongSnamFootball.Managers
 
             return result;
         }
-        public async Task<StoreDto> GetStoreById(int id)
+        public async Task<StoreDetailDto> GetStoreById(int id)
         {
-            var Store = await _storeRepository.GetStoreById(id);
-            var result = _mapper.Map<StoreDto>(Store);
+            var store = await _storeRepository.GetStoreById(id);
+            var result = _mapper.Map<StoreDetailDto>(store);
             return result;
         }
 
