@@ -10,26 +10,29 @@ namespace JongSnamFootball.Repositories
         private readonly RepositoryDbContext _repositoryDbContext;
         private IDbContextTransaction _dbContextTransaction;
 
-        private ICommentRepository _commentRepository;
+        private IReviewRepository _commentRepository;
         private IDiscountRepository _discountRepository;
         private IFieldRepository _fieldRepository;
         private IPaymentRepository _paymentRepository;
         private IReservationRepository _reservationRepository;
         private IStoreRepository _storeRepository;
         private IUserRepository _userRepository;
+        private IPictureFieldRepository _pictureField;
+        private IReviewRepository _reviewRepository;
+
 
         public RepositoryWrapper(RepositoryDbContext repositoryDbContext)
         {
             _repositoryDbContext = repositoryDbContext;
         }
 
-        public ICommentRepository Comment
+        public IReviewRepository Comment
         {
             get
             {
                 if (_commentRepository == null)
                 {
-                    _commentRepository = new CommentRepository(_repositoryDbContext);
+                    _commentRepository = new ReviewRepository(_repositoryDbContext);
                 }
 
                 return _commentRepository;
@@ -113,23 +116,47 @@ namespace JongSnamFootball.Repositories
                 return _userRepository;
             }
         }
+        public IPictureFieldRepository PictureField
+        {
+            get
+            {
+                if (_pictureField == null)
+                {
+                    _pictureField = new PictureFieldRepository(_repositoryDbContext);
+                }
+
+                return _pictureField;
+            }
+        }
+        public IReviewRepository Review
+        {
+            get
+            {
+                if (_reviewRepository == null)
+                {
+                    _reviewRepository = new ReviewRepository(_repositoryDbContext);
+                }
+
+                return _reviewRepository;
+            }
+        }
 
         public async Task<int> SaveAsync()
         {
             return await _repositoryDbContext.SaveChangesAsync();
         }
 
-        public async Task BeginTransaction()
+        public async Task BeginTransactionAsync()
         {
              _dbContextTransaction = await _repositoryDbContext.Database.BeginTransactionAsync();
         }
 
-        public async Task Commit()
+        public async Task CommitAsync()
         {
             await _dbContextTransaction?.CommitAsync();
         }
 
-        public async Task Rollback()
+        public async Task RollbackAsync()
         {
             await _dbContextTransaction?.RollbackAsync();
         }

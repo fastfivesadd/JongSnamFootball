@@ -4,11 +4,11 @@ using JongSnamFootball.Entities.Models;
 
 namespace JongSnamFootball.Interfaces.Repositories
 {
-    public interface ICommentRepository
+    public interface IReviewRepository : IRepository<ReviewModel>
     {
-        Task<List<CommentModel>> GetAll();
+        Task<List<ReviewModel>> GetAll();
 
-        Task<List<CommentModel>> GetCommentByStoreId(int storeID);
+        Task<List<ReviewModel>> GetReviewByStoreId(int storeID);
 
     }
 }

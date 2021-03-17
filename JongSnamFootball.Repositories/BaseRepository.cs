@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using JongSnamFootball.Interfaces.Repositories;
 
 namespace JongSnamFootball.Repositories
@@ -15,6 +16,12 @@ namespace JongSnamFootball.Repositories
         public async Task<T> CreateAsync(T model)
         {
             await _dbContext.Set<T>().AddAsync(model);
+            return model;
+        } 
+
+        public async Task<IEnumerable<T>> CreateRangeAsync(IEnumerable<T> model)
+        {
+            await _dbContext.Set<T>().AddRangeAsync(model);
             return model;
         }
 

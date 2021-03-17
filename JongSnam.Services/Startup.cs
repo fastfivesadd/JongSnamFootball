@@ -49,9 +49,10 @@ namespace JongSnam.Services
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger(o => o.SerializeAsV2 = true);
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "JongSnam.Services v1"));
             }
+
+            app.UseSwagger(o => o.SerializeAsV2 = true);
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "JongSnam.Services v1"));
 
             app.UseHttpsRedirection();
 

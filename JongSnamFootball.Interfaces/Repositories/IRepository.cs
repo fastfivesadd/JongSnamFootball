@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace JongSnamFootball.Interfaces.Repositories
 {
@@ -6,9 +7,10 @@ namespace JongSnamFootball.Interfaces.Repositories
     {
         Task<T> CreateAsync(T model);
 
+        Task<IEnumerable<T>> CreateRangeAsync(IEnumerable<T> model);
+
         T Updete(T model);
 
         void Delete(T model);
-
     }
 }

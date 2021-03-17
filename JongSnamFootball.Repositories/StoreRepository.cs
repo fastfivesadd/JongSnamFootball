@@ -16,29 +16,25 @@ namespace JongSnamFootball.Repositories
 
         public async Task<List<StoreModel>> GetAll()
         {
-            var result = await _dbContext.Store.AsNoTracking().ToListAsync();
+            var result = await _dbContext.Stores.AsNoTracking().ToListAsync();
 
             return result;
+        }
+        public async Task<StoreModel> GetStoreById(int Id)
+        {
+            return await _dbContext.Stores.Where(w => w.Id == Id).AsNoTracking().FirstOrDefaultAsync();
         }
 
         public async Task<List<StoreModel>> GetStoreByOwnerId(int? ownerId)
         {
             if (ownerId.HasValue)
             {
-                return await _dbContext.Store.Where(w => w.Owner == ownerId).AsNoTracking().ToListAsync();
+                return await _dbContext.Stores.Where(w => w.OwnerId == ownerId).AsNoTracking().ToListAsync();
             }
 
             return new List<StoreModel>();
         }
 
-        public async Task<StoreModel> GetCommentByStoreId(int? storeID)
-        {
-            if (storeID.HasValue)
-            {
-                //return await _dbContext.Store.Where(w => w.Id == storeID).Include(i => i.CommentModel).AsNoTracking().FirstOrDefaultAsync();
-            }
 
-            return new StoreModel();
-        }
     }
 }
