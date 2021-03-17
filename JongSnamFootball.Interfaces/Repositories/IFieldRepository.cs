@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using JongSnamFootball.Entities.Models;
+using JongSnamFootball.Entities.Request;
 
 namespace JongSnamFootball.Interfaces.Repositories
 {
-    public interface IFieldRepository
+    public interface IFieldRepository : IRepository<FieldModel>
     {
-        Task<List<FieldModel>> GetAll();
+        Task<List<FieldModel>> GetFieldBySearch(SearchFieldRequest request);
 
-        Task<List<FieldModel>> GetByStoreID(int? storeID);
+        Task<List<FieldModel>> GetByStoreId(int? storeID);
 
-        Task<List<FieldModel>> GetByFieldID(int? fieldID);
+        Task<FieldModel> GetFieldById(int id);
     }
 }

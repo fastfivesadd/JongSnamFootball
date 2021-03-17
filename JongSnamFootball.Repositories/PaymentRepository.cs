@@ -1,26 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using JongSnamFootball.Entities.Models;
 using JongSnamFootball.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace JongSnamFootball.Repositories
 {
     public class PaymentRepository : BaseRepository<PaymentModel>, IPaymentRepository
     {
-        public PaymentRepository(ILogger<PaymentRepository> logger, RepoDbContext context) : base(logger, context)
+        public PaymentRepository(RepositoryDbContext context) : base(context)
         {
 
         }
 
         public async Task<List<PaymentModel>> GetAll()
         {
-            var result = await _dbContext.Payment.AsNoTracking().ToListAsync();
+            var result = await _dbContext.Payments.AsNoTracking().ToListAsync();
             return result;
+        }
+        public async Task<PaymentModel> GetPaymentById(int id)
+        {
+            return await _dbContext.Payments.Where(w => w.Id == id).AsNoTracking().FirstOrDefaultAsync();
+        }
+        
+        public async Task<List<PaymentModel>> GetByReservationId(int id)
+        {
+            return await _dbContext.Payments.Where(w => w.ReservationId == id).AsNoTracking().ToListAsync();
         }
     }
 }

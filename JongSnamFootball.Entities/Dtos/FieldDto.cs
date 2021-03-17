@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace JongSnamFootball.Entities.Dtos
+﻿namespace JongSnamFootball.Entities.Dtos
 {
     public class FieldDto
     {
@@ -14,6 +8,8 @@ namespace JongSnamFootball.Entities.Dtos
 
         public int Price { get; set; }
 
+        public string StoreName {get; set; }
 
+        public bool IsOpen { get; set; }
     }
 }

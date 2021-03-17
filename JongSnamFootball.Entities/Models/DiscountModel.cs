@@ -3,24 +3,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JongSnamFootball.Entities.Models
 {
-     public class DiscountModel
+    public class DiscountModel : BaseModel
     {
-        [Column("id_discount")]
-        public int Id { get; set; }
+        public int FieldId { get; set; }
 
-        [Column("id_field_in_discount")]
-        public int IdField { get; set; }
+        public DateTime StartDate { get; set; }
 
-        [Column("startTime_discount")]
-        public DateTime StartTime { get; set; }
+        public DateTime EndDate { get; set; }
 
-        [Column("endTime_discount")]
-        public DateTime EndTime { get; set; }
+        public double Percentage { get; set; }
 
-        [Column("percentage_discount")]
-        public float Percentage { get; set; }
-
-        [Column("detail_discount")]
         public string Detail { get; set; }
 
     }

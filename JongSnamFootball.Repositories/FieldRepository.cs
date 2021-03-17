@@ -1,45 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using JongSnamFootball.Entities.Models;
+using JongSnamFootball.Entities.Request;
 using JongSnamFootball.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace JongSnamFootball.Repositories
 {
     public class FieldRepository : BaseRepository<FieldModel>, IFieldRepository
     {
-        public FieldRepository(ILogger<FieldRepository> logger, RepoDbContext context) : base(logger, context)
+        public FieldRepository(RepositoryDbContext context) : base(context)
         {
-
-        }
-        public async Task<List<FieldModel>> GetAll()
-        {
-            var result = await _dbContext.Field.AsNoTracking().ToListAsync();
-            return result;
         }
 
-        public async Task<List<FieldModel>> GetByStoreID(int? storeID)
+        public async Task<List<FieldModel>> GetFieldBySearch(SearchFieldRequest request)
         {
-            if (storeID.HasValue)
+            var result = _dbContext.Fields.Include(i => i.StoreModel).AsNoTracking();
+
+            if (request.StartPrice.HasValue)
             {
-                return await _dbContext.Field.Where(w => w.IdStore == storeID).AsNoTracking().ToListAsync();
+                result = result.Where(w => w.Price >= request.StartPrice);
             }
 
-            return new List<FieldModel>();
-        }
-
-        public async Task<List<FieldModel>> GetByFieldID(int? fieldID)
-        {
-            if (fieldID.HasValue)
+            if (request.ToPrice.HasValue)
             {
-                return await _dbContext.Field.Where(w => w.Id == fieldID).AsNoTracking().ToListAsync();
+                result = result.Where(w => w.Price <= request.ToPrice);
             }
 
-            return new List<FieldModel>();
+            if (request.DistrictId.HasValue)
+            {
+                result = result.Where(w => w.StoreModel.DistrictId == request.DistrictId.Value);
+            }
+
+            if (request.ProvinceId.HasValue)
+            {
+                result = result.Where(w => w.StoreModel.ProvinceId == request.ProvinceId.Value);
+            }
+
+            return await result.ToListAsync();
+        }
+
+        public async Task<List<FieldModel>> GetByStoreId(int? storeId)
+        {
+            return await _dbContext.Fields.Where(w => w.StoreId == storeId).Include(i => i.StoreModel).AsNoTracking().ToListAsync();
+        }
+
+        public async Task<FieldModel> GetFieldById(int id)
+        {
+                return await _dbContext.Fields.Where(w => w.Id == id)
+                    .Include(i => i.ImageFieldModel)
+                    .Include(i => i.DiscountModel)
+                    .AsNoTracking().FirstOrDefaultAsync();
         }
     }
 }

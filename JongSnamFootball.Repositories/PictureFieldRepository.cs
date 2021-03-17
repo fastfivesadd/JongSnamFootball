@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using JongSnamFootball.Entities.Models;
 using JongSnamFootball.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace JongSnamFootball.Repositories
 {
-    class PictureFieldRepository : BaseRepository<PictureFieldModel>, IPictureFieldRepository
+    class PictureFieldRepository : BaseRepository<ImageFieldModel>, IPictureFieldRepository
     {
-        public PictureFieldRepository(ILogger<PictureFieldRepository> logger, RepoDbContext context) : base(logger, context)
+        public PictureFieldRepository(RepositoryDbContext context) : base(context)
         {
 
         }
-        public async Task<List<PictureFieldModel>> GetAll()
+        public async Task<List<ImageFieldModel>> GetAll()
         {
-            var result = await _dbContext.Picturefield.AsNoTracking().ToListAsync();
+            var result = await _dbContext.ImagesField.AsNoTracking().ToListAsync();
             return result;
         }
 
