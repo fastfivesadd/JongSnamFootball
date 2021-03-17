@@ -4,8 +4,12 @@ using JongSnamFootball.Entities.Models;
 
 namespace JongSnamFootball.Interfaces.Repositories
 {
-    public interface IPaymentRepository
+    public interface IPaymentRepository : IRepository<PaymentModel>
     {
         Task<List<PaymentModel>> GetAll();
+
+        Task<PaymentModel> GetPaymentById(int id);
+
+        Task<List<PaymentModel>> GetByReservationId(int id);
     }
 }

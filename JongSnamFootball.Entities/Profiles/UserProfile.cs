@@ -9,8 +9,8 @@ namespace JongSnamFootball.Entities.Profiles
     {
         public UserProfile()
         {
-            CreateMap<UserMemberModel, UserDto>();
-            CreateMap<UserRequest, UserMemberModel>();
+            CreateMap<UserModel, UserDto>();
+            CreateMap<UserRequest, UserModel>();
         }
     }
 }

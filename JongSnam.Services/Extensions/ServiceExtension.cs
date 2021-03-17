@@ -15,7 +15,11 @@ namespace JongSnam.Services.Extensions
             services.AddScoped<IStoreManager, StoreManager>();
             services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<IFieldManager, FieldManager>();
-            services.AddScoped<ICommentManager, CommentManager>();
+            services.AddScoped<IReviewManager, ReviewManager>();
+            services.AddScoped<IReservationManager, ReservationManager>();
+            services.AddScoped<IPaymentManager, PaymentManager>();
+            services.AddScoped<IAddressManager, AddressManager>();
+
         }
 
         public static void AddConfigureRepositories(this IServiceCollection services)
@@ -23,15 +27,26 @@ namespace JongSnam.Services.Extensions
             services.AddScoped<IStoreRepository, StoreRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IFieldRepository, FieldRepository>();
-            services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<IReviewRepository, ReviewRepository>();
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+            services.AddScoped<IReservationRepository, ReservationRepository>();
+            services.AddScoped<IPaymentRepository, PaymentRepository>();
+            services.AddScoped<IProvinceRepository, ProvinceRepository>();
+            services.AddScoped<IDistrictRepository, DistrictRepository>();
+            services.AddScoped<ISubDistrictRepository, SubDistrictRepository>();
+
         }
 
         public static void AddAutoMapperProfiles(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(UserProfile));
             services.AddAutoMapper(typeof(StoreProfile));
-            services.AddAutoMapper(typeof(CommentProfile));
+            services.AddAutoMapper(typeof(ReviewProfile));
+            services.AddAutoMapper(typeof(FieldProfile));
+            services.AddAutoMapper(typeof(DiscountProfile));
+            services.AddAutoMapper(typeof(PictureFieldProfile));
+            services.AddAutoMapper(typeof(ReservationProfile));
+            services.AddAutoMapper(typeof(PaymentProfile));
         }
     }
 }

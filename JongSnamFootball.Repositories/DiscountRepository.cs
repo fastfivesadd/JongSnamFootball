@@ -14,7 +14,7 @@ namespace JongSnamFootball.Repositories
         }
         public async Task<List<DiscountModel>> GetAll()
         {
-            var result = await _dbContext.Discount.AsNoTracking().ToListAsync();
+            var result = await _dbContext.Discounts.AsNoTracking().ToListAsync();
             return result;
         }
     }
