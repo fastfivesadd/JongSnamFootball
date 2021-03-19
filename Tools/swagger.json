@@ -265,7 +265,10 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/EnumDto"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EnumDto"
+              }
             }
           },
           "400": {
@@ -2185,13 +2188,13 @@
     "StoreRequest": {
       "required": [
         "address",
-        "amphur",
         "contactMobile",
-        "district",
+        "districtId",
         "isOpen",
         "name",
         "ownerId",
-        "province"
+        "provinceId",
+        "subDistrictId"
       ],
       "type": "object",
       "properties": {
@@ -2212,20 +2215,17 @@
           "maxLength": 50,
           "type": "string"
         },
-        "district": {
-          "format": "string",
-          "maxLength": 50,
-          "type": "string"
+        "subDistrictId": {
+          "format": "int32",
+          "type": "integer"
         },
-        "amphur": {
-          "format": "string",
-          "maxLength": 50,
-          "type": "string"
+        "districtId": {
+          "format": "int32",
+          "type": "integer"
         },
-        "province": {
-          "format": "string",
-          "maxLength": 50,
-          "type": "string"
+        "provinceId": {
+          "format": "int32",
+          "type": "integer"
         },
         "contactMobile": {
           "format": "tel",

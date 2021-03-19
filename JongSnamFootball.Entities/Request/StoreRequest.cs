@@ -25,20 +25,14 @@ namespace JongSnamFootball.Entities.Request
         [DataType(DataType.Text)]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "District is required")]
-        [MaxLength(50)]
-        [DataType(DataType.Text)]
-        public string District { get; set; }
+        [Required(ErrorMessage = "SubDistrictId is required")]
+        public int SubDistrictId { get; set; }
 
-        [Required(ErrorMessage = "Amphur is required")]
-        [MaxLength(50)]
-        [DataType(DataType.Text)]
-        public string Amphur { get; set; }
+        [Required(ErrorMessage = "DistrictId is required")]
+        public int DistrictId { get; set; }
 
-        [Required(ErrorMessage = "Province is required")]
-        [MaxLength(50)]
-        [DataType(DataType.Text)]
-        public string Province { get; set; }
+        [Required(ErrorMessage = "ProvinceId is required")]
+        public int ProvinceId { get; set; }
 
         [Required(ErrorMessage = "TelePhone is required")]
         [StringLength(10, MinimumLength = 9,
