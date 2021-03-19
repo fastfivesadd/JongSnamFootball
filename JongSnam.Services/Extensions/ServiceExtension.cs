@@ -19,6 +19,7 @@ namespace JongSnam.Services.Extensions
             services.AddScoped<IReservationManager, ReservationManager>();
             services.AddScoped<IPaymentManager, PaymentManager>();
             services.AddScoped<IAddressManager, AddressManager>();
+            services.AddScoped<IEnumManager, EnumManager>();
 
         }
 
