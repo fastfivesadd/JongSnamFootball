@@ -239,6 +239,50 @@
         }
       }
     },
+    "/api/Enum": {
+      "get": {
+        "tags": [
+          "Enum"
+        ],
+        "operationId": "GetEnums",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "enumName",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "id",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnumDto"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemsDetailDto"
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemsDetailDto"
+            }
+          }
+        }
+      }
+    },
     "/api/Field/Search": {
       "get": {
         "tags": [
@@ -1575,6 +1619,18 @@
         },
         "districtModel": {
           "$ref": "#/definitions/DistrictModel"
+        }
+      }
+    },
+    "EnumDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
         }
       }
     },

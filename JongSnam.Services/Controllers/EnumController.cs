@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using JongSnamFootball.Entities.Dtos;
 using JongSnamFootball.Interfaces.Managers;
 using Microsoft.AspNetCore.Http;
@@ -20,8 +21,8 @@ namespace JongSnam.Services.Controllers
 
         [HttpGet]
         [Consumes("application/json")]
-        [Produces("application/json", Type = typeof(EnumDto))]
-        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(EnumDto))]
+        [Produces("application/json", Type = typeof(List<EnumDto>))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(List<EnumDto>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
         public async Task<ActionResult> GetEnums(string enumName, int id)
