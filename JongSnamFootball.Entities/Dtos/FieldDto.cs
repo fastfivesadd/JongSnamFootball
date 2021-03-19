@@ -1,4 +1,7 @@
-﻿namespace JongSnamFootball.Entities.Dtos
+﻿using System.Collections.Generic;
+using JongSnamFootball.Entities.Models;
+
+namespace JongSnamFootball.Entities.Dtos
 {
     public class FieldDto
     {
@@ -11,5 +14,8 @@
         public string StoreName {get; set; }
 
         public bool IsOpen { get; set; }
+
+        public virtual ICollection<ImageFieldModel> ImageFieldModel { get; set; }
+
     }
 }
