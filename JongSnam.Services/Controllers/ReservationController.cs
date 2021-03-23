@@ -45,8 +45,8 @@ namespace JongSnam.Services.Controllers
 
         [HttpGet("{Id}/Detail")]
         [Consumes("application/json")]
-        [Produces("application/json", Type = typeof(BasePagingDto<ReservationDto>))]
-        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<ReservationDto>))]
+        [Produces("application/json", Type = typeof(BasePagingDto<ReservationDetailDto>))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<ReservationDetailDto>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
         public async Task<ActionResult> GetShowDetailYourReservation(int Id)
