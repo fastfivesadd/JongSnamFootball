@@ -21,7 +21,7 @@ namespace JongSnam.Services.Controllers
             _paymentManager = paymentManager;
         }
 
-        [HttpGet("{reservationId}")]
+        [HttpGet("{reservationId}/ReservationId")]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(List<PaymentDto>))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(List<PaymentDto>))]

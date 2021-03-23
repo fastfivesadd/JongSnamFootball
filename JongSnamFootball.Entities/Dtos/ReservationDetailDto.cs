@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JongSnamFootball.Entities.Models;
 
 namespace JongSnamFootball.Entities.Dtos
 {
@@ -28,7 +29,7 @@ namespace JongSnamFootball.Entities.Dtos
         
         public bool IsFullAmount { get; set; }
 
-        public string Image { get; set; }
+        public IEnumerable<PaymentModel> PaymentModel { get; set; }
 
         public decimal AmountForPay { get; set; }
     }
