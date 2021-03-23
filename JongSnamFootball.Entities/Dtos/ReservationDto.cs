@@ -13,6 +13,8 @@ namespace JongSnamFootball.Entities.Dtos
 
         public string UserName { get; set; }
 
+        public string StoreName { get; set; }
+
         public string ContactMobile { get; set; }
 
         public DateTime StartTime { get; set; }

@@ -15,11 +15,14 @@ namespace JongSnamFootball.Repositories
         {
 
         }
-        public async Task<List<ReservationModel>> GetReservationBySearch(int storeId, int ownerId, SearchReservationRequest request)
+        public async Task<List<ReservationModel>> GetReservationBySearch(int userId, SearchReservationRequest request)
         {
-            var result = _dbContext.Reservations.Where(w => w.StoreId == storeId)
-                .Include(i => i.UserModel).Include(i => i.StoreModel).Where(w => w.StoreModel.OwnerId == ownerId)
-                .AsNoTracking();
+            //var result = _dbContext.Reservations.Where(w => w.StoreId == storeId)
+            //    .Include(i => i.UserModel).Include(i => i.StoreModel).Where(w => w.StoreModel.OwnerId == ownerId)
+            //    .AsNoTracking();
+
+            var result =  _dbContext.Reservations.Where(w => w.StoreModel.OwnerId == userId || w.UserId == userId).Include(i => i.UserModel).Include(i => i.StoreModel).AsNoTracking();
+
             var aa = result.ToList();
 
             if (request.StartTime != null && request.StopTime != null)
@@ -35,7 +38,7 @@ namespace JongSnamFootball.Repositories
 
             if (!string.IsNullOrWhiteSpace(request.UserName))
             {
-                result = result.Where(w => $"{w.UserModel.FirstName} {w.UserModel.LastName}".Contains(request.StoreName)).AsNoTracking();
+                result = result.Where(w => w.UserModel.FirstName.Contains(request.UserName)).AsNoTracking();
             }
 
             if (!string.IsNullOrWhiteSpace(request.StoreName))
@@ -45,9 +48,9 @@ namespace JongSnamFootball.Repositories
             return await result.ToListAsync();
         }
 
-        public async Task<List<ReservationModel>> GetYourReservation(int storeId, int ownerId)
+        public async Task<List<ReservationModel>> GetYourReservation(int userId)
         {
-            return await _dbContext.Reservations.Where(w => w.StoreId == storeId).Include(i => i.UserModel).Include(i => i.StoreModel).Where(w => w.StoreModel.OwnerId == ownerId).AsNoTracking().ToListAsync();
+            return await _dbContext.Reservations.Where(w => w.StoreModel.OwnerId == userId || w.UserId == userId).Include(i => i.UserModel).Include(i => i.StoreModel).AsNoTracking().ToListAsync();
         }
 
         public async Task<List<ReservationModel>> GetShowDetailYourReservation(int Id)

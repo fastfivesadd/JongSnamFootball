@@ -21,15 +21,15 @@ namespace JongSnam.Services.Controllers
             _reservationManager = reservationManager;
         }
 
-        [HttpGet("{storeId}")]
+        [HttpGet("{userId}")]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(BasePagingDto<ReservationDto>))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<ReservationDto>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
-        public async Task<ActionResult> GetYourReservation(int storeId, int ownerId, int currentPage, int pageSize)
+        public async Task<ActionResult> GetYourReservation(int userId, int currentPage, int pageSize)
         {
-            return Ok(await _reservationManager.GetYourReservation(storeId, ownerId, currentPage, pageSize));
+            return Ok(await _reservationManager.GetYourReservation(userId, currentPage, pageSize));
         }
 
         [HttpGet("Search")]
@@ -38,9 +38,9 @@ namespace JongSnam.Services.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<ReservationDto>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
-        public async Task<ActionResult> GetReservationBySearch(int storeId, int ownerId, [FromQuery] SearchReservationRequest request, int currentPage, int pageSize)
+        public async Task<ActionResult> GetReservationBySearch(int userId, [FromQuery] SearchReservationRequest request, int currentPage, int pageSize)
         {
-            return Ok(await _reservationManager.GetReservationBySearch(storeId, ownerId, request, currentPage, pageSize));
+            return Ok(await _reservationManager.GetReservationBySearch(userId, request, currentPage, pageSize));
         }
 
         [HttpGet("{Id}/Detail")]
