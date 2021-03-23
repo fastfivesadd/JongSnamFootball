@@ -714,7 +714,7 @@
         }
       }
     },
-    "/api/Reservation/{storeId}": {
+    "/api/Reservation/{userId}": {
       "get": {
         "tags": [
           "Reservation"
@@ -726,14 +726,8 @@
         "parameters": [
           {
             "in": "path",
-            "name": "storeId",
+            "name": "userId",
             "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "query",
-            "name": "ownerId",
             "type": "integer",
             "format": "int32"
           },
@@ -784,13 +778,7 @@
         "parameters": [
           {
             "in": "query",
-            "name": "storeId",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "query",
-            "name": "ownerId",
+            "name": "userId",
             "type": "integer",
             "format": "int32"
           },
@@ -933,7 +921,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ReservationDtoBasePagingDto"
+              "$ref": "#/definitions/ReservationDetailDtoBasePagingDto"
             }
           },
           "400": {
@@ -1995,6 +1983,9 @@
         "userName": {
           "type": "string"
         },
+        "storeName": {
+          "type": "string"
+        },
         "contactMobile": {
           "type": "string"
         },
@@ -2023,6 +2014,71 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReservationDto"
+          }
+        }
+      }
+    },
+    "ReservationDetailDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "approvalStatus": {
+          "type": "boolean"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "storeName": {
+          "type": "string"
+        },
+        "contactMobile": {
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "stopTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "fieldName": {
+          "type": "string"
+        },
+        "pricePerHour": {
+          "format": "double",
+          "type": "number"
+        },
+        "isFullAmount": {
+          "type": "boolean"
+        },
+        "image": {
+          "type": "string"
+        },
+        "amountForPay": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "ReservationDetailDtoBasePagingDto": {
+      "type": "object",
+      "properties": {
+        "currentPage": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "totalPage": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "collection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReservationDetailDto"
           }
         }
       }
