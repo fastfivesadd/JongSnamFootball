@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace JongSnamFootball.Entities.Request
 {
@@ -39,7 +34,7 @@ namespace JongSnamFootball.Entities.Request
             ErrorMessage = "ContactMobile should be minimum 8 characters and a maximum of 10 characters")]
         [Phone]
         public string ContactMobile { get; set; }
- 
+
         public decimal? Latitude { get; set; }
 
         public decimal? Longtitude { get; set; }

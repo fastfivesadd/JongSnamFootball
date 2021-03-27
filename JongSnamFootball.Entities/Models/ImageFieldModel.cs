@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace JongSnamFootball.Entities.Models
+﻿namespace JongSnamFootball.Entities.Models
 {
     public class ImageFieldModel : BaseModel
     {

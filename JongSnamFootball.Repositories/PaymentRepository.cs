@@ -23,7 +23,7 @@ namespace JongSnamFootball.Repositories
         {
             return await _dbContext.Payments.Where(w => w.Id == id).AsNoTracking().FirstOrDefaultAsync();
         }
-        
+
         public async Task<List<PaymentModel>> GetByReservationId(int id)
         {
             return await _dbContext.Payments.Where(w => w.ReservationId == id).AsNoTracking().ToListAsync();

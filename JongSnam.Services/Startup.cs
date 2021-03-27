@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using JongSnam.Services.Extensions;
 using JongSnamFootball.Repositories;
@@ -29,6 +31,47 @@ namespace JongSnam.Services
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "JongSnam.Services", Version = "v1" });
                 c.CustomOperationIds(apiDesc => apiDesc.TryGetMethodInfo(out MethodInfo methodInfo) ? methodInfo.Name : null);
+
+                //c.AddSecurityDefinition(
+                //    "Bearer",
+                //    new OpenApiSecurityScheme
+                //    {
+                //        Type = SecuritySchemeType.OAuth2
+                //    });
+
+                //c.AddSecurityRequirement(
+                //    new SwaggerGenOptions 
+                //    { 
+                //    ParameterFilterDescriptors = new List<FilterDescriptor> {  }
+                //});
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = @"Bearer 12345abcdef",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+                            
+                        },
+                        new List<string>()
+                    }
+                });
             });
 
             services.AddDbContext<RepositoryDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("comsci_jsnfb")));

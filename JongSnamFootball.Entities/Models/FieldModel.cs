@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JongSnamFootball.Entities.Models
 {
@@ -18,7 +17,7 @@ namespace JongSnamFootball.Entities.Models
         public bool Active { get; set; }
 
         public virtual StoreModel StoreModel { get; set; }
-        
+
         public virtual DiscountModel DiscountModel { get; set; }
 
         public virtual ICollection<ImageFieldModel> ImageFieldModel { get; set; }

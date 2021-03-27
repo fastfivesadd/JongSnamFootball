@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using JongSnamFootball.Entities.Dtos;
 using JongSnamFootball.Interfaces.Managers;
@@ -16,7 +13,7 @@ namespace JongSnamFootball.Managers
         private readonly ISubDistrictRepository _subDistrictRepository;
 
         public EnumManager(
-            IProvinceRepository provinceRepository, 
+            IProvinceRepository provinceRepository,
             IDistrictRepository districtRepository,
             ISubDistrictRepository subDistrictRepository)
         {

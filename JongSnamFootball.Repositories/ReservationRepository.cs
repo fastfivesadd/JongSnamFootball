@@ -21,7 +21,7 @@ namespace JongSnamFootball.Repositories
             //    .Include(i => i.UserModel).Include(i => i.StoreModel).Where(w => w.StoreModel.OwnerId == ownerId)
             //    .AsNoTracking();
 
-            var result =  _dbContext.Reservations.Where(w => w.StoreModel.OwnerId == userId || w.UserId == userId).Include(i => i.UserModel).Include(i => i.StoreModel).AsNoTracking();
+            var result = _dbContext.Reservations.Where(w => w.StoreModel.OwnerId == userId || w.UserId == userId).Include(i => i.UserModel).Include(i => i.StoreModel).AsNoTracking();
 
             var aa = result.ToList();
 

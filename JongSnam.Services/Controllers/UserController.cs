@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using JongSnam.Services.Attributes;
 using JongSnamFootball.Entities.Dtos;
 using JongSnamFootball.Entities.Request;
 using JongSnamFootball.Interfaces.Managers;
@@ -11,6 +12,7 @@ namespace JongSnam.Services.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AuthorizeTokenHeader]
     public class UserController : ControllerBase
     {
         private readonly IUserManager _userManager;
@@ -56,7 +58,7 @@ namespace JongSnam.Services.Controllers
         [Produces("application/json", Type = typeof(bool))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(bool))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
-        public async Task<ActionResult> ChangePassword(int id, [FromBody]ChangePasswordRequest request)
+        public async Task<ActionResult> ChangePassword(int id, [FromBody] ChangePasswordRequest request)
         {
             var result = await _userManager.ChangePassword(id, request);
             return Ok(result);

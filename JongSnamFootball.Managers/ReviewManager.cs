@@ -69,7 +69,7 @@ namespace JongSnamFootball.Managers
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }

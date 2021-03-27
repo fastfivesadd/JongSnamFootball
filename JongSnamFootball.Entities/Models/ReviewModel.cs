@@ -1,9 +1,8 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JongSnamFootball.Entities.Models
 {
-    public class ReviewModel 
+    public class ReviewModel
     {
         public int Id { get; set; }
 

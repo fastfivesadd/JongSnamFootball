@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JongSnamFootball.Entities.Request
 {
@@ -16,7 +12,7 @@ namespace JongSnamFootball.Entities.Request
         [Required(ErrorMessage = "EndDate is required")]
         public DateTime? EndDate { get; set; }
 
-        [Range(0,100)]
+        [Range(0, 100)]
         [Required(ErrorMessage = "Percentage is required")]
         public double? Percentage { get; set; }
 

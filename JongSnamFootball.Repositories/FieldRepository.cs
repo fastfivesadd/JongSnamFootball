@@ -48,10 +48,10 @@ namespace JongSnamFootball.Repositories
 
         public async Task<FieldModel> GetFieldById(int id)
         {
-                return await _dbContext.Fields.Where(w => w.Id == id)
-                    .Include(i => i.ImageFieldModel)
-                    .Include(i => i.DiscountModel)
-                    .AsNoTracking().FirstOrDefaultAsync();
+            return await _dbContext.Fields.Where(w => w.Id == id)
+                .Include(i => i.ImageFieldModel)
+                .Include(i => i.DiscountModel)
+                .AsNoTracking().FirstOrDefaultAsync();
         }
     }
 }

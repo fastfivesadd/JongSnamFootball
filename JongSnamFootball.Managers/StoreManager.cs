@@ -65,12 +65,12 @@ namespace JongSnamFootball.Managers
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
         }
-        
+
         public async Task<bool> UpdateStore(int id, UpdateStoreRequest request)
         {
             try
@@ -92,16 +92,16 @@ namespace JongSnamFootball.Managers
                 storeModel.UpdatedDate = DateTime.Now;
 
                 _repositoryWrapper.Store.Updete(storeModel);
-                
+
                 await _repositoryWrapper.SaveAsync();
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
         }
-        
+
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using JongSnamFootball.Entities.Dtos;
@@ -56,7 +54,7 @@ namespace JongSnamFootball.Managers
             return result;
         }
 
-        public async Task<bool> UpdateApprovalStatus(int id ,ReservationApprovalRequest request)
+        public async Task<bool> UpdateApprovalStatus(int id, ReservationApprovalRequest request)
         {
             try
             {
@@ -71,7 +69,7 @@ namespace JongSnamFootball.Managers
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -93,7 +91,7 @@ namespace JongSnamFootball.Managers
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -108,13 +106,13 @@ namespace JongSnamFootball.Managers
                 {
                     return false;
                 }
-                
+
                 await _repositoryWrapper.BeginTransactionAsync();
 
                 reservationModel.Active = false;
 
                 _repositoryWrapper.Reservation.Updete(reservationModel);
-                
+
                 await _repositoryWrapper.SaveAsync();
 
                 await _repositoryWrapper.CommitAsync();

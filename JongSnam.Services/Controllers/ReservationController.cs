@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using JongSnamFootball.Entities.Dtos;
 using JongSnamFootball.Entities.Request;
 using JongSnamFootball.Interfaces.Managers;
@@ -59,7 +56,7 @@ namespace JongSnam.Services.Controllers
         [Produces("application/json", Type = typeof(bool))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(bool))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
-        public async Task<ActionResult> UpdateApprovalStatus(int id , [FromBody] ReservationApprovalRequest request)
+        public async Task<ActionResult> UpdateApprovalStatus(int id, [FromBody] ReservationApprovalRequest request)
         {
             var result = await _reservationManager.UpdateApprovalStatus(id, request);
             return Ok(result);
@@ -86,5 +83,5 @@ namespace JongSnam.Services.Controllers
             return Ok(result);
         }
     }
-    
+
 }

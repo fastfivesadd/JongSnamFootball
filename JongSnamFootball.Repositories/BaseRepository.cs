@@ -17,7 +17,7 @@ namespace JongSnamFootball.Repositories
         {
             await _dbContext.Set<T>().AddAsync(model);
             return model;
-        } 
+        }
 
         public async Task<IEnumerable<T>> CreateRangeAsync(IEnumerable<T> model)
         {

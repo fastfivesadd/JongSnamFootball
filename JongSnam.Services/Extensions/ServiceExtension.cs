@@ -20,6 +20,7 @@ namespace JongSnam.Services.Extensions
             services.AddScoped<IPaymentManager, PaymentManager>();
             services.AddScoped<IAddressManager, AddressManager>();
             services.AddScoped<IEnumManager, EnumManager>();
+            services.AddScoped<IAuthenticationManager, AuthenticationManager>();
 
         }
 
@@ -35,6 +36,7 @@ namespace JongSnam.Services.Extensions
             services.AddScoped<IProvinceRepository, ProvinceRepository>();
             services.AddScoped<IDistrictRepository, DistrictRepository>();
             services.AddScoped<ISubDistrictRepository, SubDistrictRepository>();
+            services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
 
         }
 
