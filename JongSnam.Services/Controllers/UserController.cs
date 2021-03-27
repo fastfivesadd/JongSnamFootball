@@ -4,6 +4,7 @@ using JongSnam.Services.Attributes;
 using JongSnamFootball.Entities.Dtos;
 using JongSnamFootball.Entities.Request;
 using JongSnamFootball.Interfaces.Managers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -42,6 +43,7 @@ namespace JongSnam.Services.Controllers
             return Ok(await _userManager.GetUserById(id));
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(IEnumerable<bool>))]
