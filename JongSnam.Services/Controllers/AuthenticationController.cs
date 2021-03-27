@@ -20,8 +20,8 @@ namespace JongSnam.Services.Controllers
 
         [HttpPost("/Login")]
         [Consumes("application/json")]
-        [Produces("application/json", Type = typeof(bool))]
-        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(bool))]
+        [Produces("application/json", Type = typeof(UserDto))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(UserDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
         public async Task<ActionResult> Login(string user, string password)
         {

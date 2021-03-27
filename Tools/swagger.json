@@ -239,6 +239,76 @@
         }
       }
     },
+    "/Login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "operationId": "Login",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "user",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "password",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UserDto"
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemsDetailDto"
+            }
+          }
+        }
+      }
+    },
+    "/Logout": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "operationId": "Logout",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemsDetailDto"
+            }
+          }
+        }
+      }
+    },
     "/api/Enum": {
       "get": {
         "tags": [
@@ -559,7 +629,7 @@
         }
       }
     },
-    "/api/Payment/{reservationId}": {
+    "/api/Payment/{reservationId}/ReservationId": {
       "get": {
         "tags": [
           "Payment"
@@ -921,7 +991,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ReservationDetailDtoBasePagingDto"
+              "$ref": "#/definitions/ReservationDetailDto"
             }
           },
           "400": {
@@ -1613,6 +1683,42 @@
         }
       }
     },
+    "UserDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "contactMobile": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "userType": {
+          "type": "string"
+        },
+        "isLoggedIn": {
+          "type": "boolean"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
     "EnumDto": {
       "type": "object",
       "properties": {
@@ -2018,6 +2124,41 @@
         }
       }
     },
+    "PaymentModel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "createdDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "reservationId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "image": {
+          "type": "string"
+        },
+        "amount": {
+          "format": "double",
+          "type": "number"
+        },
+        "date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "isFullAmount": {
+          "type": "boolean"
+        }
+      }
+    },
     "ReservationDetailDto": {
       "type": "object",
       "properties": {
@@ -2055,31 +2196,15 @@
         "isFullAmount": {
           "type": "boolean"
         },
-        "image": {
-          "type": "string"
+        "paymentModel": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentModel"
+          }
         },
         "amountForPay": {
           "format": "double",
           "type": "number"
-        }
-      }
-    },
-    "ReservationDetailDtoBasePagingDto": {
-      "type": "object",
-      "properties": {
-        "currentPage": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "totalPage": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "collection": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ReservationDetailDto"
-          }
         }
       }
     },
@@ -2458,36 +2583,6 @@
         }
       }
     },
-    "UserDto": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "address": {
-          "type": "string"
-        },
-        "contactMobile": {
-          "type": "string"
-        },
-        "image": {
-          "type": "string"
-        },
-        "userType": {
-          "type": "string"
-        }
-      }
-    },
     "UserRequest": {
       "required": [
         "confirmPassword",
@@ -2610,5 +2705,18 @@
         }
       }
     }
-  }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Bearer 12345abcdef"
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
 }
