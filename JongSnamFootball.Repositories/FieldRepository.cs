@@ -16,7 +16,7 @@ namespace JongSnamFootball.Repositories
 
         public async Task<List<FieldModel>> GetFieldBySearch(SearchFieldRequest request)
         {
-            var result = _dbContext.Fields.Include(i => i.StoreModel).AsNoTracking();
+            var result = _dbContext.Fields.Include(i => i.StoreModel).Include(i => i.ImageFieldModel).AsNoTracking();
 
             if (request.StartPrice.HasValue)
             {

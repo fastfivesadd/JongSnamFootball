@@ -19,5 +19,7 @@ namespace JongSnamFootball.Entities.Dtos
 
         public virtual ICollection<ImageFieldModel> ImageFieldModel { get; set; }
 
+
+
     }
 }

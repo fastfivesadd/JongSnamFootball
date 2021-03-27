@@ -1775,6 +1775,9 @@
         "isOpen": {
           "type": "boolean"
         },
+        "active": {
+          "type": "boolean"
+        },
         "imageFieldModel": {
           "type": "array",
           "items": {
@@ -1802,10 +1805,38 @@
         }
       }
     },
-    "ImageFieldDto": {
+    "DiscountModel": {
       "type": "object",
       "properties": {
-        "image": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "createdDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "fieldId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "startDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "percentage": {
+          "format": "double",
+          "type": "number"
+        },
+        "detail": {
           "type": "string"
         }
       }
@@ -1824,18 +1855,23 @@
           "format": "double",
           "type": "number"
         },
+        "size": {
+          "type": "string"
+        },
         "isOpen": {
           "type": "boolean"
         },
-        "percentage": {
-          "format": "double",
-          "type": "number"
+        "discountModel": {
+          "$ref": "#/definitions/DiscountModel"
         },
-        "imageFieldDto": {
+        "imageFieldModel": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ImageFieldDto"
+            "$ref": "#/definitions/ImageFieldModel"
           }
+        },
+        "active": {
+          "type": "boolean"
         }
       }
     },
@@ -1865,6 +1901,9 @@
           "type": "integer"
         },
         "isOpen": {
+          "type": "boolean"
+        },
+        "active": {
           "type": "boolean"
         }
       }
@@ -1998,6 +2037,9 @@
           "type": "integer"
         },
         "isOpen": {
+          "type": "boolean"
+        },
+        "active": {
           "type": "boolean"
         },
         "updateDiscountRequest": {
@@ -2341,6 +2383,9 @@
         },
         "officeHours": {
           "type": "string"
+        },
+        "isOpen": {
+          "type": "boolean"
         },
         "image": {
           "type": "string"
