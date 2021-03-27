@@ -44,6 +44,7 @@ namespace JongSnamFootball.Managers
                 var userModel = _mapper.Map<UserModel>(requestDto);
                 userModel.CreatedDate = DateTime.Now;
                 userModel.UpdatedDate = DateTime.Now;
+                userModel.IsLoggedIn = false;
                 var encryptedString = Encryptions.EncryptString(EncryptionConstants.Key, userModel.Password);
                 userModel.Password = encryptedString;
                 await _repositoryWrapper.User.CreateAsync(userModel);

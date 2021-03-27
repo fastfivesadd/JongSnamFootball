@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using JongSnam.Services.Attributes;
 using JongSnamFootball.Entities.Dtos;
 using JongSnamFootball.Entities.Models;
 using JongSnamFootball.Interfaces.Managers;
@@ -11,6 +12,7 @@ namespace JongSnam.Services.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AuthorizeTokenHeader]
     public class AddressController : ControllerBase
     {
         private readonly IAddressManager _addressManager;

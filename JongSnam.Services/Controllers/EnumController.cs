@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using JongSnam.Services.Attributes;
 using JongSnamFootball.Entities.Dtos;
 using JongSnamFootball.Interfaces.Managers;
 using Microsoft.AspNetCore.Http;
@@ -10,6 +11,7 @@ namespace JongSnam.Services.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AuthorizeTokenHeader]
     public class EnumController : ControllerBase
     {
         private readonly IEnumManager _enumManager;
