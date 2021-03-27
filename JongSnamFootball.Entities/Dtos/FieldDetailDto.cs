@@ -13,8 +13,6 @@ namespace JongSnamFootball.Entities.Dtos
 
         public bool IsOpen { get; set; }
 
-        public double Percentage { get; set; }
-
         public IEnumerable<ImageFieldDto> ImageFieldDto { get; set; }
 
         public virtual DiscountModel DiscountModel { get; set; }
