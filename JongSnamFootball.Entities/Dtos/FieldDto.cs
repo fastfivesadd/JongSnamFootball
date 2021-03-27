@@ -17,6 +17,8 @@ namespace JongSnamFootball.Entities.Dtos
 
         public bool Active { get; set; }
 
+        public virtual StoreModel StoreModel { get; set; }
+
         public virtual ICollection<ImageFieldModel> ImageFieldModel { get; set; }
 
 
