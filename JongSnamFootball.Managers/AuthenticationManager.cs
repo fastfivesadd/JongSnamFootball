@@ -44,6 +44,7 @@ namespace JongSnamFootball.Managers
             await _repositoryWrapper.SaveAsync();
 
             var result = _mapper.Map<UserDto>(userModel);
+            result.UserType = userModel.UserTypeId == 1 ? "Owner" : "Customer";
 
             result.Password = password;
 
