@@ -11,6 +11,8 @@ namespace JongSnamFootball.Entities.Dtos
 
         public decimal Price { get; set; }
 
+        public string Size { get; set; }
+
         public bool IsOpen { get; set; }
 
         public IEnumerable<ImageFieldDto> ImageFieldDto { get; set; }
