@@ -6,6 +6,7 @@
         public string Name { get; set; }
         public decimal Rating { get; set; }
         public string OfficeHours { get; set; }
+        public bool IsOpen { get; set; }
         public string Image { get; set; }
     }
 }

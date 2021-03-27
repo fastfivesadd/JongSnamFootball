@@ -19,5 +19,7 @@ namespace JongSnamFootball.Entities.Request
         public int Price { get; set; }
 
         public bool IsOpen { get; set; }
+
+        public bool Active { get; set; }
     }
 }

@@ -15,5 +15,7 @@ namespace JongSnamFootball.Entities.Dtos
         public double Percentage { get; set; }
 
         public IEnumerable<ImageFieldDto> ImageFieldDto { get; set; }
+
+        public bool Active { get; set; }
     }
 }
