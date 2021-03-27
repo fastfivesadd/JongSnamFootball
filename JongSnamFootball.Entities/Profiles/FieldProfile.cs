@@ -13,8 +13,7 @@ namespace JongSnamFootball.Entities.Profiles
                 .ForMember(fd => fd.StoreName, map => map.MapFrom(fm => fm.StoreModel.Name))
                .ForMember(fd => fd.IsOpen, map => map.MapFrom(fm => fm.StoreModel.IsOpen));
 
-            CreateMap<FieldModel, FieldDetailDto>()
-                .ForMember(fd => fd.Percentage, map => map.MapFrom(fm => fm.DiscountModel.Percentage));
+            CreateMap<FieldModel, FieldDetailDto>();
 
             CreateMap<FieldModel, FieldRequest>();
 

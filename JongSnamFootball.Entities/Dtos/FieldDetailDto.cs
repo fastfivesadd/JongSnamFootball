@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using JongSnamFootball.Entities.Models;
 
 namespace JongSnamFootball.Entities.Dtos
 {
@@ -15,6 +16,8 @@ namespace JongSnamFootball.Entities.Dtos
         public double Percentage { get; set; }
 
         public IEnumerable<ImageFieldDto> ImageFieldDto { get; set; }
+
+        public virtual DiscountModel DiscountModel { get; set; }
 
         public bool Active { get; set; }
     }
