@@ -53,14 +53,14 @@ namespace JongSnamFootball.Repositories
             return await _dbContext.Reservations.Where(w => w.StoreModel.OwnerId == userId || w.UserId == userId).Include(i => i.UserModel).Include(i => i.StoreModel).AsNoTracking().ToListAsync();
         }
 
-        public async Task<List<ReservationModel>> GetShowDetailYourReservation(int Id)
+        public async Task<ReservationModel> GetShowDetailYourReservation(int Id)
         {
             return await _dbContext.Reservations.Where(w => w.Id == Id)
                 .Include(i => i.UserModel)
                 .Include(i => i.StoreModel)
                 .Include(i => i.PaymentModel)
                 .Include(i => i.FieldModel)
-                .AsNoTracking().ToListAsync();
+                .AsNoTracking().FirstOrDefaultAsync();
         }
 
         public async Task<ReservationModel> GetReservatioById(int id)

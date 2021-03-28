@@ -836,6 +836,124 @@
         }
       }
     },
+    "/api/Reservation/{userId}/{month}/month": {
+      "get": {
+        "tags": [
+          "Reservation"
+        ],
+        "operationId": "GetGraphReservation",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "month",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "currentPage",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "pageSize",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GrahpDtoBasePagingDto"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemsDetailDto"
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemsDetailDto"
+            }
+          }
+        }
+      }
+    },
+    "/api/Reservation/{userId}/{year}/year": {
+      "get": {
+        "tags": [
+          "Reservation"
+        ],
+        "operationId": "GraphYearReservation",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "year",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "currentPage",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "pageSize",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GrahpDtoBasePagingDto"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemsDetailDto"
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemsDetailDto"
+            }
+          }
+        }
+      }
+    },
     "/api/Reservation/Search": {
       "get": {
         "tags": [
@@ -1731,6 +1849,68 @@
         }
       }
     },
+    "StoreModel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "createdDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "ownerId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "subDistrictId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "districtId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "provinceId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "contactMobile": {
+          "type": "string"
+        },
+        "latitude": {
+          "format": "double",
+          "type": "number"
+        },
+        "longtitude": {
+          "format": "double",
+          "type": "number"
+        },
+        "rules": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "isOpen": {
+          "type": "boolean"
+        },
+        "officeHours": {
+          "type": "string"
+        }
+      }
+    },
     "ImageFieldModel": {
       "type": "object",
       "properties": {
@@ -1777,6 +1957,9 @@
         },
         "active": {
           "type": "boolean"
+        },
+        "storeModel": {
+          "$ref": "#/definitions/StoreModel"
         },
         "imageFieldModel": {
           "type": "array",
@@ -2144,6 +2327,9 @@
         "stopTime": {
           "format": "date-time",
           "type": "string"
+        },
+        "image": {
+          "type": "string"
         }
       }
     },
@@ -2162,6 +2348,42 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReservationDto"
+          }
+        }
+      }
+    },
+    "GrahpDto": {
+      "type": "object",
+      "properties": {
+        "days": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "months": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "years": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "GrahpDtoBasePagingDto": {
+      "type": "object",
+      "properties": {
+        "currentPage": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "totalPage": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "collection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GrahpDto"
           }
         }
       }
