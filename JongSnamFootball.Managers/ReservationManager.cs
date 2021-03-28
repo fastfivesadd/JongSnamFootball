@@ -107,7 +107,7 @@ namespace JongSnamFootball.Managers
             var reservation = await _reservationRepository.GetShowDetailYourReservation(Id);
 
             var result = _mapper.Map<ReservationDetailDto>(reservation);
-
+            result.ImageProfile = reservation.UserModel.ImageProfile;
             return result;
         }
 

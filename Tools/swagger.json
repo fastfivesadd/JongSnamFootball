@@ -2433,6 +2433,9 @@
         "approvalStatus": {
           "type": "boolean"
         },
+        "imageProfile": {
+          "type": "string"
+        },
         "userName": {
           "type": "string"
         },
