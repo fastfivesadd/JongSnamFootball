@@ -1952,6 +1952,9 @@
         "storeName": {
           "type": "string"
         },
+        "size": {
+          "type": "string"
+        },
         "isOpen": {
           "type": "boolean"
         },
@@ -2329,6 +2332,10 @@
           "type": "string"
         },
         "image": {
+          "type": "string"
+        },
+        "createdDate": {
+          "format": "date-time",
           "type": "string"
         }
       }
