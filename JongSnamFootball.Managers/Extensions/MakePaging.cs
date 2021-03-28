@@ -111,5 +111,25 @@ namespace JongSnamFootball.Managers.Extensions
             return result;
         }
 
+        public static BasePagingDto<GrahpDto> GraphDtoToPaging(List<GrahpDto> list, int currentPage, int pageSize)
+        {
+            var result = new BasePagingDto<GrahpDto>();
+
+            var total = list.Count;
+            if (total == 0)
+            {
+                return result;
+            }
+
+            var skip = (currentPage - 1) * pageSize;
+
+            result.Collection = list.Skip(skip).Take(pageSize).ToList();
+
+            result.TotalPage = ((total - 1) / pageSize) + 1;
+
+            result.CurrentPage = currentPage;
+
+            return result;
+        }
     }
 }

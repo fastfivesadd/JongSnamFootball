@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using AutoMapper;
 using JongSnamFootball.Entities.Dtos;
@@ -33,6 +34,54 @@ namespace JongSnamFootball.Managers
             var result = MakePaging.ReservationDtoToPaging(listFieldDto, currentPage, pageSize);
 
             return result;
+        }
+        public async Task<BasePagingDto<GrahpDto>> GraphMonthReservation(int userId, int month, int currentPage, int pageSize)
+        {
+            var listStore = await _reservationRepository.GetYourReservation(userId);
+
+            var result = new ObservableCollection<GrahpDto>();
+
+            foreach (var data in listStore)
+            {
+                if (data.CreatedDate.Value.Month == month)
+                {
+                    result.Add(new GrahpDto
+                    {
+                        Days = data.CreatedDate == null ? 0 : data.CreatedDate.Value.Day,
+                        Months = data.CreatedDate == null ? 0 : data.CreatedDate.Value.Month,
+                        Years = data.CreatedDate == null ? 0 : data.CreatedDate.Value.Year
+                    }); ;
+                }
+            }
+            var listFieldDto = _mapper.Map<List<GrahpDto>>(result);
+
+            var resultPaging = MakePaging.GraphDtoToPaging(listFieldDto, currentPage, pageSize);
+
+            return resultPaging;
+        }
+        public async Task<BasePagingDto<GrahpDto>> GraphYearReservation(int userId, int year, int currentPage, int pageSize)
+        {
+            var listStore = await _reservationRepository.GetYourReservation(userId);
+
+            var result = new ObservableCollection<GrahpDto>();
+
+            foreach (var data in listStore)
+            {
+                if (data.CreatedDate.Value.Year == year)
+                {
+                    result.Add(new GrahpDto
+                    {
+                        Days = data.CreatedDate == null ? 0 : data.CreatedDate.Value.Day,
+                        Months = data.CreatedDate == null ? 0 : data.CreatedDate.Value.Month,
+                        Years = data.CreatedDate == null ? 0 : data.CreatedDate.Value.Year
+                    }); ;
+                }
+            }
+            var listFieldDto = _mapper.Map<List<GrahpDto>>(result);
+
+            var resultPaging = MakePaging.GraphDtoToPaging(listFieldDto, currentPage, pageSize);
+
+            return resultPaging;
         }
 
         public async Task<BasePagingDto<ReservationDto>> GetReservationBySearch(int userId, SearchReservationRequest request, int currentPage, int pageSize)
