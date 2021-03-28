@@ -13,6 +13,8 @@ namespace JongSnamFootball.Entities.Dtos
 
         public string StoreName { get; set; }
 
+        public string Size { get; set; }
+
         public bool IsOpen { get; set; }
 
         public bool Active { get; set; }
