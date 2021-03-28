@@ -31,6 +31,29 @@ namespace JongSnam.Services.Controllers
             return Ok(await _reservationManager.GetYourReservation(userId, currentPage, pageSize));
         }
 
+        [HttpGet("{userId}/{month}/month")]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(BasePagingDto<GrahpDto>))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<GrahpDto>))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> GetGraphReservation(int userId,int month, int currentPage, int pageSize)
+        {
+            return Ok(await _reservationManager.GraphMonthReservation(userId, month, currentPage, pageSize));
+        }
+
+        [HttpGet("{userId}/{year}/year")]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(BasePagingDto<GrahpDto>))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<GrahpDto>))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> GraphYearReservation(int userId, int year, int currentPage, int pageSize)
+        {
+            return Ok(await _reservationManager.GraphYearReservation(userId, year, currentPage, pageSize));
+        }
+
+
         [HttpGet("Search")]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(BasePagingDto<ReservationDto>))]

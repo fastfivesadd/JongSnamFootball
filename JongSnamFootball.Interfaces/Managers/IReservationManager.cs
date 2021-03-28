@@ -9,7 +9,12 @@ namespace JongSnamFootball.Interfaces.Managers
     {
         Task<BasePagingDto<ReservationDto>> GetYourReservation(int userId, int currentPage, int pageSize);
 
+        Task<BasePagingDto<GrahpDto>> GraphMonthReservation(int userId, int month, int currentPage, int pageSize);
+
+        Task<BasePagingDto<GrahpDto>> GraphYearReservation(int userId, int year, int currentPage, int pageSize);
+
         Task<BasePagingDto<ReservationDto>> GetReservationBySearch(int userId, SearchReservationRequest request, int currentPage, int pageSize);
+
 
         Task<List<ReservationDetailDto>> GetShowDetailYourReservation(int Id);
 
