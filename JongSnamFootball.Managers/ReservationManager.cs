@@ -102,11 +102,11 @@ namespace JongSnamFootball.Managers
             return result;
         }
 
-        public async Task<List<ReservationDetailDto>> GetShowDetailYourReservation(int Id)
+        public async Task<ReservationDetailDto> GetShowDetailYourReservation(int Id)
         {
-            var listStore = await _reservationRepository.GetShowDetailYourReservation(Id);
+            var reservation = await _reservationRepository.GetShowDetailYourReservation(Id);
 
-            var result = _mapper.Map<List<ReservationDetailDto>>(listStore);
+            var result = _mapper.Map<ReservationDetailDto>(reservation);
 
             return result;
         }

@@ -15,8 +15,7 @@ namespace JongSnamFootball.Interfaces.Managers
 
         Task<BasePagingDto<ReservationDto>> GetReservationBySearch(int userId, SearchReservationRequest request, int currentPage, int pageSize);
 
-
-        Task<List<ReservationDetailDto>> GetShowDetailYourReservation(int Id);
+        Task<ReservationDetailDto> GetShowDetailYourReservation(int Id);
 
         Task<bool> UpdateApprovalStatus(int id, ReservationApprovalRequest request);
 

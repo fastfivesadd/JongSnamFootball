@@ -11,7 +11,7 @@ namespace JongSnamFootball.Interfaces.Repositories
 
         Task<List<ReservationModel>> GetYourReservation(int userId);
 
-        Task<List<ReservationModel>> GetShowDetailYourReservation(int Id);
+        Task<ReservationModel> GetShowDetailYourReservation(int Id);
 
         Task<ReservationModel> GetReservatioById(int id);
     }
