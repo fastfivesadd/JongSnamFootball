@@ -26,11 +26,19 @@ namespace JongSnamFootball.Managers
 
         public async Task<BasePagingDto<ReservationDto>> GetYourReservation(int userId, int currentPage, int pageSize)
         {
-            var listStore = await _reservationRepository.GetYourReservation(userId);
+            var reservations = await _reservationRepository.GetYourReservation(userId);
 
-            var listFieldDto = _mapper.Map<List<ReservationDto>>(listStore);
-
-            var result = MakePaging.ReservationDtoToPaging(listFieldDto, currentPage, pageSize);
+              var list = _mapper.Map<List<ReservationModel>, List<ReservationDto>>(reservations, opt =>
+              {
+                  opt.AfterMap((src, dest) =>
+                  {
+                      foreach (var d in dest)
+                      {
+                          d.Image = src[0].StoreModel.Image;
+                      }
+                  });
+              });
+            var result = MakePaging.ReservationDtoToPaging(list, currentPage, pageSize);
 
             return result;
         }
