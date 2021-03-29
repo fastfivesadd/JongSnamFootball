@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using JongSnamFootball.Entities.Dtos;
+using JongSnamFootball.Entities.Request;
 using JongSnamFootball.Interfaces.Managers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +13,12 @@ namespace JongSnam.Services.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IAuthenticationManager _authenticationManager;
+        private readonly IUserManager _userManager;
 
-        public AuthenticationController(IAuthenticationManager authenticationManager)
+        public AuthenticationController(IAuthenticationManager authenticationManager, IUserManager userManager)
         {
             _authenticationManager = authenticationManager;
+            _userManager = userManager;
         }
 
         [HttpPost("/Login")]
@@ -36,6 +39,17 @@ namespace JongSnam.Services.Controllers
         public async Task<ActionResult> Logout(int id)
         {
             return Ok(await _authenticationManager.Logout(id));
+        }
+
+        [HttpPost("/Register")]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(bool))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(bool))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> CreateUser([FromBody] UserRequest requestDto)
+        {
+            var result = await _userManager.CreateUser(requestDto);
+            return Ok(result);
         }
     }
 }
