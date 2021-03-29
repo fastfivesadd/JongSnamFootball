@@ -49,7 +49,6 @@ namespace JongSnamFootball.Managers
                 userModel.Password = encryptedString;
                 await _repositoryWrapper.User.CreateAsync(userModel);
                 await _repositoryWrapper.SaveAsync();
-
                 return true;
             }
             catch (Exception ex)
@@ -66,9 +65,13 @@ namespace JongSnamFootball.Managers
 
                 await _repositoryWrapper.BeginTransactionAsync();
 
-                if (user.Password == request.OldPassword)
+                var Encrypassword = Encryptions.DecryptString(EncryptionConstants.Key, user.Password);
+
+                if (Encrypassword == request.OldPassword)
                 {
-                    user.Password = request.NewPassword;
+                    var encryptPassword = Encryptions.EncryptString(EncryptionConstants.Key, request.NewPassword);
+
+                    user.Password = encryptPassword;
                 }
                 else
                 {
