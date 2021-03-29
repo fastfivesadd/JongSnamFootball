@@ -37,7 +37,7 @@ namespace JongSnam.Services.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<GrahpDto>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
-        public async Task<ActionResult> GetGraphReservation(int userId,int month, int currentPage, int pageSize)
+        public async Task<ActionResult> GraphMonthReservation(int userId,int month, int currentPage, int pageSize)
         {
             return Ok(await _reservationManager.GraphMonthReservation(userId, month, currentPage, pageSize));
         }
