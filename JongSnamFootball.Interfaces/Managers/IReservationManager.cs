@@ -22,5 +22,7 @@ namespace JongSnamFootball.Interfaces.Managers
         Task<bool> CreateReservation(ReservationRequest request);
 
         Task<bool> DeleteReservation(int id);
+
+        Task<bool> UpdateReservation(int id, UpdateReservationRequest request);
     }
 }

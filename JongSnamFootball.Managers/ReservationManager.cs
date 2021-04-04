@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using JongSnamFootball.Entities.Dtos;
@@ -183,6 +185,28 @@ namespace JongSnamFootball.Managers
             finally
             {
                 _repositoryWrapper.Dispose();
+            }
+        }
+        public async Task<bool> UpdateReservation(int id, UpdateReservationRequest request)
+        {
+            try
+            {
+                var reservation = await _reservationRepository.GetShowDetailYourReservation(id);
+
+                var foo = reservation.PaymentModel.OfType<IList>().FirstOrDefault();
+
+                reservation.StartTime = request.StartTime;
+                reservation.StopTime = request.StopTime;
+                reservation.UpdatedDate = DateTime.Now;
+                _repositoryWrapper.Reservation.Updete(reservation);
+
+                await _repositoryWrapper.SaveAsync();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 

@@ -107,6 +107,17 @@ namespace JongSnam.Services.Controllers
             var result = await _reservationManager.DeleteReservation(id);
             return Ok(result);
         }
+
+        [HttpPut("{id}/request/UpdateReservation")]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(bool))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(bool))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> UpdateReservation(int id , UpdateReservationRequest request)
+        {
+            var result = await _reservationManager.UpdateReservation(id, request);
+            return Ok(result);
+        }
     }
 
 }
