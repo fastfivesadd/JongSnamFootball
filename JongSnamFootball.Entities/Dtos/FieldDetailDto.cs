@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using JongSnamFootball.Entities.Models;
 
 namespace JongSnamFootball.Entities.Dtos
 {
@@ -11,10 +11,14 @@ namespace JongSnamFootball.Entities.Dtos
 
         public decimal Price { get; set; }
 
+        public string Size { get; set; }
+
         public bool IsOpen { get; set; }
 
-        public double Percentage { get; set; }
+        public virtual DiscountModel DiscountModel { get; set; }
 
-        public IEnumerable<ImageFieldDto> ImageFieldDto { get; set; }
+        public virtual ICollection<ImageFieldModel> ImageFieldModel { get; set; }
+
+        public bool Active { get; set; }
     }
 }

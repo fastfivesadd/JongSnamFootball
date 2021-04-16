@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using JongSnamFootball.Entities.Dtos;
@@ -34,7 +32,7 @@ namespace JongSnamFootball.Managers
             var PaymentDto = _mapper.Map<List<PaymentDto>>(paymentModel);
 
             return PaymentDto;
-  
+
         }
         public async Task<PaymentDto> GetPaymentById(int id)
         {
@@ -64,7 +62,7 @@ namespace JongSnamFootball.Managers
             }
         }
 
-        public async Task<bool> UpdatePayment(int id , UpdatePaymentRequest request)
+        public async Task<bool> UpdatePayment(int id, UpdatePaymentRequest request)
         {
             try
             {
@@ -88,7 +86,7 @@ namespace JongSnamFootball.Managers
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using JongSnamFootball.Entities.Models;
 using JongSnamFootball.Interfaces.Repositories;
@@ -20,6 +18,12 @@ namespace JongSnamFootball.Repositories
             return await _dbContext.Districts.Where(w => w.ProvinceId == ProvinceId)
                 .Include(i => i.ProvinceModel)
                 .AsNoTracking().ToListAsync();
+        }
+
+
+        public async Task<DistrictModel> GetDistrictById(int id)
+        {
+            return await _dbContext.Districts.Where(w => w.Id == id).AsNoTracking().FirstOrDefaultAsync();
         }
 
     }

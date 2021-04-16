@@ -36,7 +36,7 @@ namespace JongSnamFootball.Entities.Request
         public string Address { get; set; }
 
         [Required]
-        [StringLength(10, MinimumLength = 9, 
+        [StringLength(10, MinimumLength = 9,
             ErrorMessage = "ContactMobile should be minimum 8 characters and a maximum of 10 characters")]
         [Phone]
         public string ContactMobile { get; set; }

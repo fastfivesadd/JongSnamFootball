@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace JongSnamFootball.Entities.Request
 {
@@ -24,5 +19,7 @@ namespace JongSnamFootball.Entities.Request
         public int Price { get; set; }
 
         public bool IsOpen { get; set; }
+
+        public bool Active { get; set; }
     }
 }

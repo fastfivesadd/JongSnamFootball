@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace JongSnamFootball.Entities.Models
+﻿namespace JongSnamFootball.Entities.Models
 {
     public class UserModel : BaseModel
     {
@@ -19,5 +17,6 @@ namespace JongSnamFootball.Entities.Models
         public string ImageProfile { get; set; }
 
         public int UserTypeId { get; set; }
+        public bool? IsLoggedIn { get; set; }
     }
 }

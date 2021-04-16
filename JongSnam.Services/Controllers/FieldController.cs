@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using JongSnam.Services.Attributes;
 using JongSnamFootball.Entities.Dtos;
 using JongSnamFootball.Entities.Request;
 using JongSnamFootball.Interfaces.Managers;
@@ -11,6 +11,7 @@ namespace JongSnam.Services.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AuthorizeTokenHeader]
     public class FieldController : ControllerBase
     {
         private readonly IFieldManager _fieldManager;
@@ -25,7 +26,7 @@ namespace JongSnam.Services.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<FieldDto>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
-        public async Task<ActionResult> GetFieldBySearch([FromQuery]SearchFieldRequest request, int currentPage, int pageSize)
+        public async Task<ActionResult> GetFieldBySearch([FromQuery] SearchFieldRequest request, int currentPage, int pageSize)
         {
             return Ok(await _fieldManager.GetFieldBySearch(request, currentPage, pageSize));
 

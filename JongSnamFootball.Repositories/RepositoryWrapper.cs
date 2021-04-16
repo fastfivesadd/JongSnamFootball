@@ -148,7 +148,7 @@ namespace JongSnamFootball.Repositories
 
         public async Task BeginTransactionAsync()
         {
-             _dbContextTransaction = await _repositoryDbContext.Database.BeginTransactionAsync();
+            _dbContextTransaction = await _repositoryDbContext.Database.BeginTransactionAsync();
         }
 
         public async Task CommitAsync()

@@ -1,6 +1,6 @@
 using System;
 
-namespace JongSnam.Services
+namespace JongSnamFootball
 {
     public class WeatherForecast
     {

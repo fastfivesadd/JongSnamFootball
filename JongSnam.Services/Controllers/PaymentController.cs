@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using JongSnam.Services.Attributes;
 using JongSnamFootball.Entities.Dtos;
 using JongSnamFootball.Entities.Request;
 using JongSnamFootball.Interfaces.Managers;
@@ -13,6 +12,7 @@ namespace JongSnam.Services.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AuthorizeTokenHeader]
     public class PaymentController : ControllerBase
     {
         private readonly IPaymentManager _paymentManager;
@@ -21,7 +21,7 @@ namespace JongSnam.Services.Controllers
             _paymentManager = paymentManager;
         }
 
-        [HttpGet("{reservationId}")]
+        [HttpGet("{reservationId}/ReservationId")]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(List<PaymentDto>))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(List<PaymentDto>))]

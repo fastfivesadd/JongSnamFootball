@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using JongSnam.Services.Attributes;
 using JongSnamFootball.Entities.Dtos;
 using JongSnamFootball.Entities.Request;
 using JongSnamFootball.Interfaces.Managers;
@@ -13,6 +11,7 @@ namespace JongSnam.Services.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AuthorizeTokenHeader]
     public class ReservationController : ControllerBase
     {
         private readonly IReservationManager _reservationManager;
@@ -21,16 +20,39 @@ namespace JongSnam.Services.Controllers
             _reservationManager = reservationManager;
         }
 
-        [HttpGet("{storeId}")]
+        [HttpGet("{userId}")]
         [Consumes("application/json")]
         [Produces("application/json", Type = typeof(BasePagingDto<ReservationDto>))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<ReservationDto>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
-        public async Task<ActionResult> GetYourReservation(int storeId, int ownerId, int currentPage, int pageSize)
+        public async Task<ActionResult> GetYourReservation(int userId, int currentPage, int pageSize)
         {
-            return Ok(await _reservationManager.GetYourReservation(storeId, ownerId, currentPage, pageSize));
+            return Ok(await _reservationManager.GetYourReservation(userId, currentPage, pageSize));
         }
+
+        [HttpGet("{userId}/{month}/month")]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(BasePagingDto<GrahpDto>))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<GrahpDto>))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> GraphMonthReservation(int userId,int month, int currentPage, int pageSize)
+        {
+            return Ok(await _reservationManager.GraphMonthReservation(userId, month, currentPage, pageSize));
+        }
+
+        [HttpGet("{userId}/{year}/year")]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(BasePagingDto<GrahpDto>))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<GrahpDto>))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> GraphYearReservation(int userId, int year, int currentPage, int pageSize)
+        {
+            return Ok(await _reservationManager.GraphYearReservation(userId, year, currentPage, pageSize));
+        }
+
 
         [HttpGet("Search")]
         [Consumes("application/json")]
@@ -38,15 +60,15 @@ namespace JongSnam.Services.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<ReservationDto>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
-        public async Task<ActionResult> GetReservationBySearch(int storeId, int ownerId, [FromQuery] SearchReservationRequest request, int currentPage, int pageSize)
+        public async Task<ActionResult> GetReservationBySearch(int userId, [FromQuery] SearchReservationRequest request, int currentPage, int pageSize)
         {
-            return Ok(await _reservationManager.GetReservationBySearch(storeId, ownerId, request, currentPage, pageSize));
+            return Ok(await _reservationManager.GetReservationBySearch(userId, request, currentPage, pageSize));
         }
 
         [HttpGet("{Id}/Detail")]
         [Consumes("application/json")]
-        [Produces("application/json", Type = typeof(BasePagingDto<ReservationDto>))]
-        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(BasePagingDto<ReservationDto>))]
+        [Produces("application/json", Type = typeof(ReservationDetailDto))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(ReservationDetailDto))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
         public async Task<ActionResult> GetShowDetailYourReservation(int Id)
@@ -59,7 +81,7 @@ namespace JongSnam.Services.Controllers
         [Produces("application/json", Type = typeof(bool))]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(bool))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
-        public async Task<ActionResult> UpdateApprovalStatus(int id , [FromBody] ReservationApprovalRequest request)
+        public async Task<ActionResult> UpdateApprovalStatus(int id, [FromBody] ReservationApprovalRequest request)
         {
             var result = await _reservationManager.UpdateApprovalStatus(id, request);
             return Ok(result);
@@ -85,6 +107,17 @@ namespace JongSnam.Services.Controllers
             var result = await _reservationManager.DeleteReservation(id);
             return Ok(result);
         }
+
+        [HttpPut("{id}/request/UpdateReservation")]
+        [Consumes("application/json")]
+        [Produces("application/json", Type = typeof(bool))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(bool))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
+        public async Task<ActionResult> UpdateReservation(int id , UpdateReservationRequest request)
+        {
+            var result = await _reservationManager.UpdateReservation(id, request);
+            return Ok(result);
+        }
     }
-    
+
 }

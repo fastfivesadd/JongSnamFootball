@@ -16,7 +16,7 @@ namespace JongSnamFootball.Repositories
 
         public async Task<List<FieldModel>> GetFieldBySearch(SearchFieldRequest request)
         {
-            var result = _dbContext.Fields.Include(i => i.StoreModel).AsNoTracking();
+            var result = _dbContext.Fields.Include(i => i.StoreModel).Include(i => i.ImageFieldModel).AsNoTracking();
 
             if (request.StartPrice.HasValue)
             {
@@ -43,15 +43,15 @@ namespace JongSnamFootball.Repositories
 
         public async Task<List<FieldModel>> GetByStoreId(int? storeId)
         {
-            return await _dbContext.Fields.Where(w => w.StoreId == storeId).Include(i => i.StoreModel).AsNoTracking().ToListAsync();
+            return await _dbContext.Fields.Where(w => w.StoreId == storeId && w.Active).Include(i => i.StoreModel).Include(i => i.ImageFieldModel).AsNoTracking().ToListAsync();
         }
 
         public async Task<FieldModel> GetFieldById(int id)
         {
-                return await _dbContext.Fields.Where(w => w.Id == id)
-                    .Include(i => i.ImageFieldModel)
-                    .Include(i => i.DiscountModel)
-                    .AsNoTracking().FirstOrDefaultAsync();
+            return await _dbContext.Fields.Where(w => w.Id == id)
+                .Include(i => i.ImageFieldModel)
+                .Include(i => i.DiscountModel)
+                .AsNoTracking().FirstOrDefaultAsync();
         }
     }
 }

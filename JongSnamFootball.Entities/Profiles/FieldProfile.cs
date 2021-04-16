@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using JongSnamFootball.Entities.Dtos;
 using JongSnamFootball.Entities.Models;
 using JongSnamFootball.Entities.Request;
@@ -18,8 +13,7 @@ namespace JongSnamFootball.Entities.Profiles
                 .ForMember(fd => fd.StoreName, map => map.MapFrom(fm => fm.StoreModel.Name))
                .ForMember(fd => fd.IsOpen, map => map.MapFrom(fm => fm.StoreModel.IsOpen));
 
-            CreateMap<FieldModel, FieldDetailDto>()
-                .ForMember(fd => fd.Percentage, map => map.MapFrom(fm => fm.DiscountModel.Percentage));
+            CreateMap<FieldModel, FieldDetailDto>();
 
             CreateMap<FieldModel, FieldRequest>();
 
@@ -29,7 +23,7 @@ namespace JongSnamFootball.Entities.Profiles
             CreateMap<UpdateFieldRequest, FieldModel>();
 
 
-            
+
 
         }
 

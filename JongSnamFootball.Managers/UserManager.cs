@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using JongSnamFootball.Entities.Constants;
 using JongSnamFootball.Entities.Dtos;
 using JongSnamFootball.Entities.Models;
 using JongSnamFootball.Entities.Request;
@@ -16,7 +17,6 @@ namespace JongSnamFootball.Managers
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
         private readonly IRepositoryWrapper _repositoryWrapper;
-        private const string _key = "b14ca5898a4e4133bbce2ea2315a1916";
         public UserManager(IUserRepository userRepository, IMapper mapper, IRepositoryWrapper repositoryWrapper)
         {
             _userRepository = userRepository;
@@ -44,11 +44,11 @@ namespace JongSnamFootball.Managers
                 var userModel = _mapper.Map<UserModel>(requestDto);
                 userModel.CreatedDate = DateTime.Now;
                 userModel.UpdatedDate = DateTime.Now;
-                var encryptedString = Encryptions.EncryptString(_key, userModel.Password);
+                userModel.IsLoggedIn = false;
+                var encryptedString = Encryptions.EncryptString(EncryptionConstants.Key, userModel.Password);
                 userModel.Password = encryptedString;
                 await _repositoryWrapper.User.CreateAsync(userModel);
                 await _repositoryWrapper.SaveAsync();
-
                 return true;
             }
             catch (Exception ex)
@@ -65,9 +65,13 @@ namespace JongSnamFootball.Managers
 
                 await _repositoryWrapper.BeginTransactionAsync();
 
-                if (user.Password == request.OldPassword)
+                var Encrypassword = Encryptions.DecryptString(EncryptionConstants.Key, user.Password);
+
+                if (Encrypassword == request.OldPassword)
                 {
-                    user.Password = request.NewPassword;
+                    var encryptPassword = Encryptions.EncryptString(EncryptionConstants.Key, request.NewPassword);
+
+                    user.Password = encryptPassword;
                 }
                 else
                 {
@@ -81,7 +85,7 @@ namespace JongSnamFootball.Managers
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -89,13 +93,13 @@ namespace JongSnamFootball.Managers
             {
                 _repositoryWrapper.Dispose();
             }
-        } 
+        }
 
         public async Task<bool> Login(string emailrequest, string passwordrequest)
         {
             var user = await _userRepository.GetPasswordByEmail(emailrequest);
 
-            var password = Encryptions.DecryptString(_key ,user.Password);
+            var password = Encryptions.DecryptString(EncryptionConstants.Key, user.Password);
 
             if (passwordrequest != password)
             {

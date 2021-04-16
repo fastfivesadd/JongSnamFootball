@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using JongSnamFootball.Entities.Dtos;
@@ -26,20 +27,76 @@ namespace JongSnamFootball.Managers
             _repositoryWrapper = repositoryWrapper;
         }
 
-        public async Task<BasePagingDto<ReservationDto>> GetYourReservation(int storeId, int ownerId, int currentPage, int pageSize)
+        public async Task<BasePagingDto<ReservationDto>> GetYourReservation(int userId, int currentPage, int pageSize)
         {
-            var listStore = await _reservationRepository.GetYourReservation(storeId, ownerId);
+            var reservations = await _reservationRepository.GetYourReservation(userId);
 
-            var listFieldDto = _mapper.Map<List<ReservationDto>>(listStore);
-
-            var result = MakePaging.ReservationDtoToPaging(listFieldDto, currentPage, pageSize);
+              var list = _mapper.Map<List<ReservationModel>, List<ReservationDto>>(reservations, opt =>
+              {
+                  opt.AfterMap((src, dest) =>
+                  {
+                      foreach (var d in dest)
+                      {
+                          d.Image = src[0].StoreModel.Image;
+                      }
+                  });
+              });
+            var result = MakePaging.ReservationDtoToPaging(list, currentPage, pageSize);
 
             return result;
         }
-
-        public async Task<BasePagingDto<ReservationDto>> GetReservationBySearch(int storeId,int ownerId, SearchReservationRequest request, int currentPage, int pageSize)
+        public async Task<BasePagingDto<GrahpDto>> GraphMonthReservation(int userId, int month, int currentPage, int pageSize)
         {
-            var listReservation = await _reservationRepository.GetReservationBySearch(storeId, ownerId, request);
+            var listStore = await _reservationRepository.GetYourReservation(userId);
+
+            var result = new ObservableCollection<GrahpDto>();
+
+            foreach (var data in listStore)
+            {
+                if (data.CreatedDate.Value.Month == month)
+                {
+                    result.Add(new GrahpDto
+                    {
+                        Days = data.CreatedDate == null ? 0 : data.CreatedDate.Value.Day,
+                        Months = data.CreatedDate == null ? 0 : data.CreatedDate.Value.Month,
+                        Years = data.CreatedDate == null ? 0 : data.CreatedDate.Value.Year
+                    }); ;
+                }
+            }
+            var listFieldDto = _mapper.Map<List<GrahpDto>>(result);
+
+            var resultPaging = MakePaging.GraphDtoToPaging(listFieldDto, currentPage, pageSize);
+
+            return resultPaging;
+        }
+        public async Task<BasePagingDto<GrahpDto>> GraphYearReservation(int userId, int year, int currentPage, int pageSize)
+        {
+            var listStore = await _reservationRepository.GetYourReservation(userId);
+
+            var result = new ObservableCollection<GrahpDto>();
+
+            foreach (var data in listStore)
+            {
+                if (data.CreatedDate.Value.Year == year)
+                {
+                    result.Add(new GrahpDto
+                    {
+                        Days = data.CreatedDate == null ? 0 : data.CreatedDate.Value.Day,
+                        Months = data.CreatedDate == null ? 0 : data.CreatedDate.Value.Month,
+                        Years = data.CreatedDate == null ? 0 : data.CreatedDate.Value.Year
+                    }); ;
+                }
+            }
+            var listFieldDto = _mapper.Map<List<GrahpDto>>(result);
+
+            var resultPaging = MakePaging.GraphDtoToPaging(listFieldDto, currentPage, pageSize);
+
+            return resultPaging;
+        }
+
+        public async Task<BasePagingDto<ReservationDto>> GetReservationBySearch(int userId, SearchReservationRequest request, int currentPage, int pageSize)
+        {
+            var listReservation = await _reservationRepository.GetReservationBySearch(userId, request);
             var lisReservationDto = _mapper.Map<List<ReservationDto>>(listReservation);
 
             var result = MakePaging.ReservationDtoToPaging(lisReservationDto, currentPage, pageSize);
@@ -47,16 +104,16 @@ namespace JongSnamFootball.Managers
             return result;
         }
 
-        public async Task<List<ReservationDetailDto>> GetShowDetailYourReservation(int Id)
+        public async Task<ReservationDetailDto> GetShowDetailYourReservation(int Id)
         {
-            var listStore = await _reservationRepository.GetShowDetailYourReservation(Id);
+            var reservation = await _reservationRepository.GetShowDetailYourReservation(Id);
 
-            var result = _mapper.Map<List<ReservationDetailDto>>(listStore);
-
+            var result = _mapper.Map<ReservationDetailDto>(reservation);
+            result.ImageProfile = reservation.UserModel.ImageProfile;
             return result;
         }
 
-        public async Task<bool> UpdateApprovalStatus(int id ,ReservationApprovalRequest request)
+        public async Task<bool> UpdateApprovalStatus(int id, ReservationApprovalRequest request)
         {
             try
             {
@@ -71,7 +128,7 @@ namespace JongSnamFootball.Managers
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -93,7 +150,7 @@ namespace JongSnamFootball.Managers
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -108,13 +165,13 @@ namespace JongSnamFootball.Managers
                 {
                     return false;
                 }
-                
+
                 await _repositoryWrapper.BeginTransactionAsync();
 
                 reservationModel.Active = false;
 
                 _repositoryWrapper.Reservation.Updete(reservationModel);
-                
+
                 await _repositoryWrapper.SaveAsync();
 
                 await _repositoryWrapper.CommitAsync();
@@ -128,6 +185,28 @@ namespace JongSnamFootball.Managers
             finally
             {
                 _repositoryWrapper.Dispose();
+            }
+        }
+        public async Task<bool> UpdateReservation(int id, UpdateReservationRequest request)
+        {
+            try
+            {
+                var reservation = await _reservationRepository.GetShowDetailYourReservation(id);
+
+                var foo = reservation.PaymentModel.OfType<IList>().FirstOrDefault();
+
+                reservation.StartTime = request.StartTime;
+                reservation.StopTime = request.StopTime;
+                reservation.UpdatedDate = DateTime.Now;
+                _repositoryWrapper.Reservation.Updete(reservation);
+
+                await _repositoryWrapper.SaveAsync();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 
