@@ -26,7 +26,7 @@ namespace JongSnam.Services.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(List<ProvinceModel>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(ProblemsDetailDto))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Type = typeof(ProblemsDetailDto))]
-        public async Task<ActionResult> GetPaymentByReservationId()
+        public async Task<ActionResult> GetProvinces()
         {
             return Ok(await _addressManager.GetProvinces());
         }
